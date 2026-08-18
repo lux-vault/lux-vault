@@ -14,105 +14,207 @@
 
     body {
       font-family: Arial, sans-serif;
-      background: #0b0b0f;
-      color: white;
+      background: #08080b;
+      color: #fff;
     }
 
     header {
-      padding: 20px;
-      text-align: center;
-      border-bottom: 1px solid #292929;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: #0d0d12;
+      border-bottom: 1px solid #25252d;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    header h1 {
-      font-size: 30px;
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 1px;
     }
 
-    header p {
-      color: #aaa;
-      margin-top: 6px;
+    .cart-btn {
+      border: 1px solid #444;
+      background: #fff;
+      color: #000;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
     }
 
     .hero {
-      padding: 60px 20px;
       text-align: center;
+      padding: 70px 20px;
+      background:
+        radial-gradient(circle at top, #272733 0, #08080b 55%);
     }
 
-    .hero h2 {
-      font-size: 38px;
-      margin-bottom: 12px;
+    .hero h1 {
+      font-size: clamp(38px, 8vw, 70px);
+      margin-bottom: 14px;
     }
 
     .hero p {
       color: #aaa;
+      font-size: 17px;
       margin-bottom: 25px;
     }
 
     .shop-btn {
       display: inline-block;
-      padding: 13px 25px;
-      background: white;
-      color: black;
+      padding: 13px 24px;
+      background: #fff;
+      color: #000;
+      border-radius: 9px;
       text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
+      font-weight: 800;
     }
 
-    .products {
-      padding: 30px 20px;
-      max-width: 1000px;
+    .section {
+      max-width: 1100px;
       margin: auto;
+      padding: 35px 20px;
     }
 
-    .products h2 {
+    .section h2 {
       margin-bottom: 20px;
     }
 
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
     }
 
     .product {
-      background: #15151c;
-      border: 1px solid #292929;
-      border-radius: 12px;
-      padding: 15px;
+      background: #121218;
+      border: 1px solid #292932;
+      border-radius: 14px;
+      overflow: hidden;
     }
 
     .product img {
       width: 100%;
-      height: 220px;
+      height: 240px;
       object-fit: cover;
-      border-radius: 8px;
+      display: block;
+    }
+
+    .product-info {
+      padding: 16px;
     }
 
     .product h3 {
-      margin-top: 12px;
+      margin-bottom: 8px;
+    }
+
+    .description {
+      color: #999;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 10px;
     }
 
     .price {
-      margin: 8px 0;
-      color: #ddd;
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 13px;
     }
 
-    .buy-btn {
+    .add-btn {
       width: 100%;
-      padding: 11px;
-      border: none;
-      border-radius: 7px;
-      background: white;
-      color: black;
-      font-weight: bold;
+      border: 0;
+      padding: 12px;
+      border-radius: 8px;
+      background: #fff;
+      color: #000;
+      font-weight: 800;
       cursor: pointer;
+    }
+
+    .cart {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.75);
+      z-index: 20;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .cart-box {
+      width: min(500px, 100%);
+      max-height: 85vh;
+      overflow-y: auto;
+      background: #14141b;
+      border: 1px solid #333;
+      border-radius: 14px;
+      padding: 22px;
+    }
+
+    .cart-box h2 {
+      margin-bottom: 15px;
+    }
+
+    .cart-item {
+      padding: 12px 0;
+      border-bottom: 1px solid #292932;
+    }
+
+    .cart-item strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .cart-item span {
+      color: #aaa;
+    }
+
+    .total {
+      font-size: 20px;
+      font-weight: 800;
+      margin: 20px 0;
+    }
+
+    .close-btn,
+    .checkout-btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .close-btn {
+      border: 1px solid #444;
+      background: transparent;
+      color: #fff;
+      margin-top: 10px;
+    }
+
+    .checkout-btn {
+      border: 0;
+      background: #fff;
+      color: #000;
+    }
+
+    .empty {
+      color: #999;
+      padding: 15px 0;
     }
 
     footer {
       text-align: center;
-      padding: 30px;
       color: #777;
-      margin-top: 40px;
+      padding: 35px 20px;
+      border-top: 1px solid #222;
+      margin-top: 30px;
     }
   </style>
 </head>
@@ -120,41 +222,163 @@
 <body>
 
   <header>
-    <h1>Lux Vault</h1>
-    <p>Your Premium Online Store</p>
+    <div class="logo">LUX VAULT</div>
+    <button class="cart-btn" onclick="openCart()">
+      Cart (<span id="cartCount">0</span>)
+    </button>
   </header>
 
   <section class="hero">
-    <h2>Welcome to Lux Vault</h2>
+    <h1>Lux Vault</h1>
     <p>Discover products you'll love.</p>
-    <a href="#products" class="shop-btn">Shop Now</a>
+    <a class="shop-btn" href="#products">Shop Now</a>
   </section>
 
-  <section class="products" id="products">
+  <section class="section" id="products">
     <h2>Featured Products</h2>
 
     <div class="product-grid">
 
-      <div class="product">
-        <img src="https://via.placeholder.com/500x500" alt="Product">
-        <h3>Sample Product</h3>
-        <p class="price">₹499</p>
-        <button class="buy-btn">Buy Now</button>
-      </div>
+      <article class="product">
+        <img
+          src="https://picsum.photos/600/600?random=11"
+          alt="Premium Product"
+        >
 
-      <div class="product">
-        <img src="https://via.placeholder.com/500x500" alt="Product">
-        <h3>Premium Product</h3>
-        <p class="price">₹999</p>
-        <button class="buy-btn">Buy Now</button>
-      </div>
+        <div class="product-info">
+          <h3>Premium Product</h3>
+
+          <p class="description">
+            A stylish sample product for Lux Vault.
+          </p>
+
+          <p class="price">₹499</p>
+
+          <button
+            class="add-btn"
+            onclick="addToCart('Premium Product', 499)"
+          >
+            Add to Cart
+          </button>
+        </div>
+      </article>
+
+      <article class="product">
+        <img
+          src="https://picsum.photos/600/600?random=22"
+          alt="Luxury Product"
+        >
+
+        <div class="product-info">
+          <h3>Luxury Product</h3>
+
+          <p class="description">
+            Another sample product for your store.
+          </p>
+
+          <p class="price">₹999</p>
+
+          <button
+            class="add-btn"
+            onclick="addToCart('Luxury Product', 999)"
+          >
+            Add to Cart
+          </button>
+        </div>
+      </article>
 
     </div>
   </section>
 
+  <div class="cart" id="cart">
+    <div class="cart-box">
+
+      <h2>Your Cart</h2>
+
+      <div id="cartItems"></div>
+
+      <div class="total">
+        Total: ₹<span id="cartTotal">0</span>
+      </div>
+
+      <button class="checkout-btn" onclick="checkout()">
+        Continue to Checkout
+      </button>
+
+      <button class="close-btn" onclick="closeCart()">
+        Close
+      </button>
+
+    </div>
+  </div>
+
   <footer>
     © 2026 Lux Vault. All rights reserved.
   </footer>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      cart.push({
+        name: name,
+        price: price
+      });
+
+      updateCart();
+
+      alert(name + " added to cart!");
+    }
+
+    function updateCart() {
+      const count = document.getElementById("cartCount");
+      const items = document.getElementById("cartItems");
+      const total = document.getElementById("cartTotal");
+
+      count.textContent = cart.length;
+
+      if (cart.length === 0) {
+        items.innerHTML =
+          '<p class="empty">Your cart is empty.</p>';
+      } else {
+        items.innerHTML = cart.map(function(item) {
+          return `
+            <div class="cart-item">
+              <strong>${item.name}</strong>
+              <span>₹${item.price}</span>
+            </div>
+          `;
+        }).join("");
+      }
+
+      const sum = cart.reduce(function(total, item) {
+        return total + item.price;
+      }, 0);
+
+      total.textContent = sum;
+    }
+
+    function openCart() {
+      document.getElementById("cart").style.display = "flex";
+      updateCart();
+    }
+
+    function closeCart() {
+      document.getElementById("cart").style.display = "none";
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert("Your cart is empty.");
+        return;
+      }
+
+      alert(
+        "Checkout demo is ready. " +
+        "Payment and shipping will be connected later."
+      );
+    }
+  </script>
 
 </body>
 </html>
