@@ -157,10 +157,10 @@ header {
   margin-bottom: 10px;
 }
 
-.add-btn {
+.add-btn,
+.buy-btn {
   width: 100%;
   border: none;
-  background: #b84f73;
   color: white;
   padding: 10px 5px;
   border-radius: 9px;
@@ -168,7 +168,17 @@ header {
   font-size: 13px;
 }
 
-.add-btn:active {
+.add-btn {
+  background: #b84f73;
+}
+
+.buy-btn {
+  background: #8f3859;
+  margin-top: 8px;
+}
+
+.add-btn:active,
+.buy-btn:active {
   transform: scale(.97);
 }
 
@@ -411,7 +421,8 @@ footer {
     font-size: 14px;
   }
 
-  .add-btn {
+  .add-btn,
+  .buy-btn {
     padding: 12px;
     font-size: 14px;
   }
@@ -586,8 +597,9 @@ footer {
         Scan the QR code using any supported UPI app and complete your payment.
       </p>
 
+      <!-- NEW QR IMAGE -->
       <img
-        src="https://raw.githubusercontent.com/lux-vault/lux-vault/main/IMG-20260819-WA0033.jpg"
+        src="https://raw.githubusercontent.com/lux-vault/lux-vault/main/IMG_20260820_010804.jpg"
         alt="Lux Vault UPI Payment QR"
       >
 
@@ -884,6 +896,8 @@ function renderProducts() {
       "₹" + Number(product.price).toLocaleString("en-IN");
 
 
+    /* ADD TO CART BUTTON */
+
     const button =
       document.createElement("button");
 
@@ -897,10 +911,26 @@ function renderProducts() {
     };
 
 
+    /* BUY NOW BUTTON */
+
+    const buyButton =
+      document.createElement("button");
+
+    buyButton.className = "buy-btn";
+
+    buyButton.textContent =
+      "Buy Now";
+
+    buyButton.onclick = function() {
+      buyNow(product.id);
+    };
+
+
     info.appendChild(title);
     info.appendChild(description);
     info.appendChild(price);
     info.appendChild(button);
+    info.appendChild(buyButton);
 
     article.appendChild(image);
     article.appendChild(info);
@@ -958,6 +988,44 @@ function addToCart(productId) {
   alert(
     product.name + " added to cart!"
   );
+
+}
+
+
+/* =========================================================
+   BUY NOW
+========================================================= */
+
+function buyNow(productId) {
+
+  const product =
+    products.find(function(item) {
+      return String(item.id) === String(productId);
+    });
+
+  if (!product) return;
+
+
+  /* Buy Now means only this product */
+
+  cart = [
+
+    {
+      id: product.id,
+
+      name: product.name,
+
+      price: Number(product.price),
+
+      quantity: 1
+    }
+
+  ];
+
+
+  updateCart();
+
+  startCheckout();
 
 }
 
@@ -1395,11 +1463,6 @@ async function saveOrderToSupabase() {
     });
 
 
-  /*
-    The first structure is the standard structure
-    expected by this Lux Vault setup.
-  */
-
   const orderData = {
 
     customer_name:
@@ -1448,12 +1511,6 @@ async function saveOrderToSupabase() {
       "Order insert error:",
       result.error
     );
-
-    /*
-      Don't stop the customer from ordering
-      if the database schema has a different
-      column configuration.
-    */
 
     return {
       success: false,
@@ -1583,11 +1640,6 @@ function sendWhatsAppOrder() {
   const message =
     createWhatsAppMessage();
 
-
-  /*
-    Existing Lux Vault WhatsApp number
-    from your original code.
-  */
 
   const whatsappNumber =
     "918943657525";
@@ -1757,4 +1809,4 @@ loadProducts();
 </script>
 
 </body>
-</html>
+  </html>
