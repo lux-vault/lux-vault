@@ -429,7 +429,8 @@ function checkout() {
   const total = cart.reduce(function(sum, item) {
     return sum + item.price;
   }, 0);
-
+const shipping = total < 499 ? 50 : 0;
+const grandTotal = total + shipping;
   const items = cart.map(function(item) {
     return item.name + " - ₹" + item.price;
   }).join("\n");
@@ -449,7 +450,9 @@ function checkout() {
     "📱 Phone: " + phone + "\n" +
     "📍 Address: " + address + "\n\n" +
     "🛒 *Order:*\n" + items +
-    "\n\n💰 *Total: ₹" + total + "*";
+    "\n\n💰 *Product Total: ₹" + total + "*\n" +
+"🚚 *Shipping: ₹" + shipping + "*\n" +
+"💵 *Grand Total: ₹" + grandTotal + "*";
 
   const whatsappNumber = "918943657525";
   const whatsappURL =
