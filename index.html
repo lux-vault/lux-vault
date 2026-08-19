@@ -1,386 +1,440 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lux Vault</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lux Vault</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #08080b;
-      color: #fff;
-    }
+body {
+  font-family: Arial, sans-serif;
+  background: #fff8f5;
+  color: #3d252c;
+}
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: #0d0d12;
-      border-bottom: 1px solid #25252d;
-      padding: 16px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fffaf8;
+  border-bottom: 1px solid #f0d9d8;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    .logo {
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: 1px;
-    }
+.logo {
+  font-size: 25px;
+  font-weight: 800;
+  color: #b84f73;
+  letter-spacing: 1px;
+}
 
-    .cart-btn {
-      border: 1px solid #444;
-      background: #fff;
-      color: #000;
-      padding: 9px 14px;
-      border-radius: 8px;
-      font-weight: 700;
-      cursor: pointer;
-    }
+.cart-btn {
+  border: none;
+  background: #b84f73;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 22px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    .hero {
-      text-align: center;
-      padding: 70px 20px;
-      background:
-        radial-gradient(circle at top, #272733 0, #08080b 55%);
-    }
+.hero {
+  text-align: center;
+  padding: 75px 20px;
+  background: linear-gradient(135deg, #ffdce8, #fff1e8);
+}
 
-    .hero h1 {
-      font-size: clamp(38px, 8vw, 70px);
-      margin-bottom: 14px;
-    }
+.hero h1 {
+  font-size: clamp(38px, 9vw, 70px);
+  color: #8f3859;
+  margin-bottom: 15px;
+}
 
-    .hero p {
-      color: #aaa;
-      font-size: 17px;
-      margin-bottom: 25px;
-    }
+.hero p {
+  font-size: 17px;
+  color: #684c54;
+  margin-bottom: 28px;
+}
 
-    .shop-btn {
-      display: inline-block;
-      padding: 13px 24px;
-      background: #fff;
-      color: #000;
-      border-radius: 9px;
-      text-decoration: none;
-      font-weight: 800;
-    }
+.shop-btn {
+  display: inline-block;
+  padding: 14px 28px;
+  background: #b84f73;
+  color: white;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+}
 
-    .section {
-      max-width: 1100px;
-      margin: auto;
-      padding: 35px 20px;
-    }
+.section {
+  max-width: 1100px;
+  margin: auto;
+  padding: 55px 20px;
+}
 
-    .section h2 {
-      margin-bottom: 20px;
-    }
+.section-title {
+  text-align: center;
+  font-size: 30px;
+  color: #8f3859;
+  margin-bottom: 30px;
+}
 
-    .product-grid {
-      display: grid;
-      grid-template-columns:
-        repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 22px;
+}
 
-    .product {
-      background: #121218;
-      border: 1px solid #292932;
-      border-radius: 14px;
-      overflow: hidden;
-    }
+.product {
+  background: #ffffff;
+  border: 1px solid #f0dddd;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(100, 40, 60, 0.08);
+}
 
-    .product img {
-      width: 100%;
-      height: 240px;
-      object-fit: cover;
-      display: block;
-    }
+.product img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+  background: #f8e8e5;
+}
 
-    .product-info {
-      padding: 16px;
-    }
+.product-info {
+  padding: 18px;
+}
 
-    .product h3 {
-      margin-bottom: 8px;
-    }
+.product h3 {
+  font-size: 19px;
+  margin-bottom: 10px;
+  color: #492d35;
+}
 
-    .description {
-      color: #999;
-      font-size: 14px;
-      line-height: 1.5;
-      margin-bottom: 10px;
-    }
+.description {
+  color: #765f66;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
 
-    .price {
-      font-size: 19px;
-      font-weight: 800;
-      margin-bottom: 13px;
-    }
+.price {
+  font-size: 21px;
+  font-weight: bold;
+  color: #b84f73;
+  margin-bottom: 14px;
+}
 
-    .add-btn {
-      width: 100%;
-      border: 0;
-      padding: 12px;
-      border-radius: 8px;
-      background: #fff;
-      color: #000;
-      font-weight: 800;
-      cursor: pointer;
-    }
+.add-btn {
+  width: 100%;
+  border: none;
+  background: #b84f73;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    .cart {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.75);
-      z-index: 20;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
+.cart {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(40, 20, 25, 0.55);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
 
-    .cart-box {
-      width: min(500px, 100%);
-      max-height: 85vh;
-      overflow-y: auto;
-      background: #14141b;
-      border: 1px solid #333;
-      border-radius: 14px;
-      padding: 22px;
-    }
+.cart-box {
+  width: 100%;
+  max-width: 500px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: #fffaf8;
+  border-radius: 20px;
+  padding: 25px;
+}
 
-    .cart-box h2 {
-      margin-bottom: 15px;
-    }
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
-    .cart-item {
-      padding: 12px 0;
-      border-bottom: 1px solid #292932;
-    }
+.close-btn {
+  border: none;
+  background: #f2dce2;
+  color: #7e3650;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+}
 
-    .cart-item strong {
-      display: block;
-      margin-bottom: 5px;
-    }
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 14px 0;
+  border-bottom: 1px solid #efdfe0;
+}
 
-    .cart-item span {
-      color: #aaa;
-    }
+.empty {
+  text-align: center;
+  color: #806970;
+  padding: 25px 0;
+}
 
-    .total {
-      font-size: 20px;
-      font-weight: 800;
-      margin: 20px 0;
-    }
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 22px 0;
+}
 
-    .close-btn,
-    .checkout-btn {
-      width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      font-weight: 800;
-      cursor: pointer;
-    }
+.checkout-btn {
+  width: 100%;
+  border: none;
+  background: #8f3859;
+  color: white;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    .close-btn {
-      border: 1px solid #444;
-      background: transparent;
-      color: #fff;
-      margin-top: 10px;
-    }
+footer {
+  text-align: center;
+  padding: 30px 20px;
+  background: #f8e2e3;
+  color: #684c54;
+}
 
-    .checkout-btn {
-      border: 0;
-      background: #fff;
-      color: #000;
-    }
+@media (max-width: 600px) {
+  .hero {
+    padding: 60px 18px;
+  }
 
-    .empty {
-      color: #999;
-      padding: 15px 0;
-    }
-
-    footer {
-      text-align: center;
-      color: #777;
-      padding: 35px 20px;
-      border-top: 1px solid #222;
-      margin-top: 30px;
-    }
-  </style>
+  .product img {
+    height: 220px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <div class="logo">LUX VAULT</div>
-    <button class="cart-btn" onclick="openCart()">
-      Cart (<span id="cartCount">0</span>)
-    </button>
-  </header>
+<header>
+  <div class="logo">Lux Vault</div>
 
-  <section class="hero">
-    <h1>Lux Vault</h1>
-    <p>Discover products you'll love.</p>
-    <a class="shop-btn" href="#products">Shop Now</a>
-  </section>
+  <button class="cart-btn" onclick="openCart()">
+    🛍️ Cart (<span id="cartCount">0</span>)
+  </button>
+</header>
 
-  <section class="section" id="products">
-    <h2>Featured Products</h2>
+<section class="hero">
+  <h1>Lux Vault</h1>
 
-    <div class="product-grid">
+  <p>
+    Discover beautiful products for your everyday life.
+  </p>
 
-      <article class="product">
-        <img
-          src="https://raw.githubusercontent.com/lux-vault/lux-vault/main/rn-image_picker_lib_temp_a9430114-b04d-4661-ac6e-e2408bd419c7_1786988902575.jpg"
-          alt="Electric Mini Garlic Chopper"
+  <a href="#products" class="shop-btn">
+    Shop Now
+  </a>
+</section>
+
+<section class="section" id="products">
+
+  <h2 class="section-title">Featured Products</h2>
+
+  <div class="product-grid">
+
+    <article class="product">
+
+      <img
+        src="https://raw.githubusercontent.com/lux-vault/lux-vault/main/rn-image_picker_lib_temp_a9430114-b04d-4661-ac6e-e2408bd419c7_1786988902575.jpg"
+        alt="Electric Mini Garlic Chopper"
+      >
+
+      <div class="product-info">
+
+        <h3>Electric Mini Garlic Chopper (250ml)</h3>
+
+        <p class="description">
+          Compact 250ml electric garlic chopper for quick and easy chopping.
+        </p>
+
+        <p class="price">₹499</p>
+
+        <button
+          class="add-btn"
+          onclick="addToCart('Electric Mini Garlic Chopper (250ml)', 499)"
         >
+          Add to Cart
+        </button>
 
-        <div class="product-info">
-          <h3>Electric Mini Garlic Chopper (250ml)</h3>
+      </div>
+    </article>
 
-          <p class="description">
-  Compact 250ml electric garlic chopper for quick and easy chopping.
-          </p>
-            
-          
+    <article class="product">
 
-          <p class="price">₹499</p>
+      <img
+        src="https://picsum.photos/600/600?random=22"
+        alt="Luxury Product"
+      >
 
-          <button
-            class="add-btn"
-            onclick="addToCart('Electric Mini Garlic Chopper (250ml)', 499)"
-          >
-            Add to Cart
-          </button>
-        </div>
-      </article>
+      <div class="product-info">
 
-      <article class="product">
-        <img
-          src="https://picsum.photos/600/600?random=22"
-          alt="Luxury Product"
+        <h3>Luxury Product</h3>
+
+        <p class="description">
+          Another premium product for your Lux Vault store.
+        </p>
+
+        <p class="price">₹999</p>
+
+        <button
+          class="add-btn"
+          onclick="addToCart('Luxury Product', 999)"
         >
+          Add to Cart
+        </button>
 
-        <div class="product-info">
-          <h3>Luxury Product</h3>
+      </div>
+    </article>
 
-          <p class="description">
-            Another sample product for your store.
-          </p>
+  </div>
+</section>
 
-          <p class="price">₹999</p>
+<div class="cart" id="cart">
 
-          <button
-            class="add-btn"
-            onclick="addToCart('Luxury Product', 999)"
-          >
-            Add to Cart
-          </button>
-        </div>
-      </article>
+  <div class="cart-box">
 
-    </div>
-  </section>
-
-  <div class="cart" id="cart">
-    <div class="cart-box">
+    <div class="cart-header">
 
       <h2>Your Cart</h2>
 
-      <div id="cartItems"></div>
-
-      <div class="total">
-        Total: ₹<span id="cartTotal">0</span>
-      </div>
-
-      <button class="checkout-btn" onclick="checkout()">
-        Continue to Checkout
-      </button>
-
       <button class="close-btn" onclick="closeCart()">
-        Close
+        ×
       </button>
 
     </div>
+
+    <div id="cartItems">
+      <p class="empty">Your cart is empty.</p>
+    </div>
+
+    <div class="cart-total">
+      <span>Total</span>
+      <span>₹<span id="cartTotal">0</span></span>
+    </div>
+
+    <button class="checkout-btn" onclick="checkout()">
+      Checkout
+    </button>
+
   </div>
+</div>
 
-  <footer>
-    © 2026 Lux Vault. All rights reserved.
-  </footer>
+<footer>
+  <p>© 2026 Lux Vault. All rights reserved.</p>
+</footer>
 
-  <script>
-    let cart = [];
+<script>
 
-    function addToCart(name, price) {
-      cart.push({
-        name: name,
-        price: price
-      });
+let cart = [];
 
-      updateCart();
+function addToCart(name, price) {
 
-      alert(name + " added to cart!");
-    }
+  cart.push({
+    name: name,
+    price: price
+  });
 
-    function updateCart() {
-      const count = document.getElementById("cartCount");
-      const items = document.getElementById("cartItems");
-      const total = document.getElementById("cartTotal");
+  updateCart();
 
-      count.textContent = cart.length;
+  alert(name + " added to cart!");
+}
 
-      if (cart.length === 0) {
-        items.innerHTML =
-          '<p class="empty">Your cart is empty.</p>';
-      } else {
-        items.innerHTML = cart.map(function(item) {
-          return `
-            <div class="cart-item">
-              <strong>${item.name}</strong>
-              <span>₹${item.price}</span>
-            </div>
-          `;
-        }).join("");
-      }
+function updateCart() {
 
-      const sum = cart.reduce(function(total, item) {
-        return total + item.price;
-      }, 0);
+  const count = document.getElementById("cartCount");
+  const items = document.getElementById("cartItems");
+  const total = document.getElementById("cartTotal");
 
-      total.textContent = sum;
-    }
+  count.textContent = cart.length;
 
-    function openCart() {
-      document.getElementById("cart").style.display = "flex";
-      updateCart();
-    }
+  if (cart.length === 0) {
 
-    function closeCart() {
-      document.getElementById("cart").style.display = "none";
-    }
+    items.innerHTML =
+      '<p class="empty">Your cart is empty.</p>';
 
-    function checkout() {
-      if (cart.length === 0) {
-        alert("Your cart is empty.");
-        return;
-      }
+  } else {
 
-      alert(
-        "Checkout demo is ready. " +
-        "Payment and shipping will be connected later."
-      );
-    }
-  </script>
+    items.innerHTML = cart.map(function(item) {
+
+      return `
+        <div class="cart-item">
+          <strong>${item.name}</strong>
+          <span>₹${item.price}</span>
+        </div>
+      `;
+
+    }).join("");
+  }
+
+  const sum = cart.reduce(function(total, item) {
+
+    return total + item.price;
+
+  }, 0);
+
+  total.textContent = sum;
+}
+
+function openCart() {
+
+  document.getElementById("cart").style.display = "flex";
+
+  updateCart();
+}
+
+function closeCart() {
+
+  document.getElementById("cart").style.display = "none";
+}
+
+function checkout() {
+
+  if (cart.length === 0) {
+
+    alert("Your cart is empty.");
+
+    return;
+  }
+
+  alert(
+    "Checkout demo is ready. Payment and shipping will be connected later."
+  );
+}
+
+</script>
 
 </body>
 </html>
