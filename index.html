@@ -439,16 +439,28 @@ const grandTotal = total + shipping;
   if (!name) return;
 
   const phone = prompt("Enter your phone number:");
-  if (!phone) return;
+if (!phone) return;
 
-  const address = prompt("Enter your full delivery address:");
-  if (!address) return;
+const address = prompt("Enter your full delivery address:");
+if (!address) return;
+
+const pin = prompt("Enter your 6-digit PIN code:");
+
+if (!pin || !/^\d{6}$/.test(pin)) {
+  alert("Please enter a valid 6-digit PIN code.");
+  return;
+}
+  
+
+  
+  
 
   const message =
     "🛍️ *NEW LUX VAULT ORDER*\n\n" +
     "👤 Name: " + name + "\n" +
     "📱 Phone: " + phone + "\n" +
-    "📍 Address: " + address + "\n\n" +
+    "📍 Address: " + address + "\n" +
+"📮 PIN Code: " + pin + "\n\n" +
     "🛒 *Order:*\n" + items +
     "\n\n💰 *Product Total: ₹" + total + "*\n" +
 "🚚 *Shipping: ₹" + shipping + "*\n" +
