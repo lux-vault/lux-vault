@@ -18,20 +18,21 @@ body {
   color: #3d252c;
 }
 
+/* HEADER */
 header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: #ffffff;
+  background: #fff;
   border-bottom: 1px solid #f0d9d8;
-  padding: 15px 20px;
+  padding: 14px 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .logo {
-  font-size: 25px;
+  font-size: 24px;
   font-weight: 800;
   color: #b84f73;
   letter-spacing: 1px;
@@ -41,12 +42,13 @@ header {
   border: none;
   background: #b84f73;
   color: white;
-  padding: 10px 16px;
+  padding: 10px 15px;
   border-radius: 22px;
   font-weight: bold;
   cursor: pointer;
 }
 
+/* HERO */
 .hero {
   text-align: center;
   padding: 65px 20px;
@@ -54,20 +56,20 @@ header {
 }
 
 .hero h1 {
-  font-size: clamp(38px, 9vw, 70px);
+  font-size: clamp(40px, 10vw, 70px);
   color: #8f3859;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
 .hero p {
-  font-size: 17px;
+  font-size: 16px;
   color: #684c54;
-  margin-bottom: 28px;
+  margin-bottom: 25px;
 }
 
 .shop-btn {
   display: inline-block;
-  padding: 14px 28px;
+  padding: 13px 27px;
   background: #b84f73;
   color: white;
   border-radius: 25px;
@@ -75,17 +77,18 @@ header {
   font-weight: bold;
 }
 
+/* PRODUCTS */
 .section {
   max-width: 1100px;
   margin: auto;
-  padding: 45px 15px;
+  padding: 42px 14px;
 }
 
 .section-title {
   text-align: center;
-  font-size: 30px;
+  font-size: 29px;
   color: #8f3859;
-  margin-bottom: 30px;
+  margin-bottom: 28px;
 }
 
 .product-grid {
@@ -95,19 +98,19 @@ header {
 }
 
 .product {
-  background: #ffffff;
+  background: #fff;
   border: 1px solid #f0dddd;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 6px 18px rgba(100, 40, 60, 0.08);
+  box-shadow: 0 6px 18px rgba(100,40,60,.08);
 }
 
 .product img {
   width: 100%;
-  height: 190px;
+  height: 185px;
   object-fit: cover;
   display: block;
-  background: #ffffff;
+  background: #fff;
 }
 
 .product-info {
@@ -125,14 +128,14 @@ header {
   color: #765f66;
   font-size: 12px;
   line-height: 1.4;
-  margin-bottom: 10px;
+  margin-bottom: 9px;
 }
 
 .price {
   font-size: 19px;
   font-weight: bold;
   color: #b84f73;
-  margin-bottom: 11px;
+  margin-bottom: 10px;
 }
 
 .add-btn {
@@ -140,39 +143,44 @@ header {
   border: none;
   background: #b84f73;
   color: white;
-  padding: 10px 6px;
+  padding: 10px 5px;
   border-radius: 9px;
   font-weight: bold;
   cursor: pointer;
   font-size: 13px;
 }
 
+.add-btn:active {
+  transform: scale(.97);
+}
+
+/* CART */
 .cart {
   display: none;
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: rgba(40, 20, 25, 0.55);
+  background: rgba(40,20,25,.55);
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 18px;
 }
 
 .cart-box {
   width: 100%;
   max-width: 500px;
-  max-height: 85vh;
+  max-height: 88vh;
   overflow-y: auto;
-  background: #ffffff;
+  background: white;
   border-radius: 20px;
-  padding: 25px;
+  padding: 22px;
 }
 
 .cart-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .close-btn {
@@ -183,15 +191,55 @@ header {
   height: 35px;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .cart-item {
+  padding: 13px 0;
+  border-bottom: 1px solid #efdfe0;
+}
+
+.cart-item-top {
   display: flex;
   justify-content: space-between;
-  gap: 15px;
-  padding: 14px 0;
-  border-bottom: 1px solid #efdfe0;
+  gap: 10px;
+}
+
+.cart-item-name {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.cart-item-price {
+  color: #b84f73;
+  font-weight: bold;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 9px;
+}
+
+.qty-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 7px;
+  background: #f2dce2;
+  color: #7e3650;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.remove-btn {
+  border: none;
+  background: transparent;
+  color: #b84f73;
+  font-size: 12px;
+  cursor: pointer;
+  margin-left: 8px;
 }
 
 .empty {
@@ -200,12 +248,25 @@ header {
   padding: 25px 0;
 }
 
+.summary {
+  margin-top: 18px;
+  border-top: 1px solid #efdfe0;
+  padding-top: 15px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
 .cart-total {
   display: flex;
   justify-content: space-between;
   font-size: 20px;
   font-weight: bold;
-  margin: 22px 0;
+  margin: 17px 0;
+  color: #8f3859;
 }
 
 .checkout-btn {
@@ -220,6 +281,7 @@ header {
   cursor: pointer;
 }
 
+/* FOOTER */
 footer {
   text-align: center;
   padding: 30px 20px;
@@ -227,7 +289,9 @@ footer {
   color: #684c54;
 }
 
+/* DESKTOP */
 @media (min-width: 700px) {
+
   .product-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 22px;
@@ -268,6 +332,7 @@ footer {
 </header>
 
 <section class="hero">
+
   <h1>Lux Vault</h1>
 
   <p>
@@ -277,14 +342,18 @@ footer {
   <a href="#products" class="shop-btn">
     Shop Now
   </a>
+
 </section>
 
 <section class="section" id="products">
 
-  <h2 class="section-title">Featured Products</h2>
+  <h2 class="section-title">
+    Featured Products
+  </h2>
 
   <div class="product-grid">
 
+    <!-- PRODUCT 1 -->
     <article class="product">
 
       <img
@@ -294,24 +363,30 @@ footer {
 
       <div class="product-info">
 
-        <h3>Electric Mini Garlic Chopper (250ml)</h3>
+        <h3>
+          Electric Mini Garlic Chopper (250ml)
+        </h3>
 
         <p class="description">
           Compact 250ml electric garlic chopper for quick and easy chopping.
         </p>
 
-        <p class="price">₹249</p>
+        <p class="price">
+          ₹249
+        </p>
 
         <button
           class="add-btn"
-          onclick="addToCart('Electric Mini Garlic Chopper (250ml)', 249)"
+          onclick="addToCart('Electric Mini Garlic Chopper (250ml)',249)"
         >
           Add to Cart
         </button>
 
       </div>
+
     </article>
 
+    <!-- PRODUCT 2 -->
     <article class="product">
 
       <img
@@ -321,27 +396,34 @@ footer {
 
       <div class="product-info">
 
-        <h3>Luxury Product</h3>
+        <h3>
+          Luxury Product
+        </h3>
 
         <p class="description">
           Another premium product for your Lux Vault store.
         </p>
 
-        <p class="price">₹999</p>
+        <p class="price">
+          ₹999
+        </p>
 
         <button
           class="add-btn"
-          onclick="addToCart('Luxury Product', 999)"
+          onclick="addToCart('Luxury Product',999)"
         >
           Add to Cart
         </button>
 
       </div>
+
     </article>
 
   </div>
+
 </section>
 
+<!-- CART -->
 <div class="cart" id="cart">
 
   <div class="cart-box">
@@ -357,12 +439,28 @@ footer {
     </div>
 
     <div id="cartItems">
-      <p class="empty">Your cart is empty.</p>
+      <p class="empty">
+        Your cart is empty.
+      </p>
     </div>
 
-    <div class="cart-total">
-      <span>Total</span>
-      <span>₹<span id="cartTotal">0</span></span>
+    <div class="summary">
+
+      <div class="summary-row">
+        <span>Product Total</span>
+        <span>₹<span id="productTotal">0</span></span>
+      </div>
+
+      <div class="summary-row">
+        <span>Shipping</span>
+        <span>₹<span id="shipping">0</span></span>
+      </div>
+
+      <div class="cart-total">
+        <span>Grand Total</span>
+        <span>₹<span id="cartTotal">0</span></span>
+      </div>
+
     </div>
 
     <button class="checkout-btn" onclick="checkout()">
@@ -370,35 +468,75 @@ footer {
     </button>
 
   </div>
+
 </div>
 
 <footer>
-  <p>© 2026 Lux Vault. All rights reserved.</p>
+
+  <p>
+    © 2026 Lux Vault. All rights reserved.
+  </p>
+
 </footer>
 
 <script>
 
 let cart = [];
 
+/* ADD TO CART */
+
 function addToCart(name, price) {
 
-  cart.push({
-    name: name,
-    price: price
+  const existing = cart.find(function(item) {
+    return item.name === name;
   });
+
+  if (existing) {
+
+    existing.quantity++;
+
+  } else {
+
+    cart.push({
+      name: name,
+      price: price,
+      quantity: 1
+    });
+
+  }
 
   updateCart();
 
   alert(name + " added to cart!");
+
 }
+
+
+/* UPDATE CART */
 
 function updateCart() {
 
   const count = document.getElementById("cartCount");
   const items = document.getElementById("cartItems");
-  const total = document.getElementById("cartTotal");
 
-  count.textContent = cart.length;
+  const productTotalElement =
+    document.getElementById("productTotal");
+
+  const shippingElement =
+    document.getElementById("shipping");
+
+  const totalElement =
+    document.getElementById("cartTotal");
+
+
+  let itemCount = 0;
+
+  cart.forEach(function(item) {
+    itemCount += item.quantity;
+  });
+
+  count.textContent = itemCount;
+
 
   if (cart.length === 0) {
 
@@ -407,91 +545,254 @@ function updateCart() {
 
   } else {
 
-    items.innerHTML = cart.map(function(item) {
+    items.innerHTML = cart.map(function(item, index) {
 
       return `
         <div class="cart-item">
-          <strong>${item.name}</strong>
-          <span>₹${item.price}</span>
+
+          <div class="cart-item-top">
+
+            <span class="cart-item-name">
+              ${item.name}
+            </span>
+
+            <span class="cart-item-price">
+              ₹${item.price * item.quantity}
+            </span>
+
+          </div>
+
+          <div class="quantity">
+
+            <button
+              class="qty-btn"
+              onclick="changeQuantity(${index}, -1)"
+            >
+              −
+            </button>
+
+            <span>
+              ${item.quantity}
+            </span>
+
+            <button
+              class="qty-btn"
+              onclick="changeQuantity(${index}, 1)"
+            >
+              +
+            </button>
+
+            <button
+              class="remove-btn"
+              onclick="removeItem(${index})"
+            >
+              Remove
+            </button>
+
+          </div>
+
         </div>
       `;
 
     }).join("");
+
   }
 
-  const sum = cart.reduce(function(total, item) {
 
-    return total + item.price;
+  const total = cart.reduce(function(sum, item) {
+
+    return sum + (item.price * item.quantity);
 
   }, 0);
 
-  total.textContent = sum;
+
+  const shipping = total === 0
+    ? 0
+    : (total < 499 ? 50 : 0);
+
+
+  const grandTotal = total + shipping;
+
+
+  productTotalElement.textContent = total;
+  shippingElement.textContent = shipping;
+  totalElement.textContent = grandTotal;
+
 }
+
+
+/* CHANGE QUANTITY */
+
+function changeQuantity(index, amount) {
+
+  cart[index].quantity += amount;
+
+  if (cart[index].quantity <= 0) {
+    cart.splice(index, 1);
+  }
+
+  updateCart();
+
+}
+
+
+/* REMOVE ITEM */
+
+function removeItem(index) {
+
+  cart.splice(index, 1);
+
+  updateCart();
+
+}
+
+
+/* OPEN CART */
 
 function openCart() {
 
   document.getElementById("cart").style.display = "flex";
 
   updateCart();
+
 }
+
+
+/* CLOSE CART */
 
 function closeCart() {
 
   document.getElementById("cart").style.display = "none";
+
 }
+
+
+/* CHECKOUT */
 
 function checkout() {
 
   if (cart.length === 0) {
+
     alert("Your cart is empty.");
+
     return;
+
   }
 
-  const total = cart.reduce(function(sum, item) {
-    return sum + item.price;
+
+  const productTotal = cart.reduce(function(sum, item) {
+
+    return sum + (item.price * item.quantity);
+
   }, 0);
 
-  const shipping = total < 499 ? 50 : 0;
-  const grandTotal = total + shipping;
+
+  const shipping =
+    productTotal < 499 ? 50 : 0;
+
+
+  const grandTotal =
+    productTotal + shipping;
+
 
   const items = cart.map(function(item) {
-    return item.name + " - ₹" + item.price;
+
+    return (
+      item.name +
+      " x" +
+      item.quantity +
+      " - ₹" +
+      (item.price * item.quantity)
+    );
+
   }).join("\n");
 
-  const name = prompt("Enter your name:");
+
+  const name = prompt(
+    "Enter your name:"
+  );
+
   if (!name) return;
 
-  const phone = prompt("Enter your phone number:");
+
+  const phone = prompt(
+    "Enter your phone number:"
+  );
+
   if (!phone) return;
 
-  const address = prompt("Enter your full delivery address:");
+
+  const address = prompt(
+    "Enter your full delivery address:"
+  );
+
   if (!address) return;
 
-  const pin = prompt("Enter your 6-digit PIN code:");
+
+  const pin = prompt(
+    "Enter your 6-digit PIN code:"
+  );
+
 
   if (!pin || !/^\d{6}$/.test(pin)) {
-    alert("Please enter a valid 6-digit PIN code.");
+
+    alert(
+      "Please enter a valid 6-digit PIN code."
+    );
+
     return;
+
   }
 
-  const message =
-    "🛍️ *NEW LUX VAULT ORDER*\n\n" +
-    "👤 Name: " + name + "\n" +
-    "📱 Phone: " + phone + "\n" +
-    "📍 Address: " + address + "\n" +
-    "📮 PIN Code: " + pin + "\n\n" +
-    "🛒 *Order:*\n" + items +
-    "\n\n💰 *Product Total: ₹" + total + "*\n" +
-    "🚚 *Shipping: ₹" + shipping + "*\n" +
-    "💵 *Grand Total: ₹" + grandTotal + "*";
 
-  const whatsappNumber = "918943657525";
+  const message =
+
+    "🛍️ *NEW LUX VAULT ORDER*\n\n" +
+
+    "👤 Name: " + name + "\n" +
+
+    "📱 Phone: " + phone + "\n" +
+
+    "📍 Address: " + address + "\n" +
+
+    "📮 PIN Code: " + pin + "\n\n" +
+
+    "🛒 *ORDER:*\n" +
+
+    items +
+
+    "\n\n" +
+
+    "💰 *Product Total: ₹" +
+    productTotal +
+    "*\n" +
+
+    "🚚 *Shipping: ₹" +
+    shipping +
+    "*\n" +
+
+    "💵 *Grand Total: ₹" +
+    grandTotal +
+    "*";
+
+
+  const whatsappNumber =
+    "918943657525";
+
 
   const whatsappURL =
-    "https://wa.me/" + whatsappNumber +
-    "?text=" + encodeURIComponent(message);
 
-  window.open(whatsappURL, "_blank");
+    "https://wa.me/" +
+    whatsappNumber +
+    "?text=" +
+    encodeURIComponent(message);
+
+
+  window.open(
+    whatsappURL,
+    "_blank"
+  );
+
 }
 
 </script>
