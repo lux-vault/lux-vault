@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#b84f73">
 <title>Lux Vault</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 * {
@@ -16,6 +19,16 @@ body {
   font-family: Arial, sans-serif;
   background: #fff0f5;
   color: #3d252c;
+}
+
+button,
+input,
+textarea {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
 }
 
 /* HEADER */
@@ -45,7 +58,6 @@ header {
   padding: 10px 15px;
   border-radius: 22px;
   font-weight: bold;
-  cursor: pointer;
 }
 
 /* HERO */
@@ -89,6 +101,13 @@ header {
   font-size: 29px;
   color: #8f3859;
   margin-bottom: 28px;
+}
+
+.status {
+  text-align: center;
+  color: #806970;
+  padding: 15px;
+  font-size: 14px;
 }
 
 .product-grid {
@@ -146,7 +165,6 @@ header {
   padding: 10px 5px;
   border-radius: 9px;
   font-weight: bold;
-  cursor: pointer;
   font-size: 13px;
 }
 
@@ -154,8 +172,9 @@ header {
   transform: scale(.97);
 }
 
-/* CART */
-.cart {
+/* CART OVERLAY */
+.cart,
+.payment-modal {
   display: none;
   position: fixed;
   inset: 0;
@@ -166,17 +185,19 @@ header {
   padding: 18px;
 }
 
-.cart-box {
+.cart-box,
+.payment-box {
   width: 100%;
   max-width: 500px;
-  max-height: 88vh;
+  max-height: 90vh;
   overflow-y: auto;
   background: white;
   border-radius: 20px;
   padding: 22px;
 }
 
-.cart-header {
+.cart-header,
+.modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -190,7 +211,6 @@ header {
   width: 35px;
   height: 35px;
   border-radius: 50%;
-  cursor: pointer;
   font-size: 20px;
 }
 
@@ -213,6 +233,7 @@ header {
 .cart-item-price {
   color: #b84f73;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .quantity {
@@ -230,7 +251,6 @@ header {
   background: #f2dce2;
   color: #7e3650;
   font-weight: bold;
-  cursor: pointer;
 }
 
 .remove-btn {
@@ -238,7 +258,6 @@ header {
   background: transparent;
   color: #b84f73;
   font-size: 12px;
-  cursor: pointer;
   margin-left: 8px;
 }
 
@@ -269,16 +288,95 @@ header {
   color: #8f3859;
 }
 
-.checkout-btn {
+.checkout-btn,
+.whatsapp-btn,
+.pay-btn {
   width: 100%;
   border: none;
-  background: #8f3859;
   color: white;
   padding: 14px;
   border-radius: 12px;
   font-size: 16px;
   font-weight: bold;
-  cursor: pointer;
+  margin-top: 8px;
+}
+
+.checkout-btn {
+  background: #8f3859;
+}
+
+.whatsapp-btn {
+  background: #25D366;
+}
+
+.pay-btn {
+  background: #b84f73;
+}
+
+/* CUSTOMER FORM */
+.form-group {
+  margin-bottom: 13px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  color: #684c54;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  border: 1px solid #e7cfd4;
+  border-radius: 10px;
+  padding: 12px;
+  outline: none;
+  background: #fffafa;
+  color: #3d252c;
+}
+
+.form-group textarea {
+  min-height: 85px;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #b84f73;
+}
+
+/* PAYMENT */
+.qr-wrap {
+  text-align: center;
+}
+
+.qr-wrap img {
+  width: min(100%, 330px);
+  border-radius: 14px;
+  border: 1px solid #eee;
+  display: block;
+  margin: 10px auto 15px;
+}
+
+.payment-note {
+  text-align: center;
+  color: #684c54;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.order-id {
+  text-align: center;
+  background: #fff0f5;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px 0;
+  color: #8f3859;
+  font-weight: bold;
+  font-size: 13px;
 }
 
 /* FOOTER */
@@ -332,7 +430,6 @@ footer {
 </header>
 
 <section class="hero">
-
   <h1>Lux Vault</h1>
 
   <p>
@@ -342,7 +439,6 @@ footer {
   <a href="#products" class="shop-btn">
     Shop Now
   </a>
-
 </section>
 
 <section class="section" id="products">
@@ -351,77 +447,14 @@ footer {
     Featured Products
   </h2>
 
-  <div class="product-grid">
-
-    <!-- PRODUCT 1 -->
-    <article class="product">
-
-      <img
-        src="https://raw.githubusercontent.com/lux-vault/lux-vault/main/rn-image_picker_lib_temp_a9430114-b04d-4661-ac6e-e2408bd419c7_1786988902575.jpg"
-        alt="Electric Mini Garlic Chopper"
-      >
-
-      <div class="product-info">
-
-        <h3>
-          Electric Mini Garlic Chopper (250ml)
-        </h3>
-
-        <p class="description">
-          Compact 250ml electric garlic chopper for quick and easy chopping.
-        </p>
-
-        <p class="price">
-          ₹249
-        </p>
-
-        <button
-          class="add-btn"
-          onclick="addToCart('Electric Mini Garlic Chopper (250ml)',249)"
-        >
-          Add to Cart
-        </button>
-
-      </div>
-
-    </article>
-
-    <!-- PRODUCT 2 -->
-    <article class="product">
-
-      <img
-        src="https://picsum.photos/600/600?random=22"
-        alt="Luxury Product"
-      >
-
-      <div class="product-info">
-
-        <h3>
-          Luxury Product
-        </h3>
-
-        <p class="description">
-          Another premium product for your Lux Vault store.
-        </p>
-
-        <p class="price">
-          ₹999
-        </p>
-
-        <button
-          class="add-btn"
-          onclick="addToCart('Luxury Product',999)"
-        >
-          Add to Cart
-        </button>
-
-      </div>
-
-    </article>
-
+  <div id="productStatus" class="status">
+    Loading products...
   </div>
 
+  <div class="product-grid" id="productGrid"></div>
+
 </section>
+
 
 <!-- CART -->
 <div class="cart" id="cart">
@@ -429,13 +462,11 @@ footer {
   <div class="cart-box">
 
     <div class="cart-header">
-
       <h2>Your Cart</h2>
 
       <button class="close-btn" onclick="closeCart()">
         ×
       </button>
-
     </div>
 
     <div id="cartItems">
@@ -463,7 +494,7 @@ footer {
 
     </div>
 
-    <button class="checkout-btn" onclick="checkout()">
+    <button class="checkout-btn" onclick="startCheckout()">
       Checkout
     </button>
 
@@ -471,25 +502,435 @@ footer {
 
 </div>
 
-<footer>
 
+<!-- CHECKOUT FORM -->
+<div class="payment-modal" id="checkoutModal">
+
+  <div class="payment-box">
+
+    <div class="modal-header">
+      <h2>Delivery Details</h2>
+
+      <button class="close-btn" onclick="closeCheckout()">
+        ×
+      </button>
+    </div>
+
+    <div class="form-group">
+      <label>Name</label>
+      <input
+        id="customerName"
+        type="text"
+        placeholder="Your full name"
+        autocomplete="name"
+      >
+    </div>
+
+    <div class="form-group">
+      <label>Phone Number</label>
+      <input
+        id="customerPhone"
+        type="tel"
+        placeholder="10-digit phone number"
+        maxlength="10"
+        autocomplete="tel"
+      >
+    </div>
+
+    <div class="form-group">
+      <label>Delivery Address</label>
+      <textarea
+        id="customerAddress"
+        placeholder="House name, street, place..."
+        autocomplete="street-address"
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>PIN Code</label>
+      <input
+        id="customerPin"
+        type="tel"
+        placeholder="6-digit PIN code"
+        maxlength="6"
+        inputmode="numeric"
+        autocomplete="postal-code"
+      >
+    </div>
+
+    <button class="checkout-btn" onclick="continueToPayment()">
+      Continue to Payment
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- PAYMENT QR -->
+<div class="payment-modal" id="paymentModal">
+
+  <div class="payment-box">
+
+    <div class="modal-header">
+      <h2>Payment</h2>
+
+      <button class="close-btn" onclick="closePayment()">
+        ×
+      </button>
+    </div>
+
+    <div class="qr-wrap">
+
+      <p class="payment-note">
+        Scan the QR code using any supported UPI app and complete your payment.
+      </p>
+
+      <img
+        src="https://raw.githubusercontent.com/lux-vault/lux-vault/main/IMG-20260819-WA0033.jpg"
+        alt="Lux Vault UPI Payment QR"
+      >
+
+      <div class="order-id" id="paymentOrderId">
+        Order ready
+      </div>
+
+      <div class="cart-total">
+        <span>Total</span>
+        <span>₹<span id="paymentTotal">0</span></span>
+      </div>
+
+      <p class="payment-note">
+        After payment, tap the WhatsApp button below to send your order details.
+      </p>
+
+      <button class="whatsapp-btn" onclick="sendWhatsAppOrder()">
+        📲 Send Order on WhatsApp
+      </button>
+
+      <button class="pay-btn" onclick="finishOrder()">
+        ✅ I've Completed Payment
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<footer>
   <p>
     © 2026 Lux Vault. All rights reserved.
   </p>
-
 </footer>
+
 
 <script>
 
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+const SUPABASE_URL =
+  "https://graljzucxxqbxejqhlbe.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_quqyVsjjTF7nJxSxAOan_g_vYYiXkUR";
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+/* =========================================================
+   APP STATE
+========================================================= */
+
+let products = [];
+
 let cart = [];
 
-/* ADD TO CART */
+let customer = {
+  name: "",
+  phone: "",
+  address: "",
+  pin: ""
+};
 
-function addToCart(name, price) {
+let currentOrderId = null;
 
-  const existing = cart.find(function(item) {
-    return item.name === name;
+
+/* =========================================================
+   SAMPLE FALLBACK PRODUCTS
+========================================================= */
+
+const fallbackProducts = [
+
+  {
+    id: "fallback-1",
+    name: "Electric Mini Garlic Chopper (250ml)",
+    description:
+      "Compact 250ml electric garlic chopper for quick and easy chopping.",
+    price: 249,
+    image:
+      "https://raw.githubusercontent.com/lux-vault/lux-vault/main/rn-image_picker_lib_temp_a9430114-b04d-4661-ac6e-e2408bd419c7_1786988902575.jpg"
+  },
+
+  {
+    id: "fallback-2",
+    name: "Luxury Product",
+    description:
+      "Another premium product for your Lux Vault store.",
+    price: 999,
+    image:
+      "https://picsum.photos/600/600?random=22"
+  }
+
+];
+
+
+/* =========================================================
+   SAFE PRODUCT FIELD READER
+========================================================= */
+
+function getProductValue(product, possibleNames, fallback) {
+
+  for (const name of possibleNames) {
+
+    if (
+      product[name] !== undefined &&
+      product[name] !== null &&
+      product[name] !== ""
+    ) {
+      return product[name];
+    }
+
+  }
+
+  return fallback;
+}
+
+
+/* =========================================================
+   LOAD PRODUCTS FROM SUPABASE
+========================================================= */
+
+async function loadProducts() {
+
+  const grid =
+    document.getElementById("productGrid");
+
+  const status =
+    document.getElementById("productStatus");
+
+  try {
+
+    const result =
+      await supabaseClient
+        .from("products")
+        .select("*");
+
+    if (result.error) {
+      throw result.error;
+    }
+
+    const rows = result.data || [];
+
+    if (rows.length === 0) {
+
+      products = fallbackProducts;
+
+      status.textContent =
+        "No products found in database. Showing sample products.";
+
+    } else {
+
+      products = rows.map(function(product) {
+
+        return {
+
+          id: getProductValue(
+            product,
+            ["id", "product_id"],
+            crypto.randomUUID()
+          ),
+
+          name: String(
+            getProductValue(
+              product,
+              ["name", "product_name", "title"],
+              "Lux Vault Product"
+            )
+          ),
+
+          description: String(
+            getProductValue(
+              product,
+              ["description", "details", "product_description"],
+              "Premium product from Lux Vault."
+            )
+          ),
+
+          price: Number(
+            getProductValue(
+              product,
+              ["price", "selling_price", "amount"],
+              0
+            )
+          ),
+
+          image: String(
+            getProductValue(
+              product,
+              [
+                "image_url",
+                "image",
+                "imageurl",
+                "photo_url",
+                "product_image"
+              ],
+              "https://picsum.photos/600/600?random=22"
+            )
+          )
+
+        };
+
+      });
+
+      status.textContent = "";
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Supabase product error:",
+      error
+    );
+
+    products = fallbackProducts;
+
+    status.textContent =
+      "Using available products.";
+
+  }
+
+  renderProducts();
+
+}
+
+
+/* =========================================================
+   RENDER PRODUCTS
+========================================================= */
+
+function renderProducts() {
+
+  const grid =
+    document.getElementById("productGrid");
+
+  grid.innerHTML = "";
+
+  products.forEach(function(product) {
+
+    const article =
+      document.createElement("article");
+
+    article.className = "product";
+
+    const image =
+      document.createElement("img");
+
+    image.src = product.image;
+
+    image.alt = product.name;
+
+    image.onerror = function() {
+      this.src =
+        "https://picsum.photos/600/600?random=22";
+    };
+
+
+    const info =
+      document.createElement("div");
+
+    info.className = "product-info";
+
+
+    const title =
+      document.createElement("h3");
+
+    title.textContent =
+      product.name;
+
+
+    const description =
+      document.createElement("p");
+
+    description.className = "description";
+
+    description.textContent =
+      product.description;
+
+
+    const price =
+      document.createElement("p");
+
+    price.className = "price";
+
+    price.textContent =
+      "₹" + Number(product.price).toLocaleString("en-IN");
+
+
+    const button =
+      document.createElement("button");
+
+    button.className = "add-btn";
+
+    button.textContent =
+      "Add to Cart";
+
+    button.onclick = function() {
+      addToCart(product.id);
+    };
+
+
+    info.appendChild(title);
+    info.appendChild(description);
+    info.appendChild(price);
+    info.appendChild(button);
+
+    article.appendChild(image);
+    article.appendChild(info);
+
+    grid.appendChild(article);
+
   });
+
+}
+
+
+/* =========================================================
+   ADD TO CART
+========================================================= */
+
+function addToCart(productId) {
+
+  const product =
+    products.find(function(item) {
+      return String(item.id) === String(productId);
+    });
+
+  if (!product) return;
+
+
+  const existing =
+    cart.find(function(item) {
+      return String(item.id) === String(product.id);
+    });
+
 
   if (existing) {
 
@@ -498,26 +939,40 @@ function addToCart(name, price) {
   } else {
 
     cart.push({
-      name: name,
-      price: price,
+
+      id: product.id,
+
+      name: product.name,
+
+      price: Number(product.price),
+
       quantity: 1
+
     });
 
   }
 
+
   updateCart();
 
-  alert(name + " added to cart!");
+  alert(
+    product.name + " added to cart!"
+  );
 
 }
 
 
-/* UPDATE CART */
+/* =========================================================
+   UPDATE CART
+========================================================= */
 
 function updateCart() {
 
-  const count = document.getElementById("cartCount");
-  const items = document.getElementById("cartItems");
+  const count =
+    document.getElementById("cartCount");
+
+  const items =
+    document.getElementById("cartItems");
 
   const productTotalElement =
     document.getElementById("productTotal");
@@ -535,7 +990,8 @@ function updateCart() {
     itemCount += item.quantity;
   });
 
-  count.textContent = itemCount;
+  count.textContent =
+    itemCount;
 
 
   if (cart.length === 0) {
@@ -545,90 +1001,145 @@ function updateCart() {
 
   } else {
 
-    items.innerHTML = cart.map(function(item, index) {
+    items.innerHTML =
+      cart.map(function(item, index) {
 
-      return `
-        <div class="cart-item">
+        return `
 
-          <div class="cart-item-top">
+          <div class="cart-item">
 
-            <span class="cart-item-name">
-              ${item.name}
-            </span>
+            <div class="cart-item-top">
 
-            <span class="cart-item-price">
-              ₹${item.price * item.quantity}
-            </span>
+              <span class="cart-item-name">
+                ${escapeHtml(item.name)}
+              </span>
+
+              <span class="cart-item-price">
+                ₹${(
+                  item.price * item.quantity
+                ).toLocaleString("en-IN")}
+              </span>
+
+            </div>
+
+            <div class="quantity">
+
+              <button
+                class="qty-btn"
+                onclick="changeQuantity(${index}, -1)"
+              >
+                −
+              </button>
+
+              <span>
+                ${item.quantity}
+              </span>
+
+              <button
+                class="qty-btn"
+                onclick="changeQuantity(${index}, 1)"
+              >
+                +
+              </button>
+
+              <button
+                class="remove-btn"
+                onclick="removeItem(${index})"
+              >
+                Remove
+              </button>
+
+            </div>
 
           </div>
 
-          <div class="quantity">
+        `;
 
-            <button
-              class="qty-btn"
-              onclick="changeQuantity(${index}, -1)"
-            >
-              −
-            </button>
-
-            <span>
-              ${item.quantity}
-            </span>
-
-            <button
-              class="qty-btn"
-              onclick="changeQuantity(${index}, 1)"
-            >
-              +
-            </button>
-
-            <button
-              class="remove-btn"
-              onclick="removeItem(${index})"
-            >
-              Remove
-            </button>
-
-          </div>
-
-        </div>
-      `;
-
-    }).join("");
+      }).join("");
 
   }
 
 
-  const total = cart.reduce(function(sum, item) {
-
-    return sum + (item.price * item.quantity);
-
-  }, 0);
+  const total =
+    getProductTotal();
 
 
-  const shipping = total === 0
-    ? 0
-    : (total < 499 ? 50 : 0);
+  const shipping =
+    getShipping(total);
 
 
-  const grandTotal = total + shipping;
+  const grandTotal =
+    total + shipping;
 
 
-  productTotalElement.textContent = total;
-  shippingElement.textContent = shipping;
-  totalElement.textContent = grandTotal;
+  productTotalElement.textContent =
+    total.toLocaleString("en-IN");
+
+  shippingElement.textContent =
+    shipping.toLocaleString("en-IN");
+
+  totalElement.textContent =
+    grandTotal.toLocaleString("en-IN");
 
 }
 
 
-/* CHANGE QUANTITY */
+/* =========================================================
+   TOTAL HELPERS
+========================================================= */
+
+function getProductTotal() {
+
+  return cart.reduce(
+    function(sum, item) {
+
+      return sum +
+        (Number(item.price) *
+        Number(item.quantity));
+
+    },
+    0
+  );
+
+}
+
+
+function getShipping(total) {
+
+  if (total === 0) {
+    return 0;
+  }
+
+  return total < 499 ? 50 : 0;
+
+}
+
+
+function getGrandTotal() {
+
+  const total =
+    getProductTotal();
+
+  return total +
+    getShipping(total);
+
+}
+
+
+/* =========================================================
+   CHANGE QUANTITY
+========================================================= */
 
 function changeQuantity(index, amount) {
+
+  if (!cart[index]) return;
 
   cart[index].quantity += amount;
 
   if (cart[index].quantity <= 0) {
+
     cart.splice(index, 1);
+
   }
 
   updateCart();
@@ -636,7 +1147,9 @@ function changeQuantity(index, amount) {
 }
 
 
-/* REMOVE ITEM */
+/* =========================================================
+   REMOVE
+========================================================= */
 
 function removeItem(index) {
 
@@ -647,94 +1160,121 @@ function removeItem(index) {
 }
 
 
-/* OPEN CART */
+/* =========================================================
+   CART OPEN/CLOSE
+========================================================= */
 
 function openCart() {
 
-  document.getElementById("cart").style.display = "flex";
+  document.getElementById("cart")
+    .style.display = "flex";
 
   updateCart();
 
 }
 
 
-/* CLOSE CART */
-
 function closeCart() {
 
-  document.getElementById("cart").style.display = "none";
+  document.getElementById("cart")
+    .style.display = "none";
 
 }
 
 
-/* CHECKOUT */
+/* =========================================================
+   CHECKOUT
+========================================================= */
 
-function checkout() {
+function startCheckout() {
 
   if (cart.length === 0) {
 
-    alert("Your cart is empty.");
+    alert(
+      "Your cart is empty."
+    );
+
+    return;
+
+  }
+
+  closeCart();
+
+  document.getElementById(
+    "checkoutModal"
+  ).style.display = "flex";
+
+}
+
+
+function closeCheckout() {
+
+  document.getElementById(
+    "checkoutModal"
+  ).style.display = "none";
+
+}
+
+
+/* =========================================================
+   VALIDATE CUSTOMER
+========================================================= */
+
+function continueToPayment() {
+
+  const name =
+    document.getElementById(
+      "customerName"
+    ).value.trim();
+
+  const phone =
+    document.getElementById(
+      "customerPhone"
+    ).value.trim();
+
+  const address =
+    document.getElementById(
+      "customerAddress"
+    ).value.trim();
+
+  const pin =
+    document.getElementById(
+      "customerPin"
+    ).value.trim();
+
+
+  if (!name) {
+
+    alert("Please enter your name.");
 
     return;
 
   }
 
 
-  const productTotal = cart.reduce(function(sum, item) {
+  if (!/^\d{10}$/.test(phone)) {
 
-    return sum + (item.price * item.quantity);
-
-  }, 0);
-
-
-  const shipping =
-    productTotal < 499 ? 50 : 0;
-
-
-  const grandTotal =
-    productTotal + shipping;
-
-
-  const items = cart.map(function(item) {
-
-    return (
-      item.name +
-      " x" +
-      item.quantity +
-      " - ₹" +
-      (item.price * item.quantity)
+    alert(
+      "Please enter a valid 10-digit phone number."
     );
 
-  }).join("\n");
+    return;
+
+  }
 
 
-  const name = prompt(
-    "Enter your name:"
-  );
+  if (!address) {
 
-  if (!name) return;
+    alert(
+      "Please enter your delivery address."
+    );
 
+    return;
 
-  const phone = prompt(
-    "Enter your phone number:"
-  );
-
-  if (!phone) return;
+  }
 
 
-  const address = prompt(
-    "Enter your full delivery address:"
-  );
-
-  if (!address) return;
-
-
-  const pin = prompt(
-    "Enter your 6-digit PIN code:"
-  );
-
-
-  if (!pin || !/^\d{6}$/.test(pin)) {
+  if (!/^\d{6}$/.test(pin)) {
 
     alert(
       "Please enter a valid 6-digit PIN code."
@@ -745,17 +1285,260 @@ function checkout() {
   }
 
 
-  const message =
+  customer = {
+
+    name: name,
+
+    phone: phone,
+
+    address: address,
+
+    pin: pin
+
+  };
+
+
+  closeCheckout();
+
+  showPayment();
+
+}
+
+
+/* =========================================================
+   SHOW PAYMENT
+========================================================= */
+
+function showPayment() {
+
+  const total =
+    getGrandTotal();
+
+
+  document.getElementById(
+    "paymentTotal"
+  ).textContent =
+    total.toLocaleString("en-IN");
+
+
+  document.getElementById(
+    "paymentOrderId"
+  ).textContent =
+    "Order ID: " + generateOrderId();
+
+
+  document.getElementById(
+    "paymentModal"
+  ).style.display = "flex";
+
+}
+
+
+/* =========================================================
+   ORDER ID
+========================================================= */
+
+function generateOrderId() {
+
+  if (!currentOrderId) {
+
+    currentOrderId =
+      "LV-" +
+      Date.now().toString().slice(-8) +
+      "-" +
+      Math.floor(
+        100 + Math.random() * 900
+      );
+
+  }
+
+  return currentOrderId;
+
+}
+
+
+/* =========================================================
+   SAVE ORDER TO SUPABASE
+========================================================= */
+
+async function saveOrderToSupabase() {
+
+  const productTotal =
+    getProductTotal();
+
+  const shipping =
+    getShipping(productTotal);
+
+  const grandTotal =
+    productTotal + shipping;
+
+
+  const orderItems =
+    cart.map(function(item) {
+
+      return {
+
+        product_id: item.id,
+
+        name: item.name,
+
+        price: item.price,
+
+        quantity: item.quantity,
+
+        total:
+          item.price *
+          item.quantity
+
+      };
+
+    });
+
+
+  /*
+    The first structure is the standard structure
+    expected by this Lux Vault setup.
+  */
+
+  const orderData = {
+
+    customer_name:
+      customer.name,
+
+    phone:
+      customer.phone,
+
+    address:
+      customer.address,
+
+    pin_code:
+      customer.pin,
+
+    items:
+      orderItems,
+
+    product_total:
+      productTotal,
+
+    shipping:
+      shipping,
+
+    grand_total:
+      grandTotal,
+
+    status:
+      "pending",
+
+    order_id:
+      generateOrderId()
+
+  };
+
+
+  const result =
+    await supabaseClient
+      .from("orders")
+      .insert([orderData])
+      .select();
+
+
+  if (result.error) {
+
+    console.error(
+      "Order insert error:",
+      result.error
+    );
+
+    /*
+      Don't stop the customer from ordering
+      if the database schema has a different
+      column configuration.
+    */
+
+    return {
+      success: false,
+      error: result.error
+    };
+
+  }
+
+
+  if (
+    result.data &&
+    result.data.length > 0 &&
+    result.data[0].id
+  ) {
+
+    currentOrderId =
+      String(result.data[0].id);
+
+  }
+
+
+  return {
+    success: true,
+    data: result.data
+  };
+
+}
+
+
+/* =========================================================
+   WHATSAPP MESSAGE
+========================================================= */
+
+function createWhatsAppMessage() {
+
+  const productTotal =
+    getProductTotal();
+
+  const shipping =
+    getShipping(productTotal);
+
+  const grandTotal =
+    productTotal + shipping;
+
+
+  const items =
+    cart.map(function(item) {
+
+      return (
+        item.name +
+        " x" +
+        item.quantity +
+        " - ₹" +
+        (
+          item.price *
+          item.quantity
+        )
+      );
+
+    }).join("\n");
+
+
+  return (
 
     "🛍️ *NEW LUX VAULT ORDER*\n\n" +
 
-    "👤 Name: " + name + "\n" +
+    "🆔 Order ID: " +
+    generateOrderId() +
+    "\n\n" +
 
-    "📱 Phone: " + phone + "\n" +
+    "👤 Name: " +
+    customer.name +
+    "\n" +
 
-    "📍 Address: " + address + "\n" +
+    "📱 Phone: " +
+    customer.phone +
+    "\n" +
 
-    "📮 PIN Code: " + pin + "\n\n" +
+    "📍 Address: " +
+    customer.address +
+    "\n" +
+
+    "📮 PIN Code: " +
+    customer.pin +
+    "\n\n" +
 
     "🛒 *ORDER:*\n" +
 
@@ -773,15 +1556,44 @@ function checkout() {
 
     "💵 *Grand Total: ₹" +
     grandTotal +
-    "*";
+    "*"
 
+  );
+
+}
+
+
+/* =========================================================
+   SEND WHATSAPP
+========================================================= */
+
+function sendWhatsAppOrder() {
+
+  if (!customer.name) {
+
+    alert(
+      "Please enter your delivery details first."
+    );
+
+    return;
+
+  }
+
+
+  const message =
+    createWhatsAppMessage();
+
+
+  /*
+    Existing Lux Vault WhatsApp number
+    from your original code.
+  */
 
   const whatsappNumber =
     "918943657525";
 
 
   const whatsappURL =
-
     "https://wa.me/" +
     whatsappNumber +
     "?text=" +
@@ -794,6 +1606,153 @@ function checkout() {
   );
 
 }
+
+
+/* =========================================================
+   FINISH ORDER
+========================================================= */
+
+async function finishOrder() {
+
+  if (cart.length === 0) {
+
+    alert(
+      "Your cart is empty."
+    );
+
+    return;
+
+  }
+
+
+  const button =
+    document.querySelector(
+      "#paymentModal .pay-btn"
+    );
+
+
+  button.disabled = true;
+
+  button.textContent =
+    "Saving Order...";
+
+
+  try {
+
+    const result =
+      await saveOrderToSupabase();
+
+
+    if (result.success) {
+
+      alert(
+        "Payment noted and your order has been saved successfully!"
+      );
+
+    } else {
+
+      alert(
+        "Your order details are ready. Please send the order through WhatsApp so we can confirm it."
+      );
+
+    }
+
+
+    sendWhatsAppOrder();
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      "Please send your order through WhatsApp to complete the order."
+    );
+
+    sendWhatsAppOrder();
+
+  }
+
+
+  button.disabled = false;
+
+  button.textContent =
+    "✅ I've Completed Payment";
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value) {
+
+  return String(value)
+
+    .replaceAll("&", "&amp;")
+
+    .replaceAll("<", "&lt;")
+
+    .replaceAll(">", "&gt;")
+
+    .replaceAll('"', "&quot;")
+
+    .replaceAll("'", "&#039;");
+
+}
+
+
+/* =========================================================
+   CLOSE MODALS WHEN CLICKING OUTSIDE
+========================================================= */
+
+document.getElementById("cart")
+  .addEventListener("click", function(event) {
+
+    if (event.target === this) {
+      closeCart();
+    }
+
+  });
+
+
+document.getElementById("checkoutModal")
+  .addEventListener("click", function(event) {
+
+    if (event.target === this) {
+      closeCheckout();
+    }
+
+  });
+
+
+document.getElementById("paymentModal")
+  .addEventListener("click", function(event) {
+
+    if (event.target === this) {
+      closePayment();
+    }
+
+  });
+
+
+function closePayment() {
+
+  document.getElementById(
+    "paymentModal"
+  ).style.display = "none";
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+updateCart();
+
+loadProducts();
 
 </script>
 
