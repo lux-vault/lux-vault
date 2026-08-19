@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#b84f73">
+
 <title>Lux Vault</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -15,10 +16,15 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: Arial, sans-serif;
   background: #fff0f5;
   color: #3d252c;
+  min-height: 100vh;
 }
 
 button,
@@ -31,7 +37,14 @@ button {
   cursor: pointer;
 }
 
-/* HEADER */
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* =========================
+   HEADER
+========================= */
+
 header {
   position: sticky;
   top: 0;
@@ -60,7 +73,10 @@ header {
   font-weight: bold;
 }
 
-/* HERO */
+/* =========================
+   HERO
+========================= */
+
 .hero {
   text-align: center;
   padding: 65px 20px;
@@ -89,7 +105,10 @@ header {
   font-weight: bold;
 }
 
-/* PRODUCTS */
+/* =========================
+   PRODUCTS
+========================= */
+
 .section {
   max-width: 1100px;
   margin: auto;
@@ -121,7 +140,7 @@ header {
   border: 1px solid #f0dddd;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 6px 18px rgba(100,40,60,.08);
+  box-shadow: 0 6px 18px rgba(100, 40, 60, 0.08);
 }
 
 .product img {
@@ -178,18 +197,24 @@ header {
 }
 
 .add-btn:active,
-.buy-btn:active {
-  transform: scale(.97);
+.buy-btn:active,
+.checkout-btn:active,
+.whatsapp-btn:active,
+.pay-btn:active {
+  transform: scale(0.97);
 }
 
-/* CART OVERLAY */
+/* =========================
+   MODALS
+========================= */
+
 .cart,
 .payment-modal {
   display: none;
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: rgba(40,20,25,.55);
+  background: rgba(40, 20, 25, 0.55);
   justify-content: center;
   align-items: center;
   padding: 18px;
@@ -223,6 +248,10 @@ header {
   border-radius: 50%;
   font-size: 20px;
 }
+
+/* =========================
+   CART
+========================= */
 
 .cart-item {
   padding: 13px 0;
@@ -292,11 +321,16 @@ header {
 .cart-total {
   display: flex;
   justify-content: space-between;
+  gap: 15px;
   font-size: 20px;
   font-weight: bold;
   margin: 17px 0;
   color: #8f3859;
 }
+
+/* =========================
+   BUTTONS
+========================= */
 
 .checkout-btn,
 .whatsapp-btn,
@@ -316,14 +350,21 @@ header {
 }
 
 .whatsapp-btn {
-  background: #25D366;
+  background: #25d366;
 }
 
 .pay-btn {
   background: #b84f73;
 }
 
-/* CUSTOMER FORM */
+.pay-btn:disabled {
+  opacity: 0.65;
+}
+
+/* =========================
+   CUSTOMER FORM
+========================= */
+
 .form-group {
   margin-bottom: 13px;
 }
@@ -357,7 +398,10 @@ header {
   border-color: #b84f73;
 }
 
-/* PAYMENT */
+/* =========================
+   PAYMENT
+========================= */
+
 .qr-wrap {
   text-align: center;
 }
@@ -368,6 +412,29 @@ header {
   border: 1px solid #eee;
   display: block;
   margin: 10px auto 15px;
+}
+
+.upi-id-box {
+  text-align: center;
+  background: #fff0f5;
+  border: 1px solid #f0d9d8;
+  border-radius: 10px;
+  padding: 12px;
+  margin: 10px auto 15px;
+}
+
+.upi-id-box span {
+  display: block;
+  font-size: 12px;
+  color: #684c54;
+  margin-bottom: 5px;
+}
+
+.upi-id-box strong {
+  display: block;
+  font-size: 16px;
+  color: #8f3859;
+  word-break: break-all;
 }
 
 .payment-note {
@@ -389,7 +456,10 @@ header {
   font-size: 13px;
 }
 
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
+
 footer {
   text-align: center;
   padding: 30px 20px;
@@ -397,9 +467,11 @@ footer {
   color: #684c54;
 }
 
-/* DESKTOP */
-@media (min-width: 700px) {
+/* =========================
+   DESKTOP
+========================= */
 
+@media (min-width: 700px) {
   .product-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 22px;
@@ -462,22 +534,33 @@ footer {
     Loading products...
   </div>
 
-  <div class="product-grid" id="productGrid"></div>
+  <div
+    class="product-grid"
+    id="productGrid"
+  ></div>
 
 </section>
 
+<!-- =========================
+     CART
+========================= -->
 
-<!-- CART -->
 <div class="cart" id="cart">
 
   <div class="cart-box">
 
     <div class="cart-header">
+
       <h2>Your Cart</h2>
 
-      <button class="close-btn" onclick="closeCart()">
+      <button
+        class="close-btn"
+        onclick="closeCart()"
+        aria-label="Close cart"
+      >
         ×
       </button>
+
     </div>
 
     <div id="cartItems">
@@ -490,22 +573,36 @@ footer {
 
       <div class="summary-row">
         <span>Product Total</span>
-        <span>₹<span id="productTotal">0</span></span>
+
+        <span>
+          ₹<span id="productTotal">0</span>
+        </span>
       </div>
 
       <div class="summary-row">
         <span>Shipping</span>
-        <span>₹<span id="shipping">0</span></span>
+
+        <span>
+          ₹<span id="shipping">0</span>
+        </span>
       </div>
 
       <div class="cart-total">
+
         <span>Grand Total</span>
-        <span>₹<span id="cartTotal">0</span></span>
+
+        <span>
+          ₹<span id="cartTotal">0</span>
+        </span>
+
       </div>
 
     </div>
 
-    <button class="checkout-btn" onclick="startCheckout()">
+    <button
+      class="checkout-btn"
+      onclick="startCheckout()"
+    >
       Checkout
     </button>
 
@@ -513,52 +610,83 @@ footer {
 
 </div>
 
+<!-- =========================
+     CHECKOUT
+========================= -->
 
-<!-- CHECKOUT FORM -->
-<div class="payment-modal" id="checkoutModal">
+<div
+  class="payment-modal"
+  id="checkoutModal"
+>
 
   <div class="payment-box">
 
     <div class="modal-header">
+
       <h2>Delivery Details</h2>
 
-      <button class="close-btn" onclick="closeCheckout()">
+      <button
+        class="close-btn"
+        onclick="closeCheckout()"
+        aria-label="Close checkout"
+      >
         ×
       </button>
+
     </div>
 
     <div class="form-group">
-      <label>Name</label>
+
+      <label for="customerName">
+        Name
+      </label>
+
       <input
         id="customerName"
         type="text"
         placeholder="Your full name"
         autocomplete="name"
       >
+
     </div>
 
     <div class="form-group">
-      <label>Phone Number</label>
+
+      <label for="customerPhone">
+        Phone Number
+      </label>
+
       <input
         id="customerPhone"
         type="tel"
         placeholder="10-digit phone number"
         maxlength="10"
         autocomplete="tel"
+        inputmode="numeric"
       >
+
     </div>
 
     <div class="form-group">
-      <label>Delivery Address</label>
+
+      <label for="customerAddress">
+        Delivery Address
+      </label>
+
       <textarea
         id="customerAddress"
         placeholder="House name, street, place..."
         autocomplete="street-address"
       ></textarea>
+
     </div>
 
     <div class="form-group">
-      <label>PIN Code</label>
+
+      <label for="customerPin">
+        PIN Code
+      </label>
+
       <input
         id="customerPin"
         type="tel"
@@ -567,9 +695,13 @@ footer {
         inputmode="numeric"
         autocomplete="postal-code"
       >
+
     </div>
 
-    <button class="checkout-btn" onclick="continueToPayment()">
+    <button
+      class="checkout-btn"
+      onclick="continueToPayment()"
+    >
       Continue to Payment
     </button>
 
@@ -577,18 +709,29 @@ footer {
 
 </div>
 
+<!-- =========================
+     PAYMENT
+========================= -->
 
-<!-- PAYMENT QR -->
-<div class="payment-modal" id="paymentModal">
+<div
+  class="payment-modal"
+  id="paymentModal"
+>
 
   <div class="payment-box">
 
     <div class="modal-header">
+
       <h2>Payment</h2>
 
-      <button class="close-btn" onclick="closePayment()">
+      <button
+        class="close-btn"
+        onclick="closePayment()"
+        aria-label="Close payment"
+      >
         ×
       </button>
+
     </div>
 
     <div class="qr-wrap">
@@ -597,30 +740,55 @@ footer {
         Scan the QR code using any supported UPI app and complete your payment.
       </p>
 
-      <!-- NEW QR IMAGE -->
       <img
         src="https://raw.githubusercontent.com/lux-vault/lux-vault/main/IMG_20260820_010804.jpg"
         alt="Lux Vault UPI Payment QR"
+        onerror="this.style.display='none';"
       >
 
-      <div class="order-id" id="paymentOrderId">
+      <div class="upi-id-box">
+
+        <span>UPI ID</span>
+
+        <strong>
+          9048305367@ptsbi
+        </strong>
+
+      </div>
+
+      <div
+        class="order-id"
+        id="paymentOrderId"
+      >
         Order ready
       </div>
 
       <div class="cart-total">
+
         <span>Total</span>
-        <span>₹<span id="paymentTotal">0</span></span>
+
+        <span>
+          ₹<span id="paymentTotal">0</span>
+        </span>
+
       </div>
 
       <p class="payment-note">
         After payment, tap the WhatsApp button below to send your order details.
       </p>
 
-      <button class="whatsapp-btn" onclick="sendWhatsAppOrder()">
+      <button
+        class="whatsapp-btn"
+        onclick="sendWhatsAppOrder()"
+      >
         📲 Send Order on WhatsApp
       </button>
 
-      <button class="pay-btn" onclick="finishOrder()">
+      <button
+        class="pay-btn"
+        id="finishPaymentButton"
+        onclick="finishOrder()"
+      >
         ✅ I've Completed Payment
       </button>
 
@@ -630,13 +798,13 @@ footer {
 
 </div>
 
-
 <footer>
+
   <p>
     © 2026 Lux Vault. All rights reserved.
   </p>
-</footer>
 
+</footer>
 
 <script>
 
@@ -663,7 +831,7 @@ const supabaseClient =
 
 let products = [];
 
-let cart = [];
+let cart = loadCart();
 
 let customer = {
   name: "",
@@ -674,29 +842,41 @@ let customer = {
 
 let currentOrderId = null;
 
+let orderSaved = false;
+
 
 /* =========================================================
-   SAMPLE FALLBACK PRODUCTS
+   FALLBACK PRODUCTS
 ========================================================= */
 
 const fallbackProducts = [
 
   {
     id: "fallback-1",
-    name: "Electric Mini Garlic Chopper (250ml)",
+
+    name:
+      "Electric Mini Garlic Chopper (250ml)",
+
     description:
       "Compact 250ml electric garlic chopper for quick and easy chopping.",
+
     price: 249,
+
     image:
       "https://raw.githubusercontent.com/lux-vault/lux-vault/main/rn-image_picker_lib_temp_a9430114-b04d-4661-ac6e-e2408bd419c7_1786988902575.jpg"
   },
 
   {
     id: "fallback-2",
-    name: "Luxury Product",
+
+    name:
+      "Luxury Product",
+
     description:
       "Another premium product for your Lux Vault store.",
+
     price: 999,
+
     image:
       "https://picsum.photos/600/600?random=22"
   }
@@ -708,7 +888,11 @@ const fallbackProducts = [
    SAFE PRODUCT FIELD READER
 ========================================================= */
 
-function getProductValue(product, possibleNames, fallback) {
+function getProductValue(
+  product,
+  possibleNames,
+  fallback
+) {
 
   for (const name of possibleNames) {
 
@@ -727,16 +911,131 @@ function getProductValue(product, possibleNames, fallback) {
 
 
 /* =========================================================
-   LOAD PRODUCTS FROM SUPABASE
+   SAFE NUMBER
+========================================================= */
+
+function safeNumber(value, fallback = 0) {
+
+  const number =
+    Number(value);
+
+  return Number.isFinite(number)
+    ? number
+    : fallback;
+}
+
+
+/* =========================================================
+   LOAD CART
+========================================================= */
+
+function loadCart() {
+
+  try {
+
+    const saved =
+      localStorage.getItem(
+        "luxVaultCart"
+      );
+
+    if (!saved) {
+      return [];
+    }
+
+    const parsed =
+      JSON.parse(saved);
+
+    if (!Array.isArray(parsed)) {
+      return [];
+    }
+
+    return parsed
+      .filter(function(item) {
+
+        return (
+          item &&
+          item.id !== undefined &&
+          item.name &&
+          safeNumber(item.price) >= 0 &&
+          safeNumber(item.quantity) > 0
+        );
+
+      })
+      .map(function(item) {
+
+        return {
+
+          id:
+            item.id,
+
+          name:
+            String(item.name),
+
+          price:
+            safeNumber(item.price),
+
+          quantity:
+            Math.max(
+              1,
+              Math.floor(
+                safeNumber(item.quantity, 1)
+              )
+            )
+
+        };
+
+      });
+
+  } catch (error) {
+
+    console.error(
+      "Cart loading error:",
+      error
+    );
+
+    return [];
+  }
+}
+
+
+/* =========================================================
+   SAVE CART
+========================================================= */
+
+function saveCart() {
+
+  try {
+
+    localStorage.setItem(
+      "luxVaultCart",
+      JSON.stringify(cart)
+    );
+
+  } catch (error) {
+
+    console.error(
+      "Cart save error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   LOAD PRODUCTS
 ========================================================= */
 
 async function loadProducts() {
 
-  const grid =
-    document.getElementById("productGrid");
-
   const status =
-    document.getElementById("productStatus");
+    document.getElementById(
+      "productStatus"
+    );
+
+  status.textContent =
+    "Loading products...";
 
   try {
 
@@ -749,68 +1048,113 @@ async function loadProducts() {
       throw result.error;
     }
 
-    const rows = result.data || [];
+    const rows =
+      Array.isArray(result.data)
+        ? result.data
+        : [];
 
     if (rows.length === 0) {
 
-      products = fallbackProducts;
+      products =
+        fallbackProducts;
 
       status.textContent =
         "No products found in database. Showing sample products.";
 
     } else {
 
-      products = rows.map(function(product) {
+      products =
+        rows.map(function(product, index) {
 
-        return {
-
-          id: getProductValue(
-            product,
-            ["id", "product_id"],
-            crypto.randomUUID()
-          ),
-
-          name: String(
-            getProductValue(
-              product,
-              ["name", "product_name", "title"],
-              "Lux Vault Product"
-            )
-          ),
-
-          description: String(
-            getProductValue(
-              product,
-              ["description", "details", "product_description"],
-              "Premium product from Lux Vault."
-            )
-          ),
-
-          price: Number(
-            getProductValue(
-              product,
-              ["price", "selling_price", "amount"],
-              0
-            )
-          ),
-
-          image: String(
+          let productId =
             getProductValue(
               product,
               [
-                "image_url",
-                "image",
-                "imageurl",
-                "photo_url",
-                "product_image"
+                "id",
+                "product_id"
               ],
-              "https://picsum.photos/600/600?random=22"
-            )
-          )
+              null
+            );
 
-        };
+          if (
+            productId === null ||
+            productId === undefined ||
+            productId === ""
+          ) {
 
-      });
+            productId =
+              "product-" +
+              index +
+              "-" +
+              Date.now();
+
+          }
+
+          const price =
+            safeNumber(
+              getProductValue(
+                product,
+                [
+                  "price",
+                  "selling_price",
+                  "amount"
+                ],
+                0
+              )
+            );
+
+          return {
+
+            id:
+              productId,
+
+            name:
+              String(
+                getProductValue(
+                  product,
+                  [
+                    "name",
+                    "product_name",
+                    "title"
+                  ],
+                  "Lux Vault Product"
+                )
+              ),
+
+            description:
+              String(
+                getProductValue(
+                  product,
+                  [
+                    "description",
+                    "details",
+                    "product_description"
+                  ],
+                  "Premium product from Lux Vault."
+                )
+              ),
+
+            price:
+              price,
+
+            image:
+              String(
+                getProductValue(
+                  product,
+                  [
+                    "image_url",
+                    "image",
+                    "imageurl",
+                    "photo_url",
+                    "product_image"
+                  ],
+                  "https://picsum.photos/600/600?random=22"
+                )
+              )
+
+          };
+
+        });
 
       status.textContent = "";
     }
@@ -822,15 +1166,15 @@ async function loadProducts() {
       error
     );
 
-    products = fallbackProducts;
+    products =
+      fallbackProducts;
 
     status.textContent =
-      "Using available products.";
+      "Database products could not be loaded. Showing available products.";
 
   }
 
   renderProducts();
-
 }
 
 
@@ -841,95 +1185,140 @@ async function loadProducts() {
 function renderProducts() {
 
   const grid =
-    document.getElementById("productGrid");
+    document.getElementById(
+      "productGrid"
+    );
 
   grid.innerHTML = "";
+
+  if (!products.length) {
+
+    grid.innerHTML =
+      '<p class="empty">No products available.</p>';
+
+    return;
+  }
 
   products.forEach(function(product) {
 
     const article =
-      document.createElement("article");
+      document.createElement(
+        "article"
+      );
 
-    article.className = "product";
+    article.className =
+      "product";
 
     const image =
-      document.createElement("img");
+      document.createElement(
+        "img"
+      );
 
-    image.src = product.image;
+    image.src =
+      product.image;
 
-    image.alt = product.name;
+    image.alt =
+      product.name;
 
-    image.onerror = function() {
-      this.src =
-        "https://picsum.photos/600/600?random=22";
-    };
+    image.loading =
+      "lazy";
 
+    image.onerror =
+      function() {
+
+        this.onerror = null;
+
+        this.src =
+          "https://picsum.photos/600/600?random=22";
+
+      };
 
     const info =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
-    info.className = "product-info";
-
+    info.className =
+      "product-info";
 
     const title =
-      document.createElement("h3");
+      document.createElement(
+        "h3"
+      );
 
     title.textContent =
       product.name;
 
-
     const description =
-      document.createElement("p");
+      document.createElement(
+        "p"
+      );
 
-    description.className = "description";
+    description.className =
+      "description";
 
     description.textContent =
       product.description;
 
-
     const price =
-      document.createElement("p");
+      document.createElement(
+        "p"
+      );
 
-    price.className = "price";
+    price.className =
+      "price";
 
     price.textContent =
-      "₹" + Number(product.price).toLocaleString("en-IN");
+      "₹" +
+      safeNumber(product.price)
+        .toLocaleString("en-IN");
 
+    const addButton =
+      document.createElement(
+        "button"
+      );
 
-    /* ADD TO CART BUTTON */
+    addButton.className =
+      "add-btn";
 
-    const button =
-      document.createElement("button");
-
-    button.className = "add-btn";
-
-    button.textContent =
+    addButton.textContent =
       "Add to Cart";
 
-    button.onclick = function() {
-      addToCart(product.id);
-    };
+    addButton.type =
+      "button";
 
+    addButton.onclick =
+      function() {
 
-    /* BUY NOW BUTTON */
+        addToCart(product.id);
+
+      };
 
     const buyButton =
-      document.createElement("button");
+      document.createElement(
+        "button"
+      );
 
-    buyButton.className = "buy-btn";
+    buyButton.className =
+      "buy-btn";
 
     buyButton.textContent =
       "Buy Now";
 
-    buyButton.onclick = function() {
-      buyNow(product.id);
-    };
+    buyButton.type =
+      "button";
 
+    buyButton.onclick =
+      function() {
+
+        buyNow(product.id);
+
+      };
 
     info.appendChild(title);
     info.appendChild(description);
     info.appendChild(price);
-    info.appendChild(button);
+    info.appendChild(addButton);
     info.appendChild(buyButton);
 
     article.appendChild(image);
@@ -950,45 +1339,65 @@ function addToCart(productId) {
 
   const product =
     products.find(function(item) {
-      return String(item.id) === String(productId);
+
+      return String(item.id) ===
+        String(productId);
+
     });
 
-  if (!product) return;
+  if (!product) {
 
+    alert(
+      "Product could not be found."
+    );
+
+    return;
+  }
 
   const existing =
     cart.find(function(item) {
-      return String(item.id) === String(product.id);
-    });
 
+      return String(item.id) ===
+        String(product.id);
+
+    });
 
   if (existing) {
 
-    existing.quantity++;
+    existing.quantity =
+      safeNumber(
+        existing.quantity,
+        1
+      ) + 1;
 
   } else {
 
     cart.push({
 
-      id: product.id,
+      id:
+        product.id,
 
-      name: product.name,
+      name:
+        product.name,
 
-      price: Number(product.price),
+      price:
+        safeNumber(product.price),
 
-      quantity: 1
+      quantity:
+        1
 
     });
 
   }
 
+  saveCart();
 
   updateCart();
 
   alert(
-    product.name + " added to cart!"
+    product.name +
+    " added to cart!"
   );
-
 }
 
 
@@ -1000,33 +1409,46 @@ function buyNow(productId) {
 
   const product =
     products.find(function(item) {
-      return String(item.id) === String(productId);
+
+      return String(item.id) ===
+        String(productId);
+
     });
 
-  if (!product) return;
+  if (!product) {
 
+    alert(
+      "Product could not be found."
+    );
 
-  /* Buy Now means only this product */
+    return;
+  }
 
   cart = [
 
     {
-      id: product.id,
 
-      name: product.name,
+      id:
+        product.id,
 
-      price: Number(product.price),
+      name:
+        product.name,
 
-      quantity: 1
+      price:
+        safeNumber(product.price),
+
+      quantity:
+        1
+
     }
 
   ];
 
+  saveCart();
 
   updateCart();
 
   startCheckout();
-
 }
 
 
@@ -1037,30 +1459,48 @@ function buyNow(productId) {
 function updateCart() {
 
   const count =
-    document.getElementById("cartCount");
+    document.getElementById(
+      "cartCount"
+    );
 
   const items =
-    document.getElementById("cartItems");
+    document.getElementById(
+      "cartItems"
+    );
 
   const productTotalElement =
-    document.getElementById("productTotal");
+    document.getElementById(
+      "productTotal"
+    );
 
   const shippingElement =
-    document.getElementById("shipping");
+    document.getElementById(
+      "shipping"
+    );
 
   const totalElement =
-    document.getElementById("cartTotal");
-
+    document.getElementById(
+      "cartTotal"
+    );
 
   let itemCount = 0;
 
   cart.forEach(function(item) {
-    itemCount += item.quantity;
+
+    itemCount +=
+      Math.max(
+        0,
+        Math.floor(
+          safeNumber(
+            item.quantity
+          )
+        )
+      );
+
   });
 
   count.textContent =
     itemCount;
-
 
   if (cart.length === 0) {
 
@@ -1071,6 +1511,10 @@ function updateCart() {
 
     items.innerHTML =
       cart.map(function(item, index) {
+
+        const itemTotal =
+          safeNumber(item.price) *
+          safeNumber(item.quantity);
 
         return `
 
@@ -1083,9 +1527,7 @@ function updateCart() {
               </span>
 
               <span class="cart-item-price">
-                ₹${(
-                  item.price * item.quantity
-                ).toLocaleString("en-IN")}
+                ₹${itemTotal.toLocaleString("en-IN")}
               </span>
 
             </div>
@@ -1094,17 +1536,19 @@ function updateCart() {
 
               <button
                 class="qty-btn"
+                type="button"
                 onclick="changeQuantity(${index}, -1)"
               >
                 −
               </button>
 
               <span>
-                ${item.quantity}
+                ${safeNumber(item.quantity)}
               </span>
 
               <button
                 class="qty-btn"
+                type="button"
                 onclick="changeQuantity(${index}, 1)"
               >
                 +
@@ -1112,6 +1556,7 @@ function updateCart() {
 
               <button
                 class="remove-btn"
+                type="button"
                 onclick="removeItem(${index})"
               >
                 Remove
@@ -1127,18 +1572,14 @@ function updateCart() {
 
   }
 
-
   const total =
     getProductTotal();
-
 
   const shipping =
     getShipping(total);
 
-
   const grandTotal =
     total + shipping;
-
 
   productTotalElement.textContent =
     total.toLocaleString("en-IN");
@@ -1149,6 +1590,7 @@ function updateCart() {
   totalElement.textContent =
     grandTotal.toLocaleString("en-IN");
 
+  saveCart();
 }
 
 
@@ -1162,24 +1604,26 @@ function getProductTotal() {
     function(sum, item) {
 
       return sum +
-        (Number(item.price) *
-        Number(item.quantity));
+        (
+          safeNumber(item.price) *
+          safeNumber(item.quantity)
+        );
 
     },
     0
   );
-
 }
 
 
 function getShipping(total) {
 
-  if (total === 0) {
+  if (total <= 0) {
     return 0;
   }
 
-  return total < 499 ? 50 : 0;
-
+  return total < 499
+    ? 50
+    : 0;
 }
 
 
@@ -1190,7 +1634,6 @@ function getGrandTotal() {
 
   return total +
     getShipping(total);
-
 }
 
 
@@ -1198,11 +1641,21 @@ function getGrandTotal() {
    CHANGE QUANTITY
 ========================================================= */
 
-function changeQuantity(index, amount) {
+function changeQuantity(
+  index,
+  amount
+) {
 
-  if (!cart[index]) return;
+  if (!cart[index]) {
+    return;
+  }
 
-  cart[index].quantity += amount;
+  cart[index].quantity =
+    safeNumber(
+      cart[index].quantity,
+      1
+    ) +
+    Number(amount);
 
   if (cart[index].quantity <= 0) {
 
@@ -1210,48 +1663,58 @@ function changeQuantity(index, amount) {
 
   }
 
-  updateCart();
+  saveCart();
 
+  updateCart();
 }
 
 
 /* =========================================================
-   REMOVE
+   REMOVE ITEM
 ========================================================= */
 
 function removeItem(index) {
 
+  if (!cart[index]) {
+    return;
+  }
+
   cart.splice(index, 1);
 
-  updateCart();
+  saveCart();
 
+  updateCart();
 }
 
 
 /* =========================================================
-   CART OPEN/CLOSE
+   OPEN CART
 ========================================================= */
 
 function openCart() {
 
-  document.getElementById("cart")
-    .style.display = "flex";
+  document.getElementById(
+    "cart"
+  ).style.display = "flex";
 
   updateCart();
-
-}
-
-
-function closeCart() {
-
-  document.getElementById("cart")
-    .style.display = "none";
-
 }
 
 
 /* =========================================================
-   CHECKOUT
+   CLOSE CART
+========================================================= */
+
+function closeCart() {
+
+  document.getElementById(
+    "cart"
+  ).style.display = "none";
+}
+
+
+/* =========================================================
+   START CHECKOUT
 ========================================================= */
 
 function startCheckout() {
@@ -1263,7 +1726,6 @@ function startCheckout() {
     );
 
     return;
-
   }
 
   closeCart();
@@ -1271,21 +1733,23 @@ function startCheckout() {
   document.getElementById(
     "checkoutModal"
   ).style.display = "flex";
-
 }
 
+
+/* =========================================================
+   CLOSE CHECKOUT
+========================================================= */
 
 function closeCheckout() {
 
   document.getElementById(
     "checkoutModal"
   ).style.display = "none";
-
 }
 
 
 /* =========================================================
-   VALIDATE CUSTOMER
+   CONTINUE TO PAYMENT
 ========================================================= */
 
 function continueToPayment() {
@@ -1310,15 +1774,14 @@ function continueToPayment() {
       "customerPin"
     ).value.trim();
 
-
   if (!name) {
 
-    alert("Please enter your name.");
+    alert(
+      "Please enter your name."
+    );
 
     return;
-
   }
-
 
   if (!/^\d{10}$/.test(phone)) {
 
@@ -1327,9 +1790,7 @@ function continueToPayment() {
     );
 
     return;
-
   }
-
 
   if (!address) {
 
@@ -1338,9 +1799,7 @@ function continueToPayment() {
     );
 
     return;
-
   }
-
 
   if (!/^\d{6}$/.test(pin)) {
 
@@ -1349,27 +1808,36 @@ function continueToPayment() {
     );
 
     return;
-
   }
 
+  if (cart.length === 0) {
+
+    alert(
+      "Your cart is empty."
+    );
+
+    closeCheckout();
+
+    return;
+  }
 
   customer = {
 
-    name: name,
+    name:
+      name,
 
-    phone: phone,
+    phone:
+      phone,
 
-    address: address,
+    address:
+      address,
 
-    pin: pin
+    pin:
+      pin
 
   };
 
-
-  closeCheckout();
-
   showPayment();
-
 }
 
 
@@ -1379,49 +1847,95 @@ function continueToPayment() {
 
 function showPayment() {
 
+  if (cart.length === 0) {
+
+    alert(
+      "Your cart is empty."
+    );
+
+    return;
+  }
+
+  currentOrderId =
+    generateNewOrderId();
+
+  orderSaved =
+    false;
+
   const total =
     getGrandTotal();
-
 
   document.getElementById(
     "paymentTotal"
   ).textContent =
     total.toLocaleString("en-IN");
 
-
   document.getElementById(
     "paymentOrderId"
   ).textContent =
-    "Order ID: " + generateOrderId();
+    "Order ID: " +
+    currentOrderId;
 
+  const button =
+    document.getElementById(
+      "finishPaymentButton"
+    );
+
+  button.disabled =
+    false;
+
+  button.textContent =
+    "✅ I've Completed Payment";
+
+  closeCheckout();
 
   document.getElementById(
     "paymentModal"
-  ).style.display = "flex";
-
+  ).style.display =
+    "flex";
 }
 
 
 /* =========================================================
-   ORDER ID
+   GENERATE NEW ORDER ID
 ========================================================= */
 
-function generateOrderId() {
+function generateNewOrderId() {
+
+  const timestamp =
+    Date.now()
+      .toString()
+      .slice(-8);
+
+  const random =
+    Math.floor(
+      100 +
+      Math.random() * 900
+    );
+
+  return (
+    "LV-" +
+    timestamp +
+    "-" +
+    random
+  );
+}
+
+
+/* =========================================================
+   GET CURRENT ORDER ID
+========================================================= */
+
+function getCurrentOrderId() {
 
   if (!currentOrderId) {
 
     currentOrderId =
-      "LV-" +
-      Date.now().toString().slice(-8) +
-      "-" +
-      Math.floor(
-        100 + Math.random() * 900
-      );
+      generateNewOrderId();
 
   }
 
   return currentOrderId;
-
 }
 
 
@@ -1431,6 +1945,69 @@ function generateOrderId() {
 
 async function saveOrderToSupabase() {
 
+  if (orderSaved) {
+
+    return {
+
+      success:
+        true,
+
+      alreadySaved:
+        true
+
+    };
+  }
+
+  if (!getCurrentOrderId()) {
+
+    return {
+
+      success:
+        false,
+
+      error:
+        new Error(
+          "Order ID could not be generated."
+        )
+
+    };
+  }
+
+  if (cart.length === 0) {
+
+    return {
+
+      success:
+        false,
+
+      error:
+        new Error(
+          "Cart is empty."
+        )
+
+    };
+  }
+
+  if (
+    !customer.name ||
+    !customer.phone ||
+    !customer.address ||
+    !customer.pin
+  ) {
+
+    return {
+
+      success:
+        false,
+
+      error:
+        new Error(
+          "Customer details are missing."
+        )
+
+    };
+  }
+
   const productTotal =
     getProductTotal();
 
@@ -1438,32 +2015,38 @@ async function saveOrderToSupabase() {
     getShipping(productTotal);
 
   const grandTotal =
-    productTotal + shipping;
-
+    productTotal +
+    shipping;
 
   const orderItems =
     cart.map(function(item) {
 
       return {
 
-        product_id: item.id,
+        product_id:
+          String(item.id),
 
-        name: item.name,
+        name:
+          String(item.name),
 
-        price: item.price,
+        price:
+          safeNumber(item.price),
 
-        quantity: item.quantity,
+        quantity:
+          safeNumber(item.quantity),
 
         total:
-          item.price *
-          item.quantity
+          safeNumber(item.price) *
+          safeNumber(item.quantity)
 
       };
 
     });
 
-
   const orderData = {
+
+    order_id:
+      getCurrentOrderId(),
 
     customer_name:
       customer.name,
@@ -1490,53 +2073,45 @@ async function saveOrderToSupabase() {
       grandTotal,
 
     status:
-      "pending",
-
-    order_id:
-      generateOrderId()
+      "payment_submitted"
 
   };
-
 
   const result =
     await supabaseClient
       .from("orders")
-      .insert([orderData])
-      .select();
-
+      .insert(orderData);
 
   if (result.error) {
 
     console.error(
-      "Order insert error:",
+      "Supabase order insert error:",
       result.error
     );
 
     return {
-      success: false,
-      error: result.error
+
+      success:
+        false,
+
+      error:
+        result.error
+
     };
-
   }
 
-
-  if (
-    result.data &&
-    result.data.length > 0 &&
-    result.data[0].id
-  ) {
-
-    currentOrderId =
-      String(result.data[0].id);
-
-  }
-
+  orderSaved =
+    true;
 
   return {
-    success: true,
-    data: result.data
-  };
 
+    success:
+      true,
+
+    alreadySaved:
+      false
+
+  };
 }
 
 
@@ -1553,47 +2128,48 @@ function createWhatsAppMessage() {
     getShipping(productTotal);
 
   const grandTotal =
-    productTotal + shipping;
-
+    productTotal +
+    shipping;
 
   const items =
     cart.map(function(item) {
 
+      const itemTotal =
+        safeNumber(item.price) *
+        safeNumber(item.quantity);
+
       return (
+        "• " +
         item.name +
         " x" +
         item.quantity +
         " - ₹" +
-        (
-          item.price *
-          item.quantity
-        )
+        itemTotal.toLocaleString("en-IN")
       );
 
     }).join("\n");
-
 
   return (
 
     "🛍️ *NEW LUX VAULT ORDER*\n\n" +
 
-    "🆔 Order ID: " +
-    generateOrderId() +
+    "🆔 *Order ID:* " +
+    getCurrentOrderId() +
     "\n\n" +
 
-    "👤 Name: " +
+    "👤 *Name:* " +
     customer.name +
     "\n" +
 
-    "📱 Phone: " +
+    "📱 *Phone:* " +
     customer.phone +
     "\n" +
 
-    "📍 Address: " +
+    "📍 *Address:* " +
     customer.address +
     "\n" +
 
-    "📮 PIN Code: " +
+    "📮 *PIN Code:* " +
     customer.pin +
     "\n\n" +
 
@@ -1604,24 +2180,25 @@ function createWhatsAppMessage() {
     "\n\n" +
 
     "💰 *Product Total: ₹" +
-    productTotal +
+    productTotal.toLocaleString("en-IN") +
     "*\n" +
 
     "🚚 *Shipping: ₹" +
-    shipping +
+    shipping.toLocaleString("en-IN") +
     "*\n" +
 
     "💵 *Grand Total: ₹" +
-    grandTotal +
-    "*"
+    grandTotal.toLocaleString("en-IN") +
+    "*\n\n" +
+
+    "💳 *Payment:* Payment submitted by customer"
 
   );
-
 }
 
 
 /* =========================================================
-   SEND WHATSAPP
+   SEND WHATSAPP ORDER
 ========================================================= */
 
 function sendWhatsAppOrder() {
@@ -1633,17 +2210,22 @@ function sendWhatsAppOrder() {
     );
 
     return;
-
   }
 
+  if (cart.length === 0) {
+
+    alert(
+      "Your cart is empty."
+    );
+
+    return;
+  }
 
   const message =
     createWhatsAppMessage();
 
-
   const whatsappNumber =
     "918943657525";
-
 
   const whatsappURL =
     "https://wa.me/" +
@@ -1651,12 +2233,11 @@ function sendWhatsAppOrder() {
     "?text=" +
     encodeURIComponent(message);
 
-
   window.open(
     whatsappURL,
-    "_blank"
+    "_blank",
+    "noopener,noreferrer"
   );
-
 }
 
 
@@ -1673,64 +2254,102 @@ async function finishOrder() {
     );
 
     return;
-
   }
 
+  if (
+    !customer.name ||
+    !customer.phone ||
+    !customer.address ||
+    !customer.pin
+  ) {
 
-  const button =
-    document.querySelector(
-      "#paymentModal .pay-btn"
+    alert(
+      "Please enter your delivery details first."
     );
 
+    return;
+  }
 
-  button.disabled = true;
+  if (orderSaved) {
+
+    alert(
+      "This order has already been saved."
+    );
+
+    return;
+  }
+
+  const button =
+    document.getElementById(
+      "finishPaymentButton"
+    );
+
+  button.disabled =
+    true;
 
   button.textContent =
     "Saving Order...";
-
 
   try {
 
     const result =
       await saveOrderToSupabase();
 
-
     if (result.success) {
 
+      const savedOrderId =
+        getCurrentOrderId();
+
       alert(
-        "Payment noted and your order has been saved successfully!"
+        "Order saved successfully!\n\nOrder ID: " +
+        savedOrderId
       );
+
+      closePayment();
+
+      cart = [];
+
+      saveCart();
+
+      updateCart();
+
+      currentOrderId =
+        null;
+
+      orderSaved =
+        false;
 
     } else {
 
+      console.error(
+        "Order was not saved:",
+        result.error
+      );
+
       alert(
-        "Your order details are ready. Please send the order through WhatsApp so we can confirm it."
+        "The order could not be saved to the database.\n\nPlease use the WhatsApp button to send your order."
       );
 
     }
 
-
-    sendWhatsAppOrder();
-
-
   } catch (error) {
 
-    console.error(error);
-
-    alert(
-      "Please send your order through WhatsApp to complete the order."
+    console.error(
+      "Finish order error:",
+      error
     );
 
-    sendWhatsAppOrder();
+    alert(
+      "The order could not be saved.\n\nPlease use the WhatsApp button to send your order."
+    );
 
   }
 
-
-  button.disabled = false;
+  button.disabled =
+    false;
 
   button.textContent =
     "✅ I've Completed Payment";
-
 }
 
 
@@ -1742,60 +2361,110 @@ function escapeHtml(value) {
 
   return String(value)
 
-    .replaceAll("&", "&amp;")
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
 
-    .replaceAll("<", "&lt;")
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
 
-    .replaceAll(">", "&gt;")
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
 
-    .replaceAll('"', "&quot;")
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
 
-    .replaceAll("'", "&#039;");
-
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
 }
 
 
 /* =========================================================
-   CLOSE MODALS WHEN CLICKING OUTSIDE
+   CLOSE PAYMENT
 ========================================================= */
-
-document.getElementById("cart")
-  .addEventListener("click", function(event) {
-
-    if (event.target === this) {
-      closeCart();
-    }
-
-  });
-
-
-document.getElementById("checkoutModal")
-  .addEventListener("click", function(event) {
-
-    if (event.target === this) {
-      closeCheckout();
-    }
-
-  });
-
-
-document.getElementById("paymentModal")
-  .addEventListener("click", function(event) {
-
-    if (event.target === this) {
-      closePayment();
-    }
-
-  });
-
 
 function closePayment() {
 
   document.getElementById(
     "paymentModal"
-  ).style.display = "none";
-
+  ).style.display =
+    "none";
 }
+
+
+/* =========================================================
+   OUTSIDE CLICK
+========================================================= */
+
+document.getElementById(
+  "cart"
+).addEventListener(
+  "click",
+  function(event) {
+
+    if (event.target === this) {
+      closeCart();
+    }
+
+  }
+);
+
+
+document.getElementById(
+  "checkoutModal"
+).addEventListener(
+  "click",
+  function(event) {
+
+    if (event.target === this) {
+      closeCheckout();
+    }
+
+  }
+);
+
+
+document.getElementById(
+  "paymentModal"
+).addEventListener(
+  "click",
+  function(event) {
+
+    if (event.target === this) {
+      closePayment();
+    }
+
+  }
+);
+
+
+/* =========================================================
+   ESC KEY
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  function(event) {
+
+    if (event.key !== "Escape") {
+      return;
+    }
+
+    closeCart();
+    closeCheckout();
+    closePayment();
+
+  }
+);
 
 
 /* =========================================================
