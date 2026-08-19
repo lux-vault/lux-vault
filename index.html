@@ -421,17 +421,43 @@ function closeCart() {
 }
 
 function checkout() {
-
   if (cart.length === 0) {
-
     alert("Your cart is empty.");
-
     return;
   }
 
-  alert(
-    "Checkout demo is ready. Payment and shipping will be connected later."
-  );
+  const total = cart.reduce(function(sum, item) {
+    return sum + item.price;
+  }, 0);
+
+  const items = cart.map(function(item) {
+    return item.name + " - ₹" + item.price;
+  }).join("\n");
+
+  const name = prompt("Enter your name:");
+  if (!name) return;
+
+  const phone = prompt("Enter your phone number:");
+  if (!phone) return;
+
+  const address = prompt("Enter your full delivery address:");
+  if (!address) return;
+
+  const message =
+    "🛍️ *NEW LUX VAULT ORDER*\n\n" +
+    "👤 Name: " + name + "\n" +
+    "📱 Phone: " + phone + "\n" +
+    "📍 Address: " + address + "\n\n" +
+    "🛒 *Order:*\n" + items +
+    "\n\n💰 *Total: ₹" + total + "*";
+
+  const whatsappNumber = "918943657525";
+  const whatsappURL =
+    "https://wa.me/" + whatsappNumber +
+    "?text=" + encodeURIComponent(message);
+
+  window.open(whatsappURL, "_blank");
+}
 }
 
 </script>
