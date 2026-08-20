@@ -2572,17 +2572,324 @@ function closeAddProduct(){
 
   }
 function openManageProducts(){
-
   if(!isAdmin()){
-
     alert("Admin access denied.");
-
     return;
-
   }
 
-  alert("Manage Products system coming next.");
+  const existing = document.getElementById("manageProductsModal");
+  if(existing) existing.remove();
 
+  const modal = document.createElement("div");
+  modal.id = "manageProductsModal";
+
+  modal.innerHTML = `
+    <div style="
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.65);
+      z-index:99999;
+      padding:20px;
+      overflow-y:auto;
+    ">
+      <div style="
+        max-width:600px;
+        margin:20px auto;
+        background:#fff;
+        border-radius:22px;
+        padding:20px;
+      ">
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          margin-bottom:18px;
+        ">
+          <h2 style="margin:0;color:#54263b;">🛍️ Manage Products</h2>
+          <button id="closeManageProducts"
+            style="
+              border:0;
+              background:#f5dce5;
+              border-radius:50%;
+              width:42px;
+              height:42px;
+              font-size:22px;
+            ">×</button>
+        </div>
+
+        <div id="manageProductsList"></div>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  document.getElementById("closeManageProducts").onclick = function(){
+    modal.remove();
+  };
+
+  renderManageProducts();
+}
+
+
+function renderManageProducts(){
+  const container = document.getElementById("manageProductsList");
+
+  if(!container) return;
+
+  if(!Array.isArray(products) || products.length === 0){
+    container.innerHTML = `
+      <p style="text-align:center;padding:30px;">
+        No products found.
+      </p>
+    `;
+    return;
+  }
+
+  container.innerHTML = products.map(function(product,index){
+
+    const id = getProductValue(product,["id","product_id"],"");
+    const name = getProductValue(product,["Name","name"],"Unnamed Product");
+    const price = getProductValue(product,["Price","price"],0);
+    const stock = getProductValue(product,["Stock","stock"],0);
+    const active = getProductValue(product,["Active","active"],true);
+    const image = getProductValue(product,["image_url","Image_URL","image"],"");
+
+    return `
+      <div style="
+        border:1px solid #ead8df;
+        border-radius:18px;
+        padding:15px;
+        margin-bottom:15px;
+        background:#fff8fb;
+      ">
+
+        <div style="
+          display:flex;
+          gap:12px;
+          align-items:center;
+        ">
+
+          ${
+            image
+            ? `<img src="${image}"
+                style="
+                  width:75px;
+                  height:75px;
+                  object-fit:cover;
+                  border-radius:12px;
+                ">`
+            : `<div style="
+                  width:75px;
+                  height:75px;
+                  border-radius:12px;
+                  background:#f3dce5;
+                  display:flex;
+                  align-items:center;
+                  justify-content:center;
+                  font-size:30px;
+                ">🛍️</div>`
+          }
+
+          <div style="flex:1;">
+            <h3 style="margin:0 0 5px;color:#54263b;">
+              ${name}
+            </h3>
+
+            <div>💰 ₹${price}</div>
+            <div>📦 Stock: ${stock}</div>
+            <div>
+              ${active ? "🟢 Active" : "🔴 Inactive"}
+            </div>
+          </div>
+
+        </div>
+
+        <div style="
+          display:grid;
+          grid-template-columns:1fr 1fr;
+          gap:8px;
+          margin-top:14px;
+        ">
+
+          <button onclick="editManageProduct('${id}')"
+            style="
+              padding:11px;
+              border:0;
+              border-radius:10px;
+              background:#bd4f78;
+              color:white;
+              font-weight:bold;
+            ">
+            ✏️ Edit
+          </button>
+
+          <button onclick="toggleManageProduct('${id}',${active})"
+            style="
+              padding:11px;
+              border:0;
+              border-radius:10px;
+              background:#7d3154;
+              color:white;
+              font-weight:bold;
+            ">
+            ${active ? "🔴 Disable" : "🟢 Enable"}
+          </button>
+
+          <button onclick="deleteManageProduct('${id}')"
+            style="
+              grid-column:1 / -1;
+              padding:11px;
+              border:0;
+              border-radius:10px;
+              background:#9b263f;
+              color:white;
+              font-weight:bold;
+            ">
+            🗑️ Delete Product
+          </button>
+
+        </div>
+
+      </div>
+    `;
+  }).join("");
+}
+
+
+async function editManageProduct(productId){
+
+  const product = products.find(function(item){
+    return String(getProductValue(item,["id","product_id"],"")) === String(productId);
+  });
+
+  if(!product){
+    alert("Product not found.");
+    return;
+  }
+
+  const currentName = getProductValue(product,["Name","name"],"");
+  const currentPrice = getProductValue(product,["Price","price"],0);
+  const currentStock = getProductValue(product,["Stock","stock"],0);
+
+  const name = prompt("Product name:",currentName);
+  if(name === null) return;
+
+  const price = prompt("Price:",currentPrice);
+  if(price === null) return;
+
+  const stock = prompt("Stock:",currentStock);
+  if(stock === null) return;
+
+  const priceNumber = Number(price);
+  const stockNumber = Number(stock);
+
+  if(!name.trim() || !Number.isFinite(priceNumber) || !Number.isFinite(stockNumber)){
+    alert("Please enter valid details.");
+    return;
+  }
+
+  try{
+
+    const result = await supabaseClient
+      .from("products")
+      .update({
+        Name:name.trim(),
+        Price:priceNumber,
+        Stock:stockNumber
+      })
+      .eq("id",productId);
+
+    if(result.error){
+      throw result.error;
+    }
+
+    alert("Product updated successfully! ✅");
+
+    await loadProducts();
+    renderManageProducts();
+
+  }catch(error){
+
+    console.error("Update product error:",error);
+
+    alert(
+      "Could not update product.\n\n" +
+      (error.message || "Unknown error.")
+    );
+  }
+}
+
+
+async function toggleManageProduct(productId,currentActive){
+
+  try{
+
+    const result = await supabaseClient
+      .from("products")
+      .update({
+        Active:!currentActive
+      })
+      .eq("id",productId);
+
+    if(result.error){
+      throw result.error;
+    }
+
+    await loadProducts();
+    renderManageProducts();
+
+  }catch(error){
+
+    console.error("Toggle product error:",error);
+
+    alert(
+      "Could not change product status.\n\n" +
+      (error.message || "Unknown error.")
+    );
+  }
+}
+
+
+async function deleteManageProduct(productId){
+
+  const product = products.find(function(item){
+    return String(getProductValue(item,["id","product_id"],"")) === String(productId);
+  });
+
+  const name = product
+    ? getProductValue(product,["Name","name"],"this product")
+    : "this product";
+
+  if(!confirm("Delete " + name + " permanently?")){
+    return;
+  }
+
+  try{
+
+    const result = await supabaseClient
+      .from("products")
+      .delete()
+      .eq("id",productId);
+
+    if(result.error){
+      throw result.error;
+    }
+
+    alert("Product deleted successfully! 🗑️");
+
+    await loadProducts();
+    renderManageProducts();
+
+  }catch(error){
+
+    console.error("Delete product error:",error);
+
+    alert(
+      "Could not delete product.\n\n" +
+      (error.message || "Unknown error.")
+    );
+  }
 }
 /* =========================================================
    CART
