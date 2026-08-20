@@ -1,1 +1,3556 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#b84f73">
+<title>Lux Vault</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Arial,sans-serif;
+  background:#fff0f5;
+  color:#3d252c;
+  min-height:100vh
+}
+button,input,textarea{font-family:inherit}
+button{cursor:pointer}
+button:disabled{cursor:not-allowed}
+
+/* HEADER */
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:#fff;
+  border-bottom:1px solid #f0d9d8;
+  padding:12px 16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px
+}
+.logo{
+  font-size:23px;
+  font-weight:800;
+  color:#b84f73;
+  letter-spacing:1px
+}
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  flex-wrap:wrap;
+  justify-content:flex-end
+}
+.header-btn{
+  border:none;
+  padding:9px 11px;
+  border-radius:20px;
+  font-weight:bold;
+  font-size:12px
+}
+.account-btn{background:#f4dce4;color:#7e3650}
+.cart-btn{background:#b84f73;color:#fff}
+.admin-btn{background:#3d252c;color:#fff}
+
+/* HERO */
+.hero{
+  text-align:center;
+  padding:65px 20px;
+  background:linear-gradient(135deg,#ffdce8,#fff1e8)
+}
+.hero h1{
+  font-size:clamp(40px,10vw,70px);
+  color:#8f3859;
+  margin-bottom:12px
+}
+.hero p{
+  font-size:16px;
+  color:#684c54;
+  margin-bottom:25px
+}
+.shop-btn{
+  display:inline-block;
+  padding:13px 27px;
+  background:#b84f73;
+  color:#fff;
+  border-radius:25px;
+  text-decoration:none;
+  font-weight:bold
+}
+
+/* SECTIONS */
+.section{
+  max-width:1100px;
+  margin:auto;
+  padding:42px 14px
+}
+.section-title{
+  text-align:center;
+  font-size:29px;
+  color:#8f3859;
+  margin-bottom:28px
+}
+.status{
+  text-align:center;
+  color:#806970;
+  padding:15px;
+  font-size:14px
+}
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px
+}
+.product{
+  background:#fff;
+  border:1px solid #f0dddd;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 6px 18px rgba(100,40,60,.08)
+}
+.product img{
+  width:100%;
+  height:185px;
+  object-fit:cover;
+  display:block;
+  background:#fff
+}
+.product-info{padding:13px}
+.product h3{
+  font-size:16px;
+  line-height:1.3;
+  margin-bottom:8px;
+  color:#492d35
+}
+.description{
+  color:#765f66;
+  font-size:12px;
+  line-height:1.4;
+  margin-bottom:9px
+}
+.price{
+  font-size:19px;
+  font-weight:bold;
+  color:#b84f73;
+  margin-bottom:10px
+}
+.add-btn,.buy-btn{
+  width:100%;
+  border:none;
+  color:#fff;
+  padding:10px 5px;
+  border-radius:9px;
+  font-weight:bold;
+  font-size:13px
+}
+.add-btn{background:#b84f73}
+.buy-btn{background:#8f3859;margin-top:8px}
+
+/* MODALS */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:500;
+  background:rgba(40,20,25,.58);
+  justify-content:center;
+  align-items:center;
+  padding:18px
+}
+.modal-box{
+  width:100%;
+  max-width:520px;
+  max-height:92vh;
+  overflow-y:auto;
+  background:#fff;
+  border-radius:20px;
+  padding:22px
+}
+.modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px
+}
+.close-btn{
+  border:none;
+  background:#f2dce2;
+  color:#7e3650;
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  font-size:20px
+}
+
+/* FORMS */
+.form-group{margin-bottom:13px}
+.form-group label{
+  display:block;
+  font-size:13px;
+  font-weight:bold;
+  color:#684c54;
+  margin-bottom:6px
+}
+.form-group input,
+.form-group textarea,
+.form-group select{
+  width:100%;
+  border:1px solid #e7cfd4;
+  border-radius:10px;
+  padding:12px;
+  outline:none;
+  background:#fffafa;
+  color:#3d252c
+}
+.form-group textarea{
+  min-height:85px;
+  resize:vertical
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+  border-color:#b84f73
+}
+.main-btn{
+  width:100%;
+  border:none;
+  color:#fff;
+  padding:13px;
+  border-radius:12px;
+  font-size:15px;
+  font-weight:bold;
+  background:#b84f73;
+  margin-top:7px
+}
+.dark-btn{background:#8f3859}
+.green-btn{background:#25d366}
+.red-btn{background:#b33b55}
+.secondary-btn{
+  width:100%;
+  border:none;
+  color:#7e3650;
+  background:#f2dce2;
+  padding:12px;
+  border-radius:12px;
+  font-weight:bold;
+  margin-top:8px
+}
+.switch-text{
+  text-align:center;
+  margin-top:15px;
+  font-size:13px;
+  color:#684c54
+}
+.switch-text button{
+  border:none;
+  background:none;
+  color:#b84f73;
+  font-weight:bold
+}
+.auth-message{
+  text-align:center;
+  font-size:13px;
+  padding:8px;
+  min-height:20px;
+  color:#8f3859
+}
+
+/* CART */
+.cart-item{
+  padding:13px 0;
+  border-bottom:1px solid #efdfe0
+}
+.cart-item-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px
+}
+.cart-item-name{
+  font-weight:bold;
+  font-size:14px
+}
+.cart-item-price{
+  color:#b84f73;
+  font-weight:bold;
+  white-space:nowrap
+}
+.quantity{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:9px
+}
+.qty-btn{
+  width:28px;
+  height:28px;
+  border:none;
+  border-radius:7px;
+  background:#f2dce2;
+  color:#7e3650;
+  font-weight:bold
+}
+.remove-btn{
+  border:none;
+  background:transparent;
+  color:#b84f73;
+  font-size:12px;
+  margin-left:8px
+}
+.empty{
+  text-align:center;
+  color:#806970;
+  padding:25px 0
+}
+.summary{
+  margin-top:18px;
+  border-top:1px solid #efdfe0;
+  padding-top:15px
+}
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  margin:8px 0
+}
+.cart-total{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  font-size:20px;
+  font-weight:bold;
+  margin:17px 0;
+  color:#8f3859
+}
+
+/* PAYMENT */
+.qr-wrap{text-align:center}
+.qr-wrap img{
+  width:min(100%,330px);
+  border-radius:14px;
+  border:1px solid #eee;
+  display:block;
+  margin:10px auto 15px
+}
+.upi-id-box{
+  text-align:center;
+  background:#fff0f5;
+  border:1px solid #f0d9d8;
+  border-radius:10px;
+  padding:12px;
+  margin:10px auto 15px
+}
+.upi-id-box span{
+  display:block;
+  font-size:12px;
+  color:#684c54;
+  margin-bottom:5px
+}
+.upi-id-box strong{
+  display:block;
+  font-size:16px;
+  color:#8f3859;
+  word-break:break-all
+}
+.payment-note{
+  text-align:center;
+  color:#684c54;
+  font-size:13px;
+  line-height:1.5;
+  margin-bottom:10px
+}
+.order-id{
+  text-align:center;
+  background:#fff0f5;
+  padding:10px;
+  border-radius:10px;
+  margin:10px 0;
+  color:#8f3859;
+  font-weight:bold;
+  font-size:13px
+}
+
+/* ACCOUNT */
+.account-card{
+  text-align:center;
+  background:#fff0f5;
+  padding:18px;
+  border-radius:14px;
+  margin-bottom:15px
+}
+.account-icon{
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  background:#b84f73;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 10px;
+  font-size:28px
+}
+.account-email{
+  font-size:14px;
+  color:#684c54;
+  word-break:break-all
+}
+.admin-badge{
+  display:inline-block;
+  background:#3d252c;
+  color:#fff;
+  padding:5px 10px;
+  border-radius:15px;
+  font-size:11px;
+  margin-top:8px
+}
+
+/* ADMIN */
+.admin-panel{
+  max-width:900px;
+  margin:auto
+}
+.admin-stat{
+  background:#fff0f5;
+  border-radius:13px;
+  padding:15px;
+  margin-bottom:12px
+}
+.admin-stat strong{
+  display:block;
+  color:#8f3859;
+  font-size:24px
+}
+.admin-order{
+  border:1px solid #efdfe0;
+  border-radius:13px;
+  padding:15px;
+  margin-bottom:12px;
+  background:#fff
+}
+.admin-order h3{
+  color:#8f3859;
+  margin-bottom:8px;
+  font-size:16px
+}
+.admin-order p{
+  font-size:13px;
+  line-height:1.5;
+  color:#684c54;
+  margin:3px 0
+}
+.admin-order-items{
+  background:#fff0f5;
+  border-radius:9px;
+  padding:10px;
+  margin:10px 0
+}
+.admin-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:10px
+}
+.admin-actions select{
+  flex:1;
+  min-width:160px;
+  border:1px solid #e7cfd4;
+  padding:10px;
+  border-radius:9px
+}
+.small-btn{
+  border:none;
+  padding:10px 13px;
+  border-radius:9px;
+  color:#fff;
+  background:#8f3859;
+  font-weight:bold
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:30px 20px;
+  background:#f8e2e3;
+  color:#684c54
+}
+
+@media(min-width:700px){
+  .product-grid{
+    grid-template-columns:repeat(3,1fr);
+    gap:22px
+  }
+  .product img{height:250px}
+  .product-info{padding:18px}
+  .product h3{font-size:19px}
+  .description{font-size:14px}
+  .add-btn,.buy-btn{
+    padding:12px;
+    font-size:14px
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Lux Vault</div>
+
+  <div class="header-actions">
+    <button
+      class="header-btn account-btn"
+      onclick="openAccount()"
+    >
+      👤 <span id="accountButtonText">Account</span>
+    </button>
+
+    <button
+      class="header-btn admin-btn"
+      id="adminHeaderButton"
+      style="display:none"
+      onclick="openAdmin()"
+    >
+      👑 Admin
+    </button>
+
+    <button
+      class="header-btn cart-btn"
+      onclick="openCart()"
+    >
+      🛍️ Cart (<span id="cartCount">0</span>)
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Lux Vault</h1>
+  <p>Discover beautiful products for your everyday life.</p>
+  <a href="#products" class="shop-btn">Shop Now</a>
+</section>
+
+<section class="section" id="products">
+  <h2 class="section-title">Featured Products</h2>
+
+  <div id="productStatus" class="status">
+    Loading products...
+  </div>
+
+  <div class="product-grid" id="productGrid"></div>
+</section>
+
+
+<!-- ACCOUNT / AUTH MODAL -->
+
+<div class="modal" id="accountModal">
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <h2 id="authTitle">Login</h2>
+
+      <button
+        class="close-btn"
+        onclick="closeAccount()"
+      >
+        ×
+      </button>
+    </div>
+
+    <div id="loginForm">
+
+      <div class="form-group">
+        <label>Email</label>
+        <input
+          id="loginEmail"
+          type="email"
+          placeholder="Your email"
+          autocomplete="email"
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input
+          id="loginPassword"
+          type="password"
+          placeholder="Your password"
+          autocomplete="current-password"
+        >
+      </div>
+
+      <div
+        id="loginMessage"
+        class="auth-message"
+      ></div>
+
+      <button
+        class="main-btn"
+        onclick="loginUser()"
+      >
+        🔐 Login
+      </button>
+
+      <button
+        class="secondary-btn"
+        onclick="showSignup()"
+      >
+        Create New Account
+      </button>
+
+    </div>
+
+
+    <div id="signupForm" style="display:none">
+
+      <div class="form-group">
+        <label>Name</label>
+        <input
+          id="signupName"
+          type="text"
+          placeholder="Your name"
+          autocomplete="name"
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input
+          id="signupEmail"
+          type="email"
+          placeholder="Your email"
+          autocomplete="email"
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input
+          id="signupPassword"
+          type="password"
+          placeholder="Minimum 6 characters"
+          autocomplete="new-password"
+        >
+      </div>
+
+      <div
+        id="signupMessage"
+        class="auth-message"
+      ></div>
+
+      <button
+        class="main-btn"
+        onclick="signupUser()"
+      >
+        ✨ Create Account
+      </button>
+
+      <button
+        class="secondary-btn"
+        onclick="showLogin()"
+      >
+        Already have an account? Login
+      </button>
+
+    </div>
+
+
+    <div id="loggedInAccount" style="display:none">
+
+      <div class="account-card">
+
+        <div class="account-icon">👤</div>
+
+        <h3 id="accountName">
+          Lux Vault Customer
+        </h3>
+
+        <p
+          class="account-email"
+          id="accountEmail"
+        ></p>
+
+        <span
+          class="admin-badge"
+          id="accountRole"
+          style="display:none"
+        >
+          ADMIN
+        </span>
+
+      </div>
+
+      <button
+        class="main-btn green-btn"
+        onclick="openMyOrders()"
+      >
+        📦 My Orders
+      </button>
+
+      <button
+        class="main-btn"
+        id="accountAdminButton"
+        style="display:none"
+        onclick="openAdmin()"
+      >
+        👑 Open Admin Dashboard
+      </button>
+
+      <button
+        class="main-btn red-btn"
+        onclick="logoutUser()"
+      >
+        🚪 Logout
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- MY ORDERS -->
+
+<div class="modal" id="myOrdersModal">
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <h2>My Orders</h2>
+
+      <button
+        class="close-btn"
+        onclick="closeMyOrders()"
+      >
+        ×
+      </button>
+    </div>
+
+    <div id="myOrdersList">
+      <p class="empty">Loading orders...</p>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ADMIN LOGIN -->
+
+<div class="modal" id="adminLoginModal">
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <h2>Admin Login</h2>
+
+      <button
+        class="close-btn"
+        onclick="closeAdminLogin()"
+      >
+        ×
+      </button>
+    </div>
+
+    <p class="payment-note">
+      Admin access is restricted to the configured admin account.
+    </p>
+
+    <div class="form-group">
+      <label>Admin Email</label>
+
+      <input
+        id="adminEmail"
+        type="email"
+        value="lux.vault.99@gmail.com"
+        readonly
+      >
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+
+      <input
+        id="adminPassword"
+        type="password"
+        placeholder="Admin password"
+        autocomplete="current-password"
+      >
+    </div>
+
+    <div
+      id="adminLoginMessage"
+      class="auth-message"
+    ></div>
+
+    <button
+      class="main-btn dark-btn"
+      onclick="adminLogin()"
+    >
+      👑 Login as Admin
+    </button>
+
+  </div>
+</div>
+
+
+<!-- ADMIN DASHBOARD -->
+
+<div class="modal" id="adminModal">
+  <div class="modal-box admin-panel">
+
+    <div class="modal-header">
+      <h2>👑 Admin Dashboard</h2>
+
+      <button
+        class="close-btn"
+        onclick="closeAdmin()"
+      >
+        ×
+      </button>
+    </div>
+
+    <div class="admin-stat">
+      <span>Total Orders</span>
+      <strong id="adminOrderCount">0</strong>
+    </div>
+
+    <button
+      class="main-btn"
+      onclick="loadAdminOrders()"
+    >
+      🔄 Refresh Orders
+    </button>
+
+    <div
+      id="adminOrdersList"
+      style="margin-top:15px"
+    >
+      <p class="empty">
+        Loading orders...
+      </p>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- CART -->
+
+<div class="modal" id="cart">
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+
+      <h2>Your Cart</h2>
+
+      <button
+        class="close-btn"
+        onclick="closeCart()"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div id="cartItems">
+      <p class="empty">
+        Your cart is empty.
+      </p>
+    </div>
+
+    <div class="summary">
+
+      <div class="summary-row">
+        <span>Product Total</span>
+        <span>
+          ₹<span id="productTotal">0</span>
+        </span>
+      </div>
+
+      <div class="summary-row">
+        <span>Shipping</span>
+        <span>
+          ₹<span id="shipping">0</span>
+        </span>
+      </div>
+
+      <div class="cart-total">
+        <span>Grand Total</span>
+        <span>
+          ₹<span id="cartTotal">0</span>
+        </span>
+      </div>
+
+    </div>
+
+    <button
+      class="main-btn dark-btn"
+      onclick="startCheckout()"
+    >
+      Checkout
+    </button>
+
+  </div>
+</div>
+
+
+<!-- CHECKOUT -->
+
+<div class="modal" id="checkoutModal">
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+
+      <h2>Delivery Details</h2>
+
+      <button
+        class="close-btn"
+        onclick="closeCheckout()"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div class="form-group">
+      <label>Name</label>
+
+      <input
+        id="customerName"
+        type="text"
+        placeholder="Your full name"
+        autocomplete="name"
+      >
+    </div>
+
+    <div class="form-group">
+      <label>Phone Number</label>
+
+      <input
+        id="customerPhone"
+        type="tel"
+        placeholder="10-digit phone number"
+        maxlength="10"
+        inputmode="numeric"
+        autocomplete="tel"
+      >
+    </div>
+
+    <div class="form-group">
+      <label>Delivery Address</label>
+
+      <textarea
+        id="customerAddress"
+        placeholder="House name, street, place..."
+        autocomplete="street-address"
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>PIN Code</label>
+
+      <input
+        id="customerPin"
+        type="tel"
+        placeholder="6-digit PIN code"
+        maxlength="6"
+        inputmode="numeric"
+        autocomplete="postal-code"
+      >
+    </div>
+
+    <button
+      class="main-btn"
+      onclick="continueToPayment()"
+    >
+      Continue to Payment
+    </button>
+
+  </div>
+</div>
+
+
+<!-- PAYMENT -->
+
+<div class="modal" id="paymentModal">
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+
+      <h2>Payment</h2>
+
+      <button
+        class="close-btn"
+        onclick="closePayment()"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div class="qr-wrap">
+
+      <p class="payment-note">
+        Scan the QR code using any supported UPI app and complete your payment.
+      </p>
+
+      <img
+        src="https://raw.githubusercontent.com/lux-vault/lux-vault/main/IMG_20260820_010804.jpg"
+        alt="Lux Vault UPI Payment QR"
+        onerror="this.style.display='none';"
+      >
+
+      <div class="upi-id-box">
+        <span>UPI ID</span>
+        <strong>9048305367@ptsbi</strong>
+      </div>
+
+      <div
+        class="order-id"
+        id="paymentOrderId"
+      >
+        Order ready
+      </div>
+
+      <div class="cart-total">
+        <span>Total</span>
+
+        <span>
+          ₹<span id="paymentTotal">0</span>
+        </span>
+      </div>
+
+      <p class="payment-note">
+        After payment, tap the WhatsApp button below to send your order details.
+      </p>
+
+      <button
+        class="main-btn green-btn"
+        onclick="sendWhatsAppOrder()"
+      >
+        📲 Send Order on WhatsApp
+      </button>
+
+      <button
+        class="main-btn"
+        id="finishPaymentButton"
+        onclick="finishOrder()"
+      >
+        ✅ I've Completed Payment
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
+
+<footer>
+  <p>© 2026 Lux Vault. All rights reserved.</p>
+</footer>
+
+
+<script>
+
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+const SUPABASE_URL =
+  "https://graljzucxxqbxejqhlbe.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_quqyVsjjTF7nJxSxAOan_g_vYYiXkUR";
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+/* =========================================================
+   ADMIN CONFIG
+========================================================= */
+
+const ADMIN_EMAIL =
+  "lux.vault.99@gmail.com";
+
+
+/* =========================================================
+   APP STATE
+========================================================= */
+
+let products = [];
+
+let cart = loadCart();
+
+let currentUser = null;
+
+let customer = {
+  name:"",
+  phone:"",
+  address:"",
+  pin:""
+};
+
+let currentOrderId = null;
+
+let orderSaved = false;
+
+
+/* =========================================================
+   FALLBACK PRODUCTS
+========================================================= */
+
+const fallbackProducts = [
+
+  {
+    id:"fallback-1",
+    name:"Electric Mini Garlic Chopper (250ml)",
+    description:"Compact 250ml electric garlic chopper for quick and easy chopping.",
+    price:249,
+    image:"https://raw.githubusercontent.com/lux-vault/lux-vault/main/rn-image_picker_lib_temp_a9430114-b04d-4661-ac6e-e2408bd419c7_1786988902575.jpg"
+  },
+
+  {
+    id:"fallback-2",
+    name:"Luxury Product",
+    description:"Another premium product for your Lux Vault store.",
+    price:999,
+    image:"https://picsum.photos/600/600?random=22"
+  }
+
+];
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function getProductValue(
+  product,
+  possibleNames,
+  fallback
+){
+
+  for(const name of possibleNames){
+
+    if(
+      product[name] !== undefined &&
+      product[name] !== null &&
+      product[name] !== ""
+    ){
+      return product[name];
+    }
+
+  }
+
+  return fallback;
+}
+
+
+function safeNumber(value,fallback=0){
+
+  const number=Number(value);
+
+  return Number.isFinite(number)
+    ? number
+    : fallback;
+}
+
+
+function escapeHtml(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+
+/* =========================================================
+   CART STORAGE
+========================================================= */
+
+function loadCart(){
+
+  try{
+
+    const saved =
+      localStorage.getItem("luxVaultCart");
+
+    if(!saved){
+      return [];
+    }
+
+    const parsed =
+      JSON.parse(saved);
+
+    if(!Array.isArray(parsed)){
+      return [];
+    }
+
+    return parsed
+      .filter(function(item){
+
+        return(
+          item &&
+          item.id !== undefined &&
+          item.name &&
+          safeNumber(item.price)>=0 &&
+          safeNumber(item.quantity)>0
+        );
+
+      })
+      .map(function(item){
+
+        return{
+          id:item.id,
+          name:String(item.name),
+          price:safeNumber(item.price),
+          quantity:Math.max(
+            1,
+            Math.floor(
+              safeNumber(item.quantity,1)
+            )
+          )
+        };
+
+      });
+
+  }catch(error){
+
+    console.error(
+      "Cart loading error:",
+      error
+    );
+
+    return [];
+
+  }
+
+}
+
+
+function saveCart(){
+
+  try{
+
+    localStorage.setItem(
+      "luxVaultCart",
+      JSON.stringify(cart)
+    );
+
+  }catch(error){
+
+    console.error(
+      "Cart save error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+async function initializeAuth(){
+
+  try{
+
+    const result =
+      await supabaseClient.auth.getSession();
+
+    if(result.error){
+      console.error(result.error);
+    }
+
+    currentUser =
+      result.data.session
+        ? result.data.session.user
+        : null;
+
+    await updateAuthUI();
+
+  }catch(error){
+
+    console.error(
+      "Auth initialization error:",
+      error
+    );
+
+  }
+
+  supabaseClient.auth.onAuthStateChange(
+    async function(event,session){
+
+      currentUser =
+        session
+          ? session.user
+          : null;
+
+      setTimeout(
+        function(){
+          updateAuthUI();
+        },
+        0
+      );
+
+    }
+  );
+
+}
+
+
+async function updateAuthUI(){
+
+  const accountText =
+    document.getElementById(
+      "accountButtonText"
+    );
+
+  const adminButton =
+    document.getElementById(
+      "adminHeaderButton"
+    );
+
+  if(!currentUser){
+
+    accountText.textContent =
+      "Account";
+
+    adminButton.style.display =
+      "none";
+
+    return;
+
+  }
+
+  const email =
+    String(
+      currentUser.email || ""
+    ).toLowerCase();
+
+  if(email === ADMIN_EMAIL.toLowerCase()){
+
+    accountText.textContent =
+      "Admin";
+
+    adminButton.style.display =
+      "block";
+
+  }else{
+
+    accountText.textContent =
+      "Account";
+
+    adminButton.style.display =
+      "none";
+
+  }
+
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+async function loginUser(){
+
+  const email =
+    document.getElementById(
+      "loginEmail"
+    ).value.trim();
+
+  const password =
+    document.getElementById(
+      "loginPassword"
+    ).value;
+
+  const message =
+    document.getElementById(
+      "loginMessage"
+    );
+
+  message.textContent =
+    "Logging in...";
+
+  if(!email || !password){
+
+    message.textContent =
+      "Please enter email and password.";
+
+    return;
+
+  }
+
+  try{
+
+    const result =
+      await supabaseClient.auth.signInWithPassword({
+        email:email,
+        password:password
+      });
+
+    if(result.error){
+      throw result.error;
+    }
+
+    currentUser =
+      result.data.user;
+
+    message.textContent =
+      "Login successful!";
+
+    await updateAuthUI();
+
+    setTimeout(
+      function(){
+        closeAccount();
+      },
+      500
+    );
+
+  }catch(error){
+
+    console.error(
+      "Login error:",
+      error
+    );
+
+    message.textContent =
+      error.message ||
+      "Login failed.";
+
+  }
+
+}
+
+
+/* =========================================================
+   SIGNUP
+========================================================= */
+
+async function signupUser(){
+
+  const name =
+    document.getElementById(
+      "signupName"
+    ).value.trim();
+
+  const email =
+    document.getElementById(
+      "signupEmail"
+    ).value.trim();
+
+  const password =
+    document.getElementById(
+      "signupPassword"
+    ).value;
+
+  const message =
+    document.getElementById(
+      "signupMessage"
+    );
+
+  if(!name){
+
+    message.textContent =
+      "Please enter your name.";
+
+    return;
+
+  }
+
+  if(!email){
+
+    message.textContent =
+      "Please enter your email.";
+
+    return;
+
+  }
+
+  if(password.length<6){
+
+    message.textContent =
+      "Password must contain at least 6 characters.";
+
+    return;
+
+  }
+
+  message.textContent =
+    "Creating account...";
+
+  try{
+
+    const result =
+      await supabaseClient.auth.signUp({
+
+        email:email,
+
+        password:password,
+
+        options:{
+          data:{
+            full_name:name
+          }
+        }
+
+      });
+
+    if(result.error){
+      throw result.error;
+    }
+
+    if(result.data.session){
+
+      currentUser =
+        result.data.user;
+
+      message.textContent =
+        "Account created successfully.";
+
+      await updateAuthUI();
+
+      setTimeout(
+        function(){
+          closeAccount();
+        },
+        700
+      );
+
+    }else{
+
+      message.textContent =
+        "Account created. Please check your email to verify your account, then login.";
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Signup error:",
+      error
+    );
+
+    message.textContent =
+      error.message ||
+      "Account creation failed.";
+
+  }
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+async function logoutUser(){
+
+  try{
+
+    const result =
+      await supabaseClient.auth.signOut();
+
+    if(result.error){
+      throw result.error;
+    }
+
+    currentUser =
+      null;
+
+    closeAccount();
+    closeAdmin();
+    closeMyOrders();
+
+    await updateAuthUI();
+
+    alert(
+      "You have been logged out."
+    );
+
+  }catch(error){
+
+    console.error(
+      "Logout error:",
+      error
+    );
+
+    alert(
+      "Logout failed. Please try again."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   ACCOUNT UI
+========================================================= */
+
+function openAccount(){
+
+  document.getElementById(
+    "accountModal"
+  ).style.display="flex";
+
+  if(currentUser){
+
+    document.getElementById(
+      "loginForm"
+    ).style.display="none";
+
+    document.getElementById(
+      "signupForm"
+    ).style.display="none";
+
+    document.getElementById(
+      "loggedInAccount"
+    ).style.display="block";
+
+    const email =
+      currentUser.email || "";
+
+    const metadata =
+      currentUser.user_metadata || {};
+
+    document.getElementById(
+      "accountEmail"
+    ).textContent =
+      email;
+
+    document.getElementById(
+      "accountName"
+    ).textContent =
+      metadata.full_name ||
+      metadata.name ||
+      "Lux Vault Customer";
+
+    const isAdmin =
+      email.toLowerCase() ===
+      ADMIN_EMAIL.toLowerCase();
+
+    document.getElementById(
+      "accountRole"
+    ).style.display =
+      isAdmin
+        ? "inline-block"
+        : "none";
+
+    document.getElementById(
+      "accountAdminButton"
+    ).style.display =
+      isAdmin
+        ? "block"
+        : "none";
+
+  }else{
+
+    showLogin();
+
+  }
+
+}
+
+
+function closeAccount(){
+
+  document.getElementById(
+    "accountModal"
+  ).style.display="none";
+
+}
+
+
+function showLogin(){
+
+  document.getElementById(
+    "authTitle"
+  ).textContent="Login";
+
+  document.getElementById(
+    "loginForm"
+  ).style.display="block";
+
+  document.getElementById(
+    "signupForm"
+  ).style.display="none";
+
+  document.getElementById(
+    "loggedInAccount"
+  ).style.display="none";
+
+  document.getElementById(
+    "loginMessage"
+  ).textContent="";
+
+}
+
+
+function showSignup(){
+
+  document.getElementById(
+    "authTitle"
+  ).textContent="Create Account";
+
+  document.getElementById(
+    "loginForm"
+  ).style.display="none";
+
+  document.getElementById(
+    "signupForm"
+  ).style.display="block";
+
+  document.getElementById(
+    "loggedInAccount"
+  ).style.display="none";
+
+  document.getElementById(
+    "signupMessage"
+  ).textContent="";
+
+}
+
+
+/* =========================================================
+   ADMIN
+========================================================= */
+
+function isAdmin(){
+
+  return(
+    currentUser &&
+    String(currentUser.email || "")
+      .toLowerCase() ===
+      ADMIN_EMAIL.toLowerCase()
+  );
+
+}
+
+
+function openAdmin(){
+
+  if(!currentUser){
+
+    openAdminLogin();
+
+    return;
+
+  }
+
+  if(!isAdmin()){
+
+    alert(
+      "Admin access denied."
+    );
+
+    return;
+
+  }
+
+  closeAccount();
+
+  document.getElementById(
+    "adminModal"
+  ).style.display="flex";
+
+  loadAdminOrders();
+
+}
+
+
+function closeAdmin(){
+
+  document.getElementById(
+    "adminModal"
+  ).style.display="none";
+
+}
+
+
+function openAdminLogin(){
+
+  document.getElementById(
+    "adminLoginModal"
+  ).style.display="flex";
+
+}
+
+
+function closeAdminLogin(){
+
+  document.getElementById(
+    "adminLoginModal"
+  ).style.display="none";
+
+}
+
+
+async function adminLogin(){
+
+  const password =
+    document.getElementById(
+      "adminPassword"
+    ).value;
+
+  const message =
+    document.getElementById(
+      "adminLoginMessage"
+    );
+
+  if(!password){
+
+    message.textContent =
+      "Enter admin password.";
+
+    return;
+
+  }
+
+  message.textContent =
+    "Logging in...";
+
+  try{
+
+    const result =
+      await supabaseClient.auth.signInWithPassword({
+
+        email:
+          ADMIN_EMAIL,
+
+        password:
+          password
+
+      });
+
+    if(result.error){
+      throw result.error;
+    }
+
+    currentUser =
+      result.data.user;
+
+    if(!isAdmin()){
+
+      await supabaseClient.auth.signOut();
+
+      currentUser=null;
+
+      throw new Error(
+        "This account is not authorized as admin."
+      );
+
+    }
+
+    message.textContent =
+      "Admin login successful.";
+
+    await updateAuthUI();
+
+    setTimeout(
+      function(){
+
+        closeAdminLogin();
+
+        openAdmin();
+
+      },
+      500
+    );
+
+  }catch(error){
+
+    console.error(
+      "Admin login error:",
+      error
+    );
+
+    message.textContent =
+      error.message ||
+      "Admin login failed.";
+
+  }
+
+}
+
+
+/* =========================================================
+   PRODUCTS
+========================================================= */
+
+async function loadProducts(){
+
+  const status =
+    document.getElementById(
+      "productStatus"
+    );
+
+  status.textContent =
+    "Loading products...";
+
+  try{
+
+    const result =
+      await supabaseClient
+        .from("products")
+        .select("*");
+
+    if(result.error){
+      throw result.error;
+    }
+
+    const rows =
+      Array.isArray(result.data)
+        ? result.data
+        : [];
+
+    if(rows.length===0){
+
+      products =
+        fallbackProducts;
+
+      status.textContent =
+        "No products found in database. Showing sample products.";
+
+    }else{
+
+      products =
+        rows
+          .filter(function(product){
+
+            const active =
+              getProductValue(
+                product,
+                ["Active","active"],
+                true
+              );
+
+            const stock =
+              safeNumber(
+                getProductValue(
+                  product,
+                  ["Stock","stock"],
+                  1
+                )
+              );
+
+            return(
+              active === true &&
+              stock > 0
+            );
+
+          })
+          .map(function(product,index){
+
+            let productId =
+              getProductValue(
+                product,
+                ["id","product_id"],
+                null
+              );
+
+            if(!productId){
+
+              productId =
+                "product-"+index;
+
+            }
+
+            return{
+
+              id:productId,
+
+              name:String(
+                getProductValue(
+                  product,
+                  ["Name","name","product_name","title"],
+                  "Lux Vault Product"
+                )
+              ),
+
+              description:String(
+                getProductValue(
+                  product,
+                  ["Description","description","details"],
+                  "Premium product from Lux Vault."
+                )
+              ),
+
+              price:safeNumber(
+                getProductValue(
+                  product,
+                  ["Price","price","selling_price","amount"],
+                  0
+                )
+              ),
+
+              image:String(
+                getProductValue(
+                  product,
+                  [
+                    "image_url",
+                    "image",
+                    "imageurl",
+                    "photo_url",
+                    "product_image"
+                  ],
+                  "https://picsum.photos/600/600?random=22"
+                )
+              )
+
+            };
+
+          });
+
+      status.textContent="";
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Supabase product error:",
+      error
+    );
+
+    products =
+      fallbackProducts;
+
+    status.textContent =
+      "Database products could not be loaded. Showing available products.";
+
+  }
+
+  renderProducts();
+
+}
+
+
+function renderProducts(){
+
+  const grid =
+    document.getElementById(
+      "productGrid"
+    );
+
+  grid.innerHTML="";
+
+  if(!products.length){
+
+    grid.innerHTML =
+      '<p class="empty">No products available.</p>';
+
+    return;
+
+  }
+
+  products.forEach(function(product){
+
+    const article =
+      document.createElement("article");
+
+    article.className="product";
+
+    const image =
+      document.createElement("img");
+
+    image.src=product.image;
+    image.alt=product.name;
+    image.loading="lazy";
+
+    image.onerror=function(){
+
+      this.onerror=null;
+
+      this.src =
+        "https://picsum.photos/600/600?random=22";
+
+    };
+
+    const info =
+      document.createElement("div");
+
+    info.className="product-info";
+
+    const title =
+      document.createElement("h3");
+
+    title.textContent=
+      product.name;
+
+    const description =
+      document.createElement("p");
+
+    description.className=
+      "description";
+
+    description.textContent=
+      product.description;
+
+    const price =
+      document.createElement("p");
+
+    price.className="price";
+
+    price.textContent =
+      "₹"+
+      safeNumber(product.price)
+        .toLocaleString("en-IN");
+
+    const addButton =
+      document.createElement("button");
+
+    addButton.className="add-btn";
+    addButton.type="button";
+    addButton.textContent="Add to Cart";
+
+    addButton.onclick=function(){
+
+      addToCart(product.id);
+
+    };
+
+    const buyButton =
+      document.createElement("button");
+
+    buyButton.className="buy-btn";
+    buyButton.type="button";
+    buyButton.textContent="Buy Now";
+
+    buyButton.onclick=function(){
+
+      buyNow(product.id);
+
+    };
+
+    info.appendChild(title);
+    info.appendChild(description);
+    info.appendChild(price);
+    info.appendChild(addButton);
+    info.appendChild(buyButton);
+
+    article.appendChild(image);
+    article.appendChild(info);
+
+    grid.appendChild(article);
+
+  });
+
+}
+
+
+/* =========================================================
+   CART
+========================================================= */
+
+function addToCart(productId){
+
+  const product =
+    products.find(function(item){
+
+      return String(item.id) ===
+        String(productId);
+
+    });
+
+  if(!product){
+
+    alert("Product could not be found.");
+
+    return;
+
+  }
+
+  const existing =
+    cart.find(function(item){
+
+      return String(item.id) ===
+        String(product.id);
+
+    });
+
+  if(existing){
+
+    existing.quantity += 1;
+
+  }else{
+
+    cart.push({
+
+      id:product.id,
+      name:product.name,
+      price:safeNumber(product.price),
+      quantity:1
+
+    });
+
+  }
+
+  saveCart();
+  updateCart();
+
+  alert(
+    product.name+
+    " added to cart!"
+  );
+
+}
+
+
+function buyNow(productId){
+
+  const product =
+    products.find(function(item){
+
+      return String(item.id) ===
+        String(productId);
+
+    });
+
+  if(!product){
+
+    alert(
+      "Product could not be found."
+    );
+
+    return;
+
+  }
+
+  cart=[{
+
+    id:product.id,
+    name:product.name,
+    price:safeNumber(product.price),
+    quantity:1
+
+  }];
+
+  saveCart();
+  updateCart();
+
+  startCheckout();
+
+}
+
+
+function getProductTotal(){
+
+  return cart.reduce(
+    function(sum,item){
+
+      return sum+
+        (
+          safeNumber(item.price)*
+          safeNumber(item.quantity)
+        );
+
+    },
+    0
+  );
+
+}
+
+
+function getShipping(total){
+
+  if(total<=0){
+    return 0;
+  }
+
+  return total<499
+    ? 50
+    : 0;
+
+}
+
+
+function getGrandTotal(){
+
+  const total =
+    getProductTotal();
+
+  return total+
+    getShipping(total);
+
+}
+
+
+function updateCart(){
+
+  const count =
+    document.getElementById(
+      "cartCount"
+    );
+
+  const items =
+    document.getElementById(
+      "cartItems"
+    );
+
+  let itemCount=0;
+
+  cart.forEach(function(item){
+
+    itemCount +=
+      Math.max(
+        0,
+        Math.floor(
+          safeNumber(item.quantity)
+        )
+      );
+
+  });
+
+  count.textContent=
+    itemCount;
+
+  if(cart.length===0){
+
+    items.innerHTML =
+      '<p class="empty">Your cart is empty.</p>';
+
+  }else{
+
+    items.innerHTML =
+      cart.map(function(item,index){
+
+        const itemTotal =
+          safeNumber(item.price)*
+          safeNumber(item.quantity);
+
+        return`
+
+          <div class="cart-item">
+
+            <div class="cart-item-top">
+
+              <span class="cart-item-name">
+                ${escapeHtml(item.name)}
+              </span>
+
+              <span class="cart-item-price">
+                ₹${itemTotal.toLocaleString("en-IN")}
+              </span>
+
+            </div>
+
+            <div class="quantity">
+
+              <button
+                class="qty-btn"
+                onclick="changeQuantity(${index},-1)"
+              >
+                −
+              </button>
+
+              <span>
+                ${safeNumber(item.quantity)}
+              </span>
+
+              <button
+                class="qty-btn"
+                onclick="changeQuantity(${index},1)"
+              >
+                +
+              </button>
+
+              <button
+                class="remove-btn"
+                onclick="removeItem(${index})"
+              >
+                Remove
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }).join("");
+
+  }
+
+  const total =
+    getProductTotal();
+
+  const shipping =
+    getShipping(total);
+
+  const grandTotal =
+    total+shipping;
+
+  document.getElementById(
+    "productTotal"
+  ).textContent=
+    total.toLocaleString("en-IN");
+
+  document.getElementById(
+    "shipping"
+  ).textContent=
+    shipping.toLocaleString("en-IN");
+
+  document.getElementById(
+    "cartTotal"
+  ).textContent=
+    grandTotal.toLocaleString("en-IN");
+
+  saveCart();
+
+}
+
+
+function changeQuantity(index,amount){
+
+  if(!cart[index]){
+    return;
+  }
+
+  cart[index].quantity =
+    safeNumber(
+      cart[index].quantity,
+      1
+    )+
+    Number(amount);
+
+  if(cart[index].quantity<=0){
+
+    cart.splice(index,1);
+
+  }
+
+  saveCart();
+  updateCart();
+
+}
+
+
+function removeItem(index){
+
+  if(!cart[index]){
+    return;
+  }
+
+  cart.splice(index,1);
+
+  saveCart();
+  updateCart();
+
+}
+
+
+function openCart(){
+
+  document.getElementById(
+    "cart"
+  ).style.display="flex";
+
+  updateCart();
+
+}
+
+
+function closeCart(){
+
+  document.getElementById(
+    "cart"
+  ).style.display="none";
+
+}
+
+
+/* =========================================================
+   CHECKOUT
+========================================================= */
+
+function startCheckout(){
+
+  if(cart.length===0){
+
+    alert(
+      "Your cart is empty."
+    );
+
+    return;
+
+  }
+
+  closeCart();
+
+  if(!currentUser){
+
+    alert(
+      "Please login or create an account before checkout."
+    );
+
+    openAccount();
+
+    return;
+
+  }
+
+  document.getElementById(
+    "checkoutModal"
+  ).style.display="flex";
+
+}
+
+
+function closeCheckout(){
+
+  document.getElementById(
+    "checkoutModal"
+  ).style.display="none";
+
+}
+
+
+function continueToPayment(){
+
+  const name =
+    document.getElementById(
+      "customerName"
+    ).value.trim();
+
+  const phone =
+    document.getElementById(
+      "customerPhone"
+    ).value.trim();
+
+  const address =
+    document.getElementById(
+      "customerAddress"
+    ).value.trim();
+
+  const pin =
+    document.getElementById(
+      "customerPin"
+    ).value.trim();
+
+  if(!name){
+
+    alert(
+      "Please enter your name."
+    );
+
+    return;
+
+  }
+
+  if(!/^\d{10}$/.test(phone)){
+
+    alert(
+      "Please enter a valid 10-digit phone number."
+    );
+
+    return;
+
+  }
+
+  if(!address){
+
+    alert(
+      "Please enter your delivery address."
+    );
+
+    return;
+
+  }
+
+  if(!/^\d{6}$/.test(pin)){
+
+    alert(
+      "Please enter a valid 6-digit PIN code."
+    );
+
+    return;
+
+  }
+
+  customer={
+    name:name,
+    phone:phone,
+    address:address,
+    pin:pin
+  };
+
+  showPayment();
+
+}
+
+
+function generateNewOrderId(){
+
+  const timestamp =
+    Date.now()
+      .toString()
+      .slice(-8);
+
+  const random =
+    Math.floor(
+      100+
+      Math.random()*900
+    );
+
+  return(
+    "LV-"+
+    timestamp+
+    "-"+
+    random
+  );
+
+}
+
+
+function getCurrentOrderId(){
+
+  if(!currentOrderId){
+
+    currentOrderId =
+      generateNewOrderId();
+
+  }
+
+  return currentOrderId;
+
+}
+
+
+function showPayment(){
+
+  currentOrderId =
+    generateNewOrderId();
+
+  orderSaved=false;
+
+  const total =
+    getGrandTotal();
+
+  document.getElementById(
+    "paymentTotal"
+  ).textContent=
+    total.toLocaleString("en-IN");
+
+  document.getElementById(
+    "paymentOrderId"
+  ).textContent=
+    "Order ID: "+
+    currentOrderId;
+
+  const button =
+    document.getElementById(
+      "finishPaymentButton"
+    );
+
+  button.disabled=false;
+
+  button.textContent=
+    "✅ I've Completed Payment";
+
+  closeCheckout();
+
+  document.getElementById(
+    "paymentModal"
+  ).style.display="flex";
+
+}
+
+
+function closePayment(){
+
+  document.getElementById(
+    "paymentModal"
+  ).style.display="none";
+
+}
+
+
+/* =========================================================
+   SAVE ORDER
+========================================================= */
+
+async function saveOrderToSupabase(){
+
+  if(orderSaved){
+
+    return{
+      success:true,
+      alreadySaved:true
+    };
+
+  }
+
+  if(!currentUser){
+
+    return{
+      success:false,
+      error:new Error(
+        "Please login before placing an order."
+      )
+    };
+
+  }
+
+  if(cart.length===0){
+
+    return{
+      success:false,
+      error:new Error(
+        "Cart is empty."
+      )
+    };
+
+  }
+
+  const productTotal =
+    getProductTotal();
+
+  const shipping =
+    getShipping(productTotal);
+
+  const grandTotal =
+    productTotal+
+    shipping;
+
+  const firstItem =
+    cart[0];
+
+  /*
+    This uses the orders columns already used
+    by the Lux Vault project.
+  */
+
+  const orderData={
+
+    product_name:
+      cart.map(function(item){
+        return item.name+
+          " x"+
+          item.quantity;
+      }).join(", "),
+
+    price:
+      grandTotal,
+
+    quantity:
+      cart.reduce(
+        function(sum,item){
+          return sum+
+            safeNumber(item.quantity);
+        },
+        0
+      ),
+
+    customer_name:
+      customer.name,
+
+    phone:
+      customer.phone,
+
+    address:
+      customer.address+
+      ", PIN: "+
+      customer.pin,
+
+    status:
+      "payment_submitted",
+
+    payment_method:
+      "UPI",
+
+    notes:
+      "Order ID: "+
+      getCurrentOrderId()+
+      " | Product Total: ₹"+
+      productTotal+
+      " | Shipping: ₹"+
+      shipping,
+
+    image_url:
+      firstItem
+        ? firstItem.image || null
+        : null,
+
+    user_id:
+      currentUser.id
+
+  };
+
+  const result =
+    await supabaseClient
+      .from("orders")
+      .insert(orderData);
+
+  if(result.error){
+
+    console.error(
+      "Supabase order insert error:",
+      result.error
+    );
+
+    return{
+      success:false,
+      error:result.error
+    };
+
+  }
+
+  orderSaved=true;
+
+  return{
+    success:true,
+    alreadySaved:false
+  };
+
+}
+
+
+/* =========================================================
+   WHATSAPP
+========================================================= */
+
+function createWhatsAppMessage(){
+
+  const productTotal =
+    getProductTotal();
+
+  const shipping =
+    getShipping(productTotal);
+
+  const grandTotal =
+    productTotal+
+    shipping;
+
+  const items =
+    cart.map(function(item){
+
+      const itemTotal =
+        safeNumber(item.price)*
+        safeNumber(item.quantity);
+
+      return(
+        "• "+
+        item.name+
+        " x"+
+        item.quantity+
+        " - ₹"+
+        itemTotal.toLocaleString("en-IN")
+      );
+
+    }).join("\n");
+
+  return(
+
+    "🛍️ *NEW LUX VAULT ORDER*\n\n"+
+
+    "🆔 *Order ID:* "+
+    getCurrentOrderId()+
+    "\n\n"+
+
+    "👤 *Name:* "+
+    customer.name+
+    "\n"+
+
+    "📱 *Phone:* "+
+    customer.phone+
+    "\n"+
+
+    "📍 *Address:* "+
+    customer.address+
+    "\n"+
+
+    "📮 *PIN Code:* "+
+    customer.pin+
+    "\n\n"+
+
+    "🛒 *ORDER:*\n"+
+    items+
+    "\n\n"+
+
+    "💰 *Product Total: ₹"+
+    productTotal.toLocaleString("en-IN")+
+    "*\n"+
+
+    "🚚 *Shipping: ₹"+
+    shipping.toLocaleString("en-IN")+
+    "*\n"+
+
+    "💵 *Grand Total: ₹"+
+    grandTotal.toLocaleString("en-IN")+
+    "*\n\n"+
+
+    "💳 *Payment:* UPI payment submitted"
+
+  );
+
+}
+
+
+function sendWhatsAppOrder(){
+
+  if(!customer.name){
+
+    alert(
+      "Please enter your delivery details first."
+    );
+
+    return;
+
+  }
+
+  if(cart.length===0){
+
+    alert(
+      "Your cart is empty."
+    );
+
+    return;
+
+  }
+
+  const message =
+    createWhatsAppMessage();
+
+  const whatsappNumber =
+    "918943657525";
+
+  const whatsappURL =
+    "https://wa.me/"+
+    whatsappNumber+
+    "?text="+
+    encodeURIComponent(message);
+
+  window.open(
+    whatsappURL,
+    "_blank"
+  );
+
+}
+
+
+/* =========================================================
+   FINISH ORDER
+========================================================= */
+
+async function finishOrder(){
+
+  if(!currentUser){
+
+    alert(
+      "Please login before completing your order."
+    );
+
+    return;
+
+  }
+
+  if(cart.length===0){
+
+    alert(
+      "Your cart is empty."
+    );
+
+    return;
+
+  }
+
+  const button =
+    document.getElementById(
+      "finishPaymentButton"
+    );
+
+  button.disabled=true;
+
+  button.textContent=
+    "Saving Order...";
+
+  try{
+
+    const result =
+      await saveOrderToSupabase();
+
+    if(result.success){
+
+      const savedOrderId =
+        getCurrentOrderId();
+
+      alert(
+        "Order saved successfully!\n\nOrder ID: "+
+        savedOrderId
+      );
+
+      closePayment();
+
+      cart=[];
+
+      saveCart();
+      updateCart();
+
+      currentOrderId=null;
+      orderSaved=false;
+
+    }else{
+
+      console.error(
+        "Order was not saved:",
+        result.error
+      );
+
+      alert(
+        "The order could not be saved to the database.\n\nPlease use the WhatsApp button to send your order."
+      );
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Finish order error:",
+      error
+    );
+
+    alert(
+      "The order could not be saved.\n\nPlease use the WhatsApp button to send your order."
+    );
+
+  }
+
+  button.disabled=false;
+
+  button.textContent=
+    "✅ I've Completed Payment";
+
+}
+
+
+/* =========================================================
+   MY ORDERS
+========================================================= */
+
+function openMyOrders(){
+
+  if(!currentUser){
+
+    alert(
+      "Please login first."
+    );
+
+    return;
+
+  }
+
+  closeAccount();
+
+  document.getElementById(
+    "myOrdersModal"
+  ).style.display="flex";
+
+  loadMyOrders();
+
+}
+
+
+function closeMyOrders(){
+
+  document.getElementById(
+    "myOrdersModal"
+  ).style.display="none";
+
+}
+
+
+async function loadMyOrders(){
+
+  const list =
+    document.getElementById(
+      "myOrdersList"
+    );
+
+  list.innerHTML =
+    '<p class="empty">Loading orders...</p>';
+
+  if(!currentUser){
+
+    list.innerHTML =
+      '<p class="empty">Please login first.</p>';
+
+    return;
+
+  }
+
+  try{
+
+    const result =
+      await supabaseClient
+        .from("orders")
+        .select("*")
+        .eq(
+          "user_id",
+          currentUser.id
+        )
+        .order(
+          "created_at",
+          {ascending:false}
+        );
+
+    if(result.error){
+      throw result.error;
+    }
+
+    const orders =
+      Array.isArray(result.data)
+        ? result.data
+        : [];
+
+    if(!orders.length){
+
+      list.innerHTML =
+        '<p class="empty">You have no orders yet.</p>';
+
+      return;
+
+    }
+
+    list.innerHTML =
+      orders.map(function(order){
+
+        return`
+
+          <div class="admin-order">
+
+            <h3>
+              Order #${escapeHtml(
+                order.id || "N/A"
+              )}
+            </h3>
+
+            <p>
+              <strong>Product:</strong>
+              ${escapeHtml(
+                order.product_name || ""
+              )}
+            </p>
+
+            <p>
+              <strong>Total:</strong>
+              ₹${safeNumber(
+                order.price
+              ).toLocaleString("en-IN")}
+            </p>
+
+            <p>
+              <strong>Status:</strong>
+              ${escapeHtml(
+                order.status || "Pending"
+              )}
+            </p>
+
+            <p>
+              <strong>Payment:</strong>
+              ${escapeHtml(
+                order.payment_method || "UPI"
+              )}
+            </p>
+
+          </div>
+
+        `;
+
+      }).join("");
+
+  }catch(error){
+
+    console.error(
+      "My orders error:",
+      error
+    );
+
+    list.innerHTML =
+      '<p class="empty">Unable to load your orders.</p>';
+
+  }
+
+}
+
+
+/* =========================================================
+   ADMIN ORDERS
+========================================================= */
+
+async function loadAdminOrders(){
+
+  const list =
+    document.getElementById(
+      "adminOrdersList"
+    );
+
+  if(!isAdmin()){
+
+    list.innerHTML =
+      '<p class="empty">Admin access denied.</p>';
+
+    return;
+
+  }
+
+  list.innerHTML =
+    '<p class="empty">Loading orders...</p>';
+
+  try{
+
+    const result =
+      await supabaseClient
+        .from("orders")
+        .select("*")
+        .order(
+          "created_at",
+          {ascending:false}
+        );
+
+    if(result.error){
+      throw result.error;
+    }
+
+    const orders =
+      Array.isArray(result.data)
+        ? result.data
+        : [];
+
+    document.getElementById(
+      "adminOrderCount"
+    ).textContent=
+      orders.length;
+
+    if(!orders.length){
+
+      list.innerHTML =
+        '<p class="empty">No orders yet.</p>';
+
+      return;
+
+    }
+
+    list.innerHTML =
+      orders.map(function(order,index){
+
+        const status =
+          order.status ||
+          "pending";
+
+        return`
+
+          <div class="admin-order">
+
+            <h3>
+              🛍️ Order ${index+1}
+            </h3>
+
+            <p>
+              <strong>Database ID:</strong>
+              ${escapeHtml(
+                String(order.id || "")
+              )}
+            </p>
+
+            <p>
+              <strong>Customer:</strong>
+              ${escapeHtml(
+                order.customer_name || ""
+              )}
+            </p>
+
+            <p>
+              <strong>Phone:</strong>
+              ${escapeHtml(
+                order.phone || ""
+              )}
+            </p>
+
+            <p>
+              <strong>Address:</strong>
+              ${escapeHtml(
+                order.address || ""
+              )}
+            </p>
+
+            <div class="admin-order-items">
+
+              <p>
+                <strong>Order:</strong>
+              </p>
+
+              <p>
+                ${escapeHtml(
+                  order.product_name || ""
+                )}
+              </p>
+
+            </div>
+
+            <p>
+              <strong>Total:</strong>
+              ₹${safeNumber(
+                order.price
+              ).toLocaleString("en-IN")}
+            </p>
+
+            <p>
+              <strong>Payment:</strong>
+              ${escapeHtml(
+                order.payment_method || ""
+              )}
+            </p>
+
+            <p>
+              <strong>Current Status:</strong>
+              ${escapeHtml(status)}
+            </p>
+
+            <div class="admin-actions">
+
+              <select
+                id="status-${escapeHtml(
+                  String(order.id)
+                )}"
+              >
+
+                <option
+                  value="pending"
+                  ${status==="pending"?"selected":""}
+                >
+                  Pending
+                </option>
+
+                <option
+                  value="payment_submitted"
+                  ${status==="payment_submitted"?"selected":""}
+                >
+                  Payment Submitted
+                </option>
+
+                <option
+                  value="confirmed"
+                  ${status==="confirmed"?"selected":""}
+                >
+                  Confirmed
+                </option>
+
+                <option
+                  value="processing"
+                  ${status==="processing"?"selected":""}
+                >
+                  Processing
+                </option>
+
+                <option
+                  value="shipped"
+                  ${status==="shipped"?"selected":""}
+                >
+                  Shipped
+                </option>
+
+                <option
+                  value="delivered"
+                  ${status==="delivered"?"selected":""}
+                >
+                  Delivered
+                </option>
+
+                <option
+                  value="cancelled"
+                  ${status==="cancelled"?"selected":""}
+                >
+                  Cancelled
+                </option>
+
+              </select>
+
+              <button
+                class="small-btn"
+                onclick="updateOrderStatus('${escapeHtml(
+                  String(order.id)
+                )}')"
+              >
+                Save Status
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }).join("");
+
+  }catch(error){
+
+    console.error(
+      "Admin orders error:",
+      error
+    );
+
+    list.innerHTML =
+      '<p class="empty">Unable to load orders. Check your Supabase orders table policies.</p>';
+
+  }
+
+}
+
+
+async function updateOrderStatus(orderId){
+
+  if(!isAdmin()){
+
+    alert(
+      "Admin access denied."
+    );
+
+    return;
+
+  }
+
+  const select =
+    document.getElementById(
+      "status-"+orderId
+    );
+
+  if(!select){
+
+    return;
+
+  }
+
+  const newStatus =
+    select.value;
+
+  try{
+
+    const result =
+      await supabaseClient
+        .from("orders")
+        .update({
+          status:newStatus
+        })
+        .eq(
+          "id",
+          orderId
+        );
+
+    if(result.error){
+      throw result.error;
+    }
+
+    alert(
+      "Order status updated."
+    );
+
+    loadAdminOrders();
+
+  }catch(error){
+
+    console.error(
+      "Status update error:",
+      error
+    );
+
+    alert(
+      "Could not update order status.\n\nCheck the orders table UPDATE policy in Supabase."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   OUTSIDE CLICK
+========================================================= */
+
+[
+  "accountModal",
+  "myOrdersModal",
+  "adminLoginModal",
+  "adminModal",
+  "cart",
+  "checkoutModal",
+  "paymentModal"
+].forEach(function(id){
+
+  const element =
+    document.getElementById(id);
+
+  if(!element){
+    return;
+  }
+
+  element.addEventListener(
+    "click",
+    function(event){
+
+      if(event.target!==this){
+        return;
+      }
+
+      this.style.display="none";
+
+    }
+  );
+
+});
+
+
+/* =========================================================
+   ESC KEY
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(event.key!=="Escape"){
+      return;
+    }
+
+    closeAccount();
+    closeMyOrders();
+    closeAdminLogin();
+    closeAdmin();
+    closeCart();
+    closeCheckout();
+    closePayment();
+
+  }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+updateCart();
+
+loadProducts();
+
+initializeAuth();
+
+</script>
+
+</body>
+</html>
