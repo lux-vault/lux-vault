@@ -2333,6 +2333,244 @@ function closeAddProduct(){
   ).style.display="none";
 
   }
+  async function saveNewProduct(){
+
+  if(!isAdmin()){
+
+    alert("Admin access denied.");
+
+    return;
+
+  }
+
+  const message =
+    document.getElementById(
+      "addProductMessage"
+    );
+
+  const photo =
+    document.getElementById(
+      "productPhoto"
+    ).files[0];
+
+  const name =
+    document.getElementById(
+      "productName"
+    ).value.trim();
+
+  const description =
+    document.getElementById(
+      "productDescription"
+    ).value.trim();
+
+  const category =
+    document.getElementById(
+      "productCategory"
+    ).value.trim();
+
+  const price =
+    safeNumber(
+      document.getElementById(
+        "productPrice"
+      ).value
+    );
+
+  const stock =
+    Math.floor(
+      safeNumber(
+        document.getElementById(
+          "productStock"
+        ).value
+      )
+    );
+
+
+  if(!photo){
+
+    message.textContent =
+      "Please select a product photo.";
+
+    return;
+
+  }
+
+  if(!name){
+
+    message.textContent =
+      "Please enter product name.";
+
+    return;
+
+  }
+
+  if(!description){
+
+    message.textContent =
+      "Please enter product description.";
+
+    return;
+
+  }
+
+  if(!category){
+
+    message.textContent =
+      "Please enter product category.";
+
+    return;
+
+  }
+
+  if(price<=0){
+
+    message.textContent =
+      "Please enter a valid price.";
+
+    return;
+
+  }
+
+  if(stock<0){
+
+    message.textContent =
+      "Please enter valid stock.";
+
+    return;
+
+  }
+
+
+  try{
+
+    message.textContent =
+      "Uploading photo...";
+
+
+    const extension =
+      photo.name.includes(".")
+        ? photo.name
+            .split(".")
+            .pop()
+            .toLowerCase()
+        : "jpg";
+
+
+    const fileName =
+      "product-" +
+      Date.now() +
+      "-" +
+      Math.random()
+        .toString(36)
+        .substring(2,8) +
+      "." +
+      extension;
+
+
+    const uploadResult =
+      await supabaseClient
+        .storage
+        .from("product-images")
+        .upload(
+          fileName,
+          photo,
+          {
+            cacheControl:"3600",
+            upsert:false,
+            contentType:
+              photo.type || "image/jpeg"
+          }
+        );
+
+
+    if(uploadResult.error){
+
+      throw uploadResult.error;
+
+    }
+
+
+    const publicResult =
+      supabaseClient
+        .storage
+        .from("product-images")
+        .getPublicUrl(
+          fileName
+        );
+
+
+    const imageUrl =
+      publicResult.data.publicUrl;
+
+
+    message.textContent =
+      "Saving product...";
+
+
+    const result =
+      await supabaseClient
+        .from("products")
+        .insert({
+
+          Name:name,
+
+          Category:category,
+
+          Price:price,
+
+          Stock:stock,
+
+          Description:description,
+
+          image_url:imageUrl,
+
+          Active:true
+
+        });
+
+
+    if(result.error){
+
+      throw result.error;
+
+    }
+
+
+    message.textContent =
+      "✅ Product added successfully!";
+
+
+    alert(
+      "Product added successfully!"
+    );
+
+
+    closeAddProduct();
+
+    await loadProducts();
+
+
+  }catch(error){
+
+    console.error(
+      "Save product error:",
+      error
+    );
+
+    message.textContent =
+      error.message ||
+      "Could not save product.";
+
+    alert(
+      "Product could not be saved.\n\n" +
+      (
+        error.message ||
+        "Unknown error."
+      )
+    );
+
+  }
+
+  }
 function openManageProducts(){
 
   if(!isAdmin()){
