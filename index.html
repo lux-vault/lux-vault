@@ -2326,7 +2326,13 @@ function openAddProduct(){
   ).style.display="flex";
 
 }
+function closeAddProduct(){
 
+  document.getElementById(
+    "addProductModal"
+  ).style.display="none";
+
+  }
 function openManageProducts(){
 
   if(!isAdmin()){
