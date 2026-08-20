@@ -2077,7 +2077,7 @@ async function loadProducts(){
       Array.isArray(result.data)
         ? result.data
         : [];
-
+document.getElementById("adminProductCount").textContent = rows.length;
     if(rows.length===0){
 
       products =
