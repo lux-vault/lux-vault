@@ -2184,7 +2184,19 @@ function openAddProduct(){
   alert("Add Product system coming next.");
 
 }
+function openManageProducts(){
 
+  if(!isAdmin()){
+
+    alert("Admin access denied.");
+
+    return;
+
+  }
+
+  alert("Manage Products system coming next.");
+
+}
 /* =========================================================
    CART
 ========================================================= */
