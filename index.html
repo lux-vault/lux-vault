@@ -2171,7 +2171,19 @@ function renderProducts(){
   });
 
 }
+function openAddProduct(){
 
+  if(!isAdmin()){
+
+    alert("Admin access denied.");
+
+    return;
+
+  }
+
+  alert("Add Product system coming next.");
+
+}
 
 /* =========================================================
    CART
