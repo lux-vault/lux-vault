@@ -6859,14 +6859,29 @@ function loadSavedAppearance(){
   if(savedLogo){
 
     const logo =
-      document.querySelector(
-        ".logo img"
+      document.getElementById(
+        "siteLogo"
+      );
+
+    const fallback =
+      document.getElementById(
+        "siteLogoFallback"
       );
 
     if(logo){
 
       logo.src =
         savedLogo;
+
+      logo.style.display =
+        "block";
+
+    }
+
+    if(fallback){
+
+      fallback.style.display =
+        "none";
 
     }
 
@@ -6876,14 +6891,29 @@ function loadSavedAppearance(){
   if(savedHero){
 
     const hero =
-      document.querySelector(
-        ".hero"
+      document.getElementById(
+        "heroImage"
+      );
+
+    const fallback =
+      document.getElementById(
+        "heroFallbackArt"
       );
 
     if(hero){
 
-      hero.style.backgroundImage =
-        `url("${savedHero}")`;
+      hero.src =
+        savedHero;
+
+      hero.style.display =
+        "block";
+
+    }
+
+    if(fallback){
+
+      fallback.style.display =
+        "none";
 
     }
 
