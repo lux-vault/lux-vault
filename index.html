@@ -5787,19 +5787,17 @@ async function uploadSiteAsset(
 
 
     const result =
-      await supabaseClient
-        .storage
-        .from("products")
-        .upload(
-          filename,
-          file,
-          {
-            cacheControl:
-              "3600",
-
-            upsert:true
-          }
-        );
+  await supabaseClient
+    .storage
+    .from(siteAssetBucket)
+    .upload(
+      filename,
+      file,
+      {
+        cacheControl: "3600",
+        upsert: true
+      }
+    );
 
 
     if(result.error){
