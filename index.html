@@ -5855,7 +5855,12 @@ const siteAssetBucket = "product-images";
   );
 
     }
-
+await supabaseClient
+  .from("store_settings")
+  .update({
+    logo_url: url
+  })
+  .eq("id", true);
 
     if(type === "hero"){
 
@@ -5890,7 +5895,12 @@ const siteAssetBucket = "product-images";
     "luxVaultHero",
     url
   );
-
+await supabaseClient
+  .from("store_settings")
+  .update({
+    hero_url: url
+  })
+  .eq("id", true);
     }
 
     if(message){
