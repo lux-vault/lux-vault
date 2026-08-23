@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#b84f73">
+<meta name="theme-color" content="#d98aa6">
 <title>Lux Vault</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -14,8 +13,8 @@
 html{scroll-behavior:smooth}
 body{
   font-family:Arial,sans-serif;
-  background:#fff0f5;
-  color:#3d252c;
+  background:#fff7fa;
+  color:#2f2529;
   min-height:100vh
 }
 button,input,textarea{font-family:inherit}
@@ -28,7 +27,7 @@ header{
   top:0;
   z-index:100;
   background:#fff;
-  border-bottom:1px solid #f0d9d8;
+  border-bottom:1px solid #f1dce4;
   padding:12px 16px;
   display:flex;
   justify-content:space-between;
@@ -55,24 +54,24 @@ header{
   font-weight:bold;
   font-size:12px
 }
-.account-btn{background:#f4dce4;color:#7e3650}
+.account-btn{background:#fce7ef;color:#8f3f5b}
 .cart-btn{background:#b84f73;color:#fff}
-.admin-btn{background:#3d252c;color:#fff}
+.admin-btn{background:#5a3442;color:#fff}
 
 /* HERO */
 .hero{
   text-align:center;
   padding:65px 20px;
-  background:linear-gradient(135deg,#ffdce8,#fff1e8)
+  background:linear-gradient(135deg,#fff8fb,#fde8f0)
 }
 .hero h1{
   font-size:clamp(40px,10vw,70px);
-  color:#8f3859;
+  color:#a64a68;
   margin-bottom:12px
 }
 .hero p{
   font-size:16px;
-  color:#684c54;
+  color:#66585e;
   margin-bottom:25px
 }
 .shop-btn{
@@ -94,12 +93,12 @@ header{
 .section-title{
   text-align:center;
   font-size:29px;
-  color:#8f3859;
+  color:#a64a68;
   margin-bottom:28px
 }
 .status{
   text-align:center;
-  color:#806970;
+  color:#766a70;
   padding:15px;
   font-size:14px
 }
@@ -110,10 +109,10 @@ header{
 }
 .product{
   background:#fff;
-  border:1px solid #f0dddd;
+  border:1px solid #f1dce4;
   border-radius:15px;
   overflow:hidden;
-  box-shadow:0 6px 18px rgba(100,40,60,.08)
+  box-shadow:0 8px 24px rgba(70,80,60,.09)
 }
 .product img{
   width:100%;
@@ -127,10 +126,10 @@ header{
   font-size:16px;
   line-height:1.3;
   margin-bottom:8px;
-  color:#492d35
+  color:#30262b
 }
 .description{
-  color:#765f66;
+  color:#6e6067;
   font-size:12px;
   line-height:1.4;
   margin-bottom:9px
@@ -151,7 +150,7 @@ header{
   font-size:13px
 }
 .add-btn{background:#b84f73}
-.buy-btn{background:#8f3859;margin-top:8px}
+.buy-btn{background:#a94b69;margin-top:8px}
 
 /* MODALS */
 .modal{
@@ -159,7 +158,7 @@ header{
   position:fixed;
   inset:0;
   z-index:500;
-  background:rgba(40,20,25,.58);
+  background:rgba(48,55,45,.20);
   justify-content:center;
   align-items:center;
   padding:18px
@@ -181,8 +180,8 @@ header{
 }
 .close-btn{
   border:none;
-  background:#f2dce2;
-  color:#7e3650;
+  background:#fce7ef;
+  color:#8f3f5b;
   width:35px;
   height:35px;
   border-radius:50%;
@@ -195,19 +194,19 @@ header{
   display:block;
   font-size:13px;
   font-weight:bold;
-  color:#684c54;
+  color:#66585e;
   margin-bottom:6px
 }
 .form-group input,
 .form-group textarea,
 .form-group select{
   width:100%;
-  border:1px solid #e7cfd4;
+  border:1px solid #ead6df;
   border-radius:10px;
   padding:12px;
   outline:none;
-  background:#fffafa;
-  color:#3d252c
+  background:#fffdfd;
+  color:#2f2529
 }
 .form-group textarea{
   min-height:85px;
@@ -229,14 +228,14 @@ header{
   background:#b84f73;
   margin-top:7px
 }
-.dark-btn{background:#8f3859}
+.dark-btn{background:#a94b69}
 .green-btn{background:#25d366}
-.red-btn{background:#b33b55}
+.red-btn{background:#b85c78}
 .secondary-btn{
   width:100%;
   border:none;
-  color:#7e3650;
-  background:#f2dce2;
+  color:#8f3f5b;
+  background:#fce7ef;
   padding:12px;
   border-radius:12px;
   font-weight:bold;
@@ -246,7 +245,7 @@ header{
   text-align:center;
   margin-top:15px;
   font-size:13px;
-  color:#684c54
+  color:#66585e
 }
 .switch-text button{
   border:none;
@@ -259,13 +258,13 @@ header{
   font-size:13px;
   padding:8px;
   min-height:20px;
-  color:#8f3859
+  color:#a64a68
 }
 
 /* CART */
 .cart-item{
   padding:13px 0;
-  border-bottom:1px solid #efdfe0
+  border-bottom:1px solid #f6dfe8
 }
 .cart-item-top{
   display:flex;
@@ -292,8 +291,8 @@ header{
   height:28px;
   border:none;
   border-radius:7px;
-  background:#f2dce2;
-  color:#7e3650;
+  background:#fce7ef;
+  color:#8f3f5b;
   font-weight:bold
 }
 .remove-btn{
@@ -305,12 +304,12 @@ header{
 }
 .empty{
   text-align:center;
-  color:#806970;
+  color:#766a70;
   padding:25px 0
 }
 .summary{
   margin-top:18px;
-  border-top:1px solid #efdfe0;
+  border-top:1px solid #f6dfe8;
   padding-top:15px
 }
 .summary-row{
@@ -325,7 +324,7 @@ header{
   font-size:20px;
   font-weight:bold;
   margin:17px 0;
-  color:#8f3859
+  color:#a64a68
 }
 
 /* PAYMENT */
@@ -339,8 +338,8 @@ header{
 }
 .upi-id-box{
   text-align:center;
-  background:#fff0f5;
-  border:1px solid #f0d9d8;
+  background:#fff7fa;
+  border:1px solid #f1dce4;
   border-radius:10px;
   padding:12px;
   margin:10px auto 15px
@@ -348,29 +347,29 @@ header{
 .upi-id-box span{
   display:block;
   font-size:12px;
-  color:#684c54;
+  color:#66585e;
   margin-bottom:5px
 }
 .upi-id-box strong{
   display:block;
   font-size:16px;
-  color:#8f3859;
+  color:#a64a68;
   word-break:break-all
 }
 .payment-note{
   text-align:center;
-  color:#684c54;
+  color:#66585e;
   font-size:13px;
   line-height:1.5;
   margin-bottom:10px
 }
 .order-id{
   text-align:center;
-  background:#fff0f5;
+  background:#fff7fa;
   padding:10px;
   border-radius:10px;
   margin:10px 0;
-  color:#8f3859;
+  color:#a64a68;
   font-weight:bold;
   font-size:13px
 }
@@ -378,7 +377,7 @@ header{
 /* ACCOUNT */
 .account-card{
   text-align:center;
-  background:#fff0f5;
+  background:#fff7fa;
   padding:18px;
   border-radius:14px;
   margin-bottom:15px
@@ -397,12 +396,12 @@ header{
 }
 .account-email{
   font-size:14px;
-  color:#684c54;
+  color:#66585e;
   word-break:break-all
 }
 .admin-badge{
   display:inline-block;
-  background:#3d252c;
+  background:#4a2a35;
   color:#fff;
   padding:5px 10px;
   border-radius:15px;
@@ -416,36 +415,36 @@ header{
   margin:auto
 }
 .admin-stat{
-  background:#fff0f5;
+  background:#fff7fa;
   border-radius:13px;
   padding:15px;
   margin-bottom:12px
 }
 .admin-stat strong{
   display:block;
-  color:#8f3859;
+  color:#a64a68;
   font-size:24px
 }
 .admin-order{
-  border:1px solid #efdfe0;
+  border:1px solid #f3e2e8;
   border-radius:13px;
   padding:15px;
   margin-bottom:12px;
   background:#fff
 }
 .admin-order h3{
-  color:#8f3859;
+  color:#a64a68;
   margin-bottom:8px;
   font-size:16px
 }
 .admin-order p{
   font-size:13px;
   line-height:1.5;
-  color:#684c54;
+  color:#66585e;
   margin:3px 0
 }
 .admin-order-items{
-  background:#fff0f5;
+  background:#fff7fa;
   border-radius:9px;
   padding:10px;
   margin:10px 0
@@ -459,7 +458,7 @@ header{
 .admin-actions select{
   flex:1;
   min-width:160px;
-  border:1px solid #e7cfd4;
+  border:1px solid #ead6df;
   padding:10px;
   border-radius:9px
 }
@@ -468,7 +467,7 @@ header{
   padding:10px 13px;
   border-radius:9px;
   color:#fff;
-  background:#8f3859;
+  background:#a94b69;
   font-weight:bold
 }
 
@@ -476,9 +475,72 @@ header{
 footer{
   text-align:center;
   padding:30px 20px;
-  background:#f8e2e3;
-  color:#684c54
+  background:#fbe8ef;
+  color:#66585e
 }
+
+
+/* LUX VAULT PREMIUM PRODUCT / ADMIN UI */
+.brand-mark{display:flex;align-items:center;text-decoration:none;min-width:0}
+.site-logo{max-height:42px;max-width:150px;width:auto;object-fit:contain;display:block}
+.hero{position:relative;min-height:430px;display:grid;place-items:center;overflow:hidden;padding:0;background:#fff8fb}
+.hero-image-wrap{position:absolute;inset:0;overflow:hidden}
+.hero-image{width:100%;height:100%;object-fit:cover;opacity:.38;filter:saturate(.8)}
+.hero-image-wrap:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(247,243,234,.96),rgba(247,243,234,.68),rgba(232,239,227,.38))}
+.hero-fallback-art{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#fff7fa,#fbe8ef);color:#a94b69;font-size:clamp(42px,9vw,78px);font-weight:800;letter-spacing:2px}
+.hero-fallback-art small{font-size:14px;letter-spacing:1px;margin-top:8px;font-weight:600}
+.hero-content{position:relative;z-index:2;width:min(760px,92%);text-align:center;padding:60px 20px}
+.hero-kicker{font-size:12px;font-weight:800;letter-spacing:2px;color:#b84f73;margin-bottom:12px}
+.hero h1{font-size:clamp(36px,8vw,68px);line-height:1.02;color:#30262b;margin-bottom:14px}
+.hero p{font-size:16px;color:#66585e;margin-bottom:25px;line-height:1.6}
+.shop-btn{background:#b84f73;box-shadow:0 10px 25px rgba(70,80,60,.16)}
+.modal{backdrop-filter:blur(5px)}
+.modal-box{box-shadow:0 24px 70px rgba(45,55,45,.16);border:1px solid rgba(145,164,133,.25)}
+.product-editor-modal{max-width:720px;background:#fffdfd}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+.full-width{grid-column:1/-1}
+.form-note{font-size:12px;line-height:1.5;color:#766a70;background:#fff8fa;border:1px solid #f3e2e8;padding:10px 12px;border-radius:10px;margin:8px 0 12px}
+.product-meta{font-size:11px;color:#766a70;line-height:1.45;min-height:16px;margin-bottom:7px}
+.price-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:5px}
+.price-row .price{margin:0}
+.mrp,.detail-mrp{text-decoration:line-through;color:#8a737c;font-size:13px}
+.discount-badge,.detail-discount{display:inline-flex;align-items:center;padding:4px 7px;border-radius:999px;background:#fbe8ef;color:#8f3f5b;font-size:11px;font-weight:800}
+.stock-line{font-size:11px;color:#a64a68;font-weight:700;margin-bottom:7px}
+.details-btn{width:100%;border:1px solid #ecd9e1;background:#fff9fb;color:#8f3f5b;padding:9px;border-radius:9px;font-weight:700;margin-bottom:7px}
+.product-details-modal{max-width:620px}
+.detail-image{width:100%;max-height:330px;object-fit:cover;border-radius:16px;background:#fff8fa;margin-bottom:16px}
+.detail-title{font-size:26px;color:#30262b;margin-bottom:8px}
+.detail-price-row{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.detail-price-row strong{font-size:25px;color:#a64a68}
+.detail-description{color:#66585e;line-height:1.6;margin-bottom:16px}
+.detail-specs{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:16px}
+.detail-specs div{background:#fff7fa;border:1px solid #f1dce4;border-radius:10px;padding:10px}
+.detail-specs span{display:block;font-size:11px;color:#766a70;margin-bottom:3px}
+.detail-specs strong{font-size:13px;color:#30262b}
+.admin-appearance-card{margin:15px 0;padding:16px;border:1px solid #f3e2e8;background:#fffafb;border-radius:15px}
+.admin-appearance-card h3{color:#8f3f5b;margin-bottom:5px}
+.admin-appearance-card p{font-size:12px;color:#766a70;margin-bottom:12px}
+.appearance-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.upload-control{display:block;padding:12px;border:1px dashed #e8b8c8;background:#fff7fa;border-radius:12px;color:#8f3f5b;font-weight:800;font-size:12px;cursor:pointer}
+.upload-control input{display:block;width:100%;margin-top:8px;font-size:11px}
+.manage-products-overlay{z-index:99999}
+.manage-products-modal{max-width:720px}
+.manage-product-card{border:1px solid #f3e2e8;background:#fffdfd;border-radius:16px;padding:14px;margin-bottom:12px}
+.manage-product-top{display:flex;gap:12px;align-items:center}
+.manage-product-top img{width:82px;height:82px;border-radius:12px;object-fit:cover;background:#fff8fa}
+.manage-product-info{flex:1;min-width:0}
+.manage-product-info h3{font-size:16px;color:#30262b;margin-bottom:5px}
+.manage-product-info p{font-size:12px;color:#766a70;margin:3px 0}
+.status-pill{display:inline-block;padding:3px 7px;border-radius:999px;font-size:10px;font-weight:800}
+.status-pill.active{background:#fbe7ef;color:#8f3f5b}
+.status-pill.inactive{background:#f6dfe5;color:#9a5065}
+.manage-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px}
+.small-btn{width:100%;border:none;padding:10px 8px;border-radius:10px;color:#fff;background:#b84f73;font-weight:800}
+.small-btn.secondary-action{background:#a94b69}
+.small-btn.danger-action{background:#b85c78}
+.current-image-wrap{text-align:center;background:#fff7fa;border-radius:14px;padding:12px;margin-bottom:14px}
+.current-image-wrap img{width:120px;height:120px;object-fit:cover;border-radius:14px;display:block;margin:0 auto 6px}
+.current-image-wrap span{font-size:11px;color:#766a70}
 
 @media(min-width:700px){
   .product-grid{
@@ -494,13 +556,29 @@ footer{
     font-size:14px
   }
 }
+
+@media(max-width:699px){
+  .form-grid{grid-template-columns:1fr}
+  .full-width{grid-column:auto}
+  .appearance-grid,.detail-specs,.manage-actions{grid-template-columns:1fr}
+  .hero{min-height:410px}
+  .hero-content{padding:45px 14px}
+  .hero h1{font-size:clamp(34px,11vw,52px)}
+  .header-actions{gap:5px}
+  .header-btn{padding:8px 9px;font-size:11px}
+  .site-logo{max-width:120px;max-height:38px}
+  .product-details-modal,.product-editor-modal{max-height:94vh}
+}
 </style>
 </head>
 
-<body>
+<body id="top">
 
 <header>
-  <div class="logo">Lux Vault</div>
+  <a class="brand-mark" href="#top" aria-label="Lux Vault home">
+    <img id="siteLogo" class="site-logo" src="" alt="Lux Vault logo" style="display:none;">
+    <span id="siteLogoFallback" class="logo">Lux Vault</span>
+  </a>
 
   <div class="header-actions">
     <button
@@ -528,10 +606,21 @@ footer{
   </div>
 </header>
 
-<section class="hero">
-  <h1>Lux Vault</h1>
-  <p>Discover beautiful products for your everyday life.</p>
-  <a href="#products" class="shop-btn">Shop Now</a>
+<section class="hero" id="heroSection">
+  <div class="hero-image-wrap">
+    <img id="heroImage" class="hero-image" src="" alt="Lux Vault kitchen and home products" style="display:none;">
+    <div class="hero-fallback-art" id="heroFallbackArt">
+      <span>Lux Vault</span>
+      <small>Kitchen • Home • Everyday Essentials</small>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-kicker">CURATED FOR EVERYDAY LIVING</p>
+    <h1>Beautiful essentials for your home.</h1>
+    <p>Discover practical kitchen and home products with a premium Lux Vault touch.</p>
+    <a href="#products" class="shop-btn">Shop Now</a>
+  </div>
 </section>
 
 <section class="section" id="products">
@@ -543,14 +632,14 @@ footer{
 
   <div class="product-grid" id="productGrid"></div>
 </section>
-
-
 <!-- ACCOUNT / AUTH MODAL -->
 
 <div class="modal" id="accountModal">
+
   <div class="modal-box">
 
     <div class="modal-header">
+
       <h2 id="authTitle">Login</h2>
 
       <button
@@ -559,48 +648,51 @@ footer{
       >
         ×
       </button>
+
     </div>
 
     <div id="loginForm">
 
       <div class="form-group">
         <label>Email</label>
+
         <input
           id="loginEmail"
           type="email"
-          placeholder="Your email"
+          placeholder="Enter your email"
           autocomplete="email"
         >
       </div>
 
       <div class="form-group">
         <label>Password</label>
+
         <input
           id="loginPassword"
           type="password"
-          placeholder="Your password"
+          placeholder="Enter your password"
           autocomplete="current-password"
         >
       </div>
 
       <div
-        id="loginMessage"
         class="auth-message"
+        id="loginMessage"
       ></div>
 
       <button
         class="main-btn"
         onclick="loginUser()"
       >
-        🔐 Login
+        Login
       </button>
 
-      <button
-        class="secondary-btn"
-        onclick="showSignup()"
-      >
-        Create New Account
-      </button>
+      <div class="switch-text">
+        Don't have an account?
+        <button onclick="showSignup()">
+          Sign Up
+        </button>
+      </div>
 
     </div>
 
@@ -608,53 +700,56 @@ footer{
     <div id="signupForm" style="display:none">
 
       <div class="form-group">
-        <label>Name</label>
-        <input
-          id="signupName"
-          type="text"
-          placeholder="Your name"
-          autocomplete="name"
-        >
-      </div>
-
-      <div class="form-group">
         <label>Email</label>
+
         <input
           id="signupEmail"
           type="email"
-          placeholder="Your email"
+          placeholder="Enter your email"
           autocomplete="email"
         >
       </div>
 
       <div class="form-group">
         <label>Password</label>
+
         <input
           id="signupPassword"
           type="password"
-          placeholder="Minimum 6 characters"
+          placeholder="Create a password"
+          autocomplete="new-password"
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Confirm Password</label>
+
+        <input
+          id="signupConfirmPassword"
+          type="password"
+          placeholder="Confirm your password"
           autocomplete="new-password"
         >
       </div>
 
       <div
-        id="signupMessage"
         class="auth-message"
+        id="signupMessage"
       ></div>
 
       <button
         class="main-btn"
         onclick="signupUser()"
       >
-        ✨ Create Account
+        Create Account
       </button>
 
-      <button
-        class="secondary-btn"
-        onclick="showLogin()"
-      >
-        Already have an account? Login
-      </button>
+      <div class="switch-text">
+        Already have an account?
+        <button onclick="showLogin()">
+          Login
+        </button>
+      </div>
 
     </div>
 
@@ -663,20 +758,19 @@ footer{
 
       <div class="account-card">
 
-        <div class="account-icon">👤</div>
+        <div class="account-icon">
+          👤
+        </div>
 
-        <h3 id="accountName">
-          Lux Vault Customer
-        </h3>
-
-        <p
+        <div
           class="account-email"
           id="accountEmail"
-        ></p>
+        >
+        </div>
 
         <span
           class="admin-badge"
-          id="accountRole"
+          id="accountAdminBadge"
           style="display:none"
         >
           ADMIN
@@ -685,64 +779,34 @@ footer{
       </div>
 
       <button
-        class="main-btn green-btn"
-        onclick="openMyOrders()"
+        class="main-btn"
+        onclick="openOrdersFromAccount()"
       >
         📦 My Orders
       </button>
 
       <button
-        class="main-btn"
-        id="accountAdminButton"
-        style="display:none"
-        onclick="openAdmin()"
-      >
-        👑 Open Admin Dashboard
-      </button>
-
-      <button
-        class="main-btn red-btn"
+        class="secondary-btn"
         onclick="logoutUser()"
       >
-        🚪 Logout
+        Logout
       </button>
 
     </div>
 
   </div>
-</div>
 
-
-<!-- MY ORDERS -->
-
-<div class="modal" id="myOrdersModal">
-  <div class="modal-box">
-
-    <div class="modal-header">
-      <h2>My Orders</h2>
-
-      <button
-        class="close-btn"
-        onclick="closeMyOrders()"
-      >
-        ×
-      </button>
-    </div>
-
-    <div id="myOrdersList">
-      <p class="empty">Loading orders...</p>
-    </div>
-
-  </div>
 </div>
 
 
 <!-- ADMIN LOGIN -->
 
 <div class="modal" id="adminLoginModal">
+
   <div class="modal-box">
 
     <div class="modal-header">
+
       <h2>Admin Login</h2>
 
       <button
@@ -751,37 +815,24 @@ footer{
       >
         ×
       </button>
-    </div>
 
-    <p class="payment-note">
-      Admin access is restricted to the configured admin account.
-    </p>
-
-    <div class="form-group">
-      <label>Admin Email</label>
-
-      <input
-        id="adminEmail"
-        type="email"
-        value="lux.vault.99@gmail.com"
-        readonly
-      >
     </div>
 
     <div class="form-group">
-      <label>Password</label>
+
+      <label>Admin Password</label>
 
       <input
         id="adminPassword"
         type="password"
-        placeholder="Admin password"
-        autocomplete="current-password"
+        placeholder="Enter admin password"
       >
+
     </div>
 
     <div
-      id="adminLoginMessage"
       class="auth-message"
+      id="adminLoginMessage"
     ></div>
 
     <button
@@ -792,16 +843,19 @@ footer{
     </button>
 
   </div>
+
 </div>
 
 
-<!-- ADMIN DASHBOARD -->
+<!-- ADMIN PANEL -->
 
 <div class="modal" id="adminModal">
-  <div class="modal-box admin-panel">
+
+  <div class="modal-box">
 
     <div class="modal-header">
-      <h2>👑 Admin Dashboard</h2>
+
+      <h2>Admin Dashboard</h2>
 
       <button
         class="close-btn"
@@ -809,56 +863,112 @@ footer{
       >
         ×
       </button>
+
     </div>
 
-    <div class="admin-stat">
-      <span>Total Orders</span>
-      <strong id="adminOrderCount">0</strong>
-    </div>
-<div class="admin-stat">
-  <span>Total Products</span>
-  <strong id="adminProductCount">0</strong>
-</div>
+    <div class="admin-panel">
 
-<button
-  class="main-btn"
-  onclick="openAddProduct()"
->
-  ➕ Add Product
-</button>
+      <div class="admin-stat">
+        <span>Total Products</span>
+        <strong id="adminProductCount">0</strong>
+      </div>
 
-<button
-  class="main-btn dark-btn"
-  onclick="openManageProducts()"
->
-  🛍️ Manage Products
-</button>
-    <button
-      class="main-btn"
-      onclick="loadAdminOrders()"
-    >
-      🔄 Refresh Orders
-    </button>
+      <div class="admin-stat">
+        <span>Total Orders</span>
+        <strong id="adminOrderCount">0</strong>
+      </div>
 
-    <div
-      id="adminOrdersList"
-      style="margin-top:15px"
-    >
-      <p class="empty">
-        Loading orders...
-      </p>
+      <div class="admin-stat">
+        <span>Total Revenue</span>
+        <strong>
+          ₹<span id="adminRevenue">0</span>
+        </strong>
+      </div>
+
+
+      <button
+        class="main-btn"
+        onclick="openAddProduct()"
+      >
+        ➕ Add Product
+      </button>
+
+      <button
+        class="main-btn dark-btn"
+        onclick="openManageProducts()"
+      >
+        🛍️ Manage Products
+      </button>
+
+
+      <div class="admin-appearance-card">
+
+        <h3>🎨 Site Appearance</h3>
+
+        <p>
+          Change the store logo and hero image.
+        </p>
+
+        <div class="appearance-grid">
+
+          <label class="upload-control">
+            Upload Logo
+            <input
+              type="file"
+              accept="image/*"
+              onchange="uploadSiteAsset('logo',this.files[0])"
+            >
+          </label>
+
+          <label class="upload-control">
+            Upload Hero Image
+            <input
+              type="file"
+              accept="image/*"
+              onchange="uploadSiteAsset('hero',this.files[0])"
+            >
+          </label>
+
+        </div>
+
+        <div
+          class="auth-message"
+          id="appearanceMessage"
+        ></div>
+
+      </div>
+
+
+      <h3
+        style="margin:22px 0 12px;color:#a64a68"
+      >
+        Recent Orders
+      </h3>
+
+      <div id="adminOrdersList">
+
+        <p class="empty">
+          Loading orders...
+        </p>
+
+      </div>
+
     </div>
 
   </div>
+
 </div>
+
 
 <!-- ADD PRODUCT -->
 
 <div class="modal" id="addProductModal">
-  <div class="modal-box">
+
+  <div class="modal-box product-editor-modal">
 
     <div class="modal-header">
-      <h2>➕ Add Product</h2>
+
+      <h2>Add Product</h2>
 
       <button
         class="close-btn"
@@ -866,133 +976,307 @@ footer{
       >
         ×
       </button>
+
     </div>
 
-    <div class="form-group">
-      <label>Product Photo *</label>
-      <input
-        id="productPhoto"
-        type="file"
-        accept="image/*"
-      >
+    <div class="form-grid">
+
+      <div class="form-group">
+
+        <label>Product Name</label>
+
+        <input
+          id="productName"
+          type="text"
+          placeholder="Product name"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Category</label>
+
+        <input
+          id="productCategory"
+          type="text"
+          placeholder="Kitchen, Home..."
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Brand</label>
+
+        <input
+          id="productBrand"
+          type="text"
+          placeholder="Brand name"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>MRP</label>
+
+        <input
+          id="productMRP"
+          type="number"
+          placeholder="999"
+          min="0"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Discount %</label>
+
+        <input
+          id="productDiscount"
+          type="number"
+          placeholder="20"
+          min="0"
+          max="100"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Selling Price</label>
+
+        <input
+          id="productPrice"
+          type="number"
+          placeholder="499"
+          min="0"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Stock</label>
+
+        <input
+          id="productStock"
+          type="number"
+          placeholder="10"
+          min="0"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Colour</label>
+
+        <input
+          id="productColour"
+          type="text"
+          placeholder="Pink"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Quantity</label>
+
+        <input
+          id="productQuantity"
+          type="number"
+          placeholder="1"
+          min="0"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Volume Value</label>
+
+        <input
+          id="productVolumeValue"
+          type="number"
+          placeholder="250"
+          min="0"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Volume Unit</label>
+
+        <select id="productVolumeUnit">
+
+          <option value="">
+            Select unit
+          </option>
+
+          <option value="ml">
+            ml
+          </option>
+
+          <option value="L">
+            L
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Weight Value</label>
+
+        <input
+          id="productWeightValue"
+          type="number"
+          placeholder="500"
+          min="0"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Weight Unit</label>
+
+        <select id="productWeightUnit">
+
+          <option value="">
+            Select unit
+          </option>
+
+          <option value="g">
+            g
+          </option>
+
+          <option value="kg">
+            kg
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group full-width">
+
+        <label>Description</label>
+
+        <textarea
+          id="productDescription"
+          placeholder="Product description..."
+        ></textarea>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Product Image</label>
+
+        <input
+          id="productPhoto"
+          type="file"
+          accept="image/*"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Status</label>
+
+        <select id="productActive">
+
+          <option value="true">
+            Active
+          </option>
+
+          <option value="false">
+            Inactive
+          </option>
+
+        </select>
+
+      </div>
+
     </div>
 
-    <div class="form-group">
-      <label>Product Name *</label>
-      <input
-        id="productName"
-        type="text"
-        placeholder="Product name"
-      >
-    </div>
-
-    <div class="form-group">
-      <label>Description *</label>
-      <textarea
-        id="productDescription"
-        placeholder="Product description"
-      ></textarea>
-    </div>
-
-    <div class="form-group">
-      <label>Category *</label>
-      <input
-        id="productCategory"
-        type="text"
-        placeholder="e.g. Kitchen"
-      >
-    </div>
-
-    <div class="form-group">
-      <label>Brand (Optional)</label>
-      <input
-        id="productBrand"
-        type="text"
-        placeholder="Brand name"
-      >
-    </div>
-
-    <div class="form-group">
-      <label>Weight (Optional)</label>
-      <input
-        id="productWeight"
-        type="text"
-        placeholder="e.g. 250g"
-      >
-    </div>
-
-    <div class="form-group">
-      <label>MRP / Real Price (Optional)</label>
-      <input
-        id="productMRP"
-        type="number"
-        min="0"
-        placeholder="e.g. 399"
-      >
-    </div>
-
-    <div class="form-group">
-      <label>Selling Price *</label>
-      <input
-        id="productPrice"
-        type="number"
-        min="0"
-        placeholder="e.g. 299"
-      >
-    </div>
-
-    <div class="form-group">
-      <label>Discount % (Optional)</label>
-      <input
-        id="productDiscount"
-        type="number"
-        min="0"
-        max="100"
-        placeholder="e.g. 25"
-      >
-    </div>
-
-    <div class="form-group">
-      <label>Delivery Charge (Optional)</label>
-      <input
-        id="productDelivery"
-        type="number"
-        min="0"
-        placeholder="e.g. 50"
-      >
-    </div>
-
-    <div class="form-group">
-      <label>Stock *</label>
-      <input
-        id="productStock"
-        type="number"
-        min="0"
-        placeholder="e.g. 10"
-      >
-    </div>
 
     <div
-      id="addProductMessage"
+      class="form-note"
+    >
+      Product image will be uploaded to the Lux Vault storage bucket.
+    </div>
+
+
+    <div
       class="auth-message"
+      id="addProductMessage"
     ></div>
+
 
     <button
       class="main-btn"
       onclick="saveNewProduct()"
     >
-      ✅ Save Product
-    </button>
-
-    <button
-      class="secondary-btn"
-      onclick="closeAddProduct()"
-    >
-      Cancel
+      ➕ Save Product
     </button>
 
   </div>
+
 </div>
+
+
+<!-- PRODUCT DETAILS -->
+
+<div class="modal" id="productDetailsModal">
+
+  <div class="modal-box product-details-modal">
+
+    <div class="modal-header">
+
+      <h2>Product Details</h2>
+
+      <button
+        class="close-btn"
+        onclick="closeProductDetails()"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div
+      id="productDetailsContent"
+    ></div>
+
+  </div>
+
+</div>
+
+
 <!-- CART -->
 
 <div class="modal" id="cart">
@@ -1013,35 +1297,55 @@ footer{
     </div>
 
     <div id="cartItems">
+
       <p class="empty">
         Your cart is empty.
       </p>
+
     </div>
 
     <div class="summary">
 
       <div class="summary-row">
-        <span>Product Total</span>
+
+        <span>
+          Product Total
+        </span>
+
         <span>
           ₹<span id="productTotal">0</span>
         </span>
+
       </div>
 
+
       <div class="summary-row">
-        <span>Shipping</span>
+
+        <span>
+          Shipping
+        </span>
+
         <span>
           ₹<span id="shipping">0</span>
         </span>
+
       </div>
 
+
       <div class="cart-total">
-        <span>Grand Total</span>
+
+        <span>
+          Grand Total
+        </span>
+
         <span>
           ₹<span id="cartTotal">0</span>
         </span>
+
       </div>
 
     </div>
+
 
     <button
       class="main-btn dark-btn"
@@ -1051,6 +1355,7 @@ footer{
     </button>
 
   </div>
+
 </div>
 
 
@@ -1073,7 +1378,9 @@ footer{
 
     </div>
 
+
     <div class="form-group">
+
       <label>Name</label>
 
       <input
@@ -1082,9 +1389,12 @@ footer{
         placeholder="Your full name"
         autocomplete="name"
       >
+
     </div>
 
+
     <div class="form-group">
+
       <label>Phone Number</label>
 
       <input
@@ -1095,9 +1405,12 @@ footer{
         inputmode="numeric"
         autocomplete="tel"
       >
+
     </div>
 
+
     <div class="form-group">
+
       <label>Delivery Address</label>
 
       <textarea
@@ -1105,9 +1418,12 @@ footer{
         placeholder="House name, street, place..."
         autocomplete="street-address"
       ></textarea>
+
     </div>
 
+
     <div class="form-group">
+
       <label>PIN Code</label>
 
       <input
@@ -1118,7 +1434,9 @@ footer{
         inputmode="numeric"
         autocomplete="postal-code"
       >
+
     </div>
+
 
     <button
       class="main-btn"
@@ -1128,10 +1446,9 @@ footer{
     </button>
 
   </div>
-</div>
 
-
-<!-- PAYMENT -->
+          </div>
+          <!-- PAYMENT -->
 
 <div class="modal" id="paymentModal">
 
@@ -1163,8 +1480,13 @@ footer{
       >
 
       <div class="upi-id-box">
+
         <span>UPI ID</span>
-        <strong>9048305367@ptsbi</strong>
+
+        <strong>
+          9048305367@ptsbi
+        </strong>
+
       </div>
 
       <div
@@ -1175,11 +1497,13 @@ footer{
       </div>
 
       <div class="cart-total">
+
         <span>Total</span>
 
         <span>
           ₹<span id="paymentTotal">0</span>
         </span>
+
       </div>
 
       <p class="payment-note">
@@ -1204,11 +1528,16 @@ footer{
     </div>
 
   </div>
+
 </div>
 
 
 <footer>
-  <p>© 2026 Lux Vault. All rights reserved.</p>
+
+  <p>
+    © 2026 Lux Vault. All rights reserved.
+  </p>
+
 </footer>
 
 
@@ -1245,6 +1574,8 @@ const ADMIN_EMAIL =
 
 let products = [];
 
+let allProducts = [];
+
 let cart = loadCart();
 
 let currentUser = null;
@@ -1269,18 +1600,32 @@ const fallbackProducts = [
 
   {
     id:"fallback-1",
-    name:"Electric Mini Garlic Chopper (250ml)",
-    description:"Compact 250ml electric garlic chopper for quick and easy chopping.",
+
+    name:
+      "Electric Mini Garlic Chopper (250ml)",
+
+    description:
+      "Compact 250ml electric garlic chopper for quick and easy chopping.",
+
     price:249,
-    image:"https://raw.githubusercontent.com/lux-vault/lux-vault/main/rn-image_picker_lib_temp_a9430114-b04d-4661-ac6e-e2408bd419c7_1786988902575.jpg"
+
+    image:
+      "https://raw.githubusercontent.com/lux-vault/lux-vault/main/rn-image_picker_lib_temp_a9430114-b04d-4661-ac6e-e2408bd419c7_1786988902575.jpg"
   },
 
   {
     id:"fallback-2",
-    name:"Luxury Product",
-    description:"Another premium product for your Lux Vault store.",
+
+    name:
+      "Luxury Product",
+
+    description:
+      "Another premium product for your Lux Vault store.",
+
     price:999,
-    image:"https://picsum.photos/600/600?random=22"
+
+    image:
+      "https://picsum.photos/600/600?random=22"
   }
 
 ];
@@ -1303,22 +1648,30 @@ function getProductValue(
       product[name] !== null &&
       product[name] !== ""
     ){
+
       return product[name];
+
     }
 
   }
 
   return fallback;
+
 }
 
 
-function safeNumber(value,fallback=0){
+function safeNumber(
+  value,
+  fallback=0
+){
 
-  const number=Number(value);
+  const number =
+    Number(value);
 
   return Number.isFinite(number)
     ? number
     : fallback;
+
 }
 
 
@@ -1330,6 +1683,7 @@ function escapeHtml(value){
     .replaceAll(">","&gt;")
     .replaceAll('"',"&quot;")
     .replaceAll("'","&#039;");
+
 }
 
 
@@ -1342,51 +1696,27 @@ function loadCart(){
   try{
 
     const saved =
-      localStorage.getItem("luxVaultCart");
+      localStorage.getItem(
+        "luxVaultCart"
+      );
 
     if(!saved){
+
       return [];
+
     }
 
     const parsed =
       JSON.parse(saved);
 
-    if(!Array.isArray(parsed)){
-      return [];
-    }
-
-    return parsed
-      .filter(function(item){
-
-        return(
-          item &&
-          item.id !== undefined &&
-          item.name &&
-          safeNumber(item.price)>=0 &&
-          safeNumber(item.quantity)>0
-        );
-
-      })
-      .map(function(item){
-
-        return{
-          id:item.id,
-          name:String(item.name),
-          price:safeNumber(item.price),
-          quantity:Math.max(
-            1,
-            Math.floor(
-              safeNumber(item.quantity,1)
-            )
-          )
-        };
-
-      });
+    return Array.isArray(parsed)
+      ? parsed
+      : [];
 
   }catch(error){
 
     console.error(
-      "Cart loading error:",
+      "Could not load cart:",
       error
     );
 
@@ -1409,7 +1739,7 @@ function saveCart(){
   }catch(error){
 
     console.error(
-      "Cart save error:",
+      "Could not save cart:",
       error
     );
 
@@ -1419,60 +1749,50 @@ function saveCart(){
 
 
 /* =========================================================
-   AUTH
+   AUTH STATE
 ========================================================= */
 
-async function initializeAuth(){
+function isAdmin(){
 
-  try{
-
-    const result =
-      await supabaseClient.auth.getSession();
-
-    if(result.error){
-      console.error(result.error);
-    }
-
-    currentUser =
-      result.data.session
-        ? result.data.session.user
-        : null;
-
-    await updateAuthUI();
-
-  }catch(error){
-
-    console.error(
-      "Auth initialization error:",
-      error
-    );
-
-  }
-
-  supabaseClient.auth.onAuthStateChange(
-    async function(event,session){
-
-      currentUser =
-        session
-          ? session.user
-          : null;
-
-      setTimeout(
-        function(){
-          updateAuthUI();
-        },
-        0
-      );
-
-    }
+  return !!(
+    currentUser &&
+    currentUser.email &&
+    currentUser.email.toLowerCase() ===
+      ADMIN_EMAIL.toLowerCase()
   );
 
 }
 
 
-async function updateAuthUI(){
+async function refreshAuthState(){
 
-  const accountText =
+  try{
+
+    const result =
+      await supabaseClient.auth.getUser();
+
+    currentUser =
+      result.data?.user || null;
+
+  }catch(error){
+
+    console.error(
+      "Auth state error:",
+      error
+    );
+
+    currentUser=null;
+
+  }
+
+  updateAccountUI();
+
+}
+
+
+function updateAccountUI(){
+
+  const accountButtonText =
     document.getElementById(
       "accountButtonText"
     );
@@ -1482,37 +1802,966 @@ async function updateAuthUI(){
       "adminHeaderButton"
     );
 
-  if(!currentUser){
+  const accountEmail =
+    document.getElementById(
+      "accountEmail"
+    );
 
-    accountText.textContent =
-      "Account";
+  const accountAdminBadge =
+    document.getElementById(
+      "accountAdminBadge"
+    );
 
-    adminButton.style.display =
-      "none";
+  if(currentUser){
+
+    if(accountButtonText){
+
+      accountButtonText.textContent =
+        "Account";
+
+    }
+
+    if(accountEmail){
+
+      accountEmail.textContent =
+        currentUser.email || "";
+
+    }
+
+    if(adminButton){
+
+      adminButton.style.display =
+        isAdmin()
+          ? "inline-block"
+          : "none";
+
+    }
+
+    if(accountAdminBadge){
+
+      accountAdminBadge.style.display =
+        isAdmin()
+          ? "inline-block"
+          : "none";
+
+    }
+
+  }else{
+
+    if(accountButtonText){
+
+      accountButtonText.textContent =
+        "Account";
+
+    }
+
+    if(adminButton){
+
+      adminButton.style.display =
+        "none";
+
+    }
+
+    if(accountAdminBadge){
+
+      accountAdminBadge.style.display =
+        "none";
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================
+   PRODUCTS
+========================================================= */
+
+function normalizeProduct(product){
+
+  const activeValue =
+    getProductValue(
+      product,
+      ["active","Active","is_active"],
+      true
+    );
+
+  return {
+
+    id:
+      getProductValue(
+        product,
+        ["id","ID"],
+        crypto.randomUUID()
+      ),
+
+    name:
+      String(
+        getProductValue(
+          product,
+          ["name","Name","product_name","Product_Name"],
+          "Unnamed Product"
+        )
+      ),
+
+    category:
+      String(
+        getProductValue(
+          product,
+          ["category","Category"],
+          ""
+        )
+      ),
+
+    brand:
+      String(
+        getProductValue(
+          product,
+          ["brand","Brand"],
+          ""
+        )
+      ),
+
+    mrp:
+      Math.max(
+        0,
+        safeNumber(
+          getProductValue(
+            product,
+            ["mrp","MRP"],
+            0
+          )
+        )
+      ),
+
+    discount:
+      Math.max(
+        0,
+        safeNumber(
+          getProductValue(
+            product,
+            ["discount","Discount"],
+            0
+          )
+        )
+      ),
+
+    price:
+      Math.max(
+        0,
+        safeNumber(
+          getProductValue(
+            product,
+            ["price","Price","selling_price","Selling_Price"],
+            0
+          )
+        )
+      ),
+
+    stock:
+      Math.max(
+        0,
+        Math.floor(
+          safeNumber(
+            getProductValue(
+              product,
+              ["stock","Stock"],
+              0
+            )
+          )
+        )
+      ),
+
+    colour:
+      String(
+        getProductValue(
+          product,
+          ["colour","Colour"],
+          ""
+        )
+      ),
+
+    quantity:
+      Math.max(
+        0,
+        Math.floor(
+          safeNumber(
+            getProductValue(
+              product,
+              ["quantity","Quantity"],
+              0
+            )
+          )
+        )
+      ),
+
+    volume_value:
+      safeNumber(
+        getProductValue(
+          product,
+          ["volume_value","Volume_Value"],
+          0
+        )
+      ),
+
+    volume_unit:
+      String(
+        getProductValue(
+          product,
+          ["volume_unit","Volume_Unit"],
+          ""
+        )
+      ),
+
+    weight_value:
+      safeNumber(
+        getProductValue(
+          product,
+          ["weight_value","Weight_Value"],
+          0
+        )
+      ),
+
+    weight_unit:
+      String(
+        getProductValue(
+          product,
+          ["weight_unit","Weight_Unit"],
+          ""
+        )
+      ),
+
+    description:
+      String(
+        getProductValue(
+          product,
+          ["description","Description","details"],
+          ""
+        )
+      ),
+
+    image_url:
+      String(
+        getProductValue(
+          product,
+          [
+            "image_url",
+            "Image_URL",
+            "image",
+            "photo_url",
+            "product_image"
+          ],
+          ""
+        )
+      ),
+
+    active:
+      activeValue === true ||
+      activeValue === "true" ||
+      activeValue === 1 ||
+      activeValue === "1"
+
+  };
+
+}
+
+
+async function loadProducts(){
+
+  const status =
+    document.getElementById(
+      "productStatus"
+    );
+
+  if(status){
+
+    status.textContent =
+      "Loading products...";
+
+  }
+
+  try{
+
+    const result =
+      await supabaseClient
+        .from("products")
+        .select("*")
+        .order(
+          "created_at",
+          {ascending:false}
+        );
+
+    if(result.error){
+
+      throw result.error;
+
+    }
+
+    const data =
+      Array.isArray(result.data)
+        ? result.data
+        : [];
+
+    allProducts =
+      data.map(normalizeProduct);
+
+    products =
+      allProducts.filter(
+        function(product){
+          return product.active;
+        }
+      );
+
+    if(!products.length){
+
+      products =
+        fallbackProducts.map(
+          normalizeProduct
+        );
+
+    }
+
+    if(status){
+
+      status.style.display =
+        "none";
+
+    }
+
+    renderProducts();
+
+    updateAdminStats();
+
+  }catch(error){
+
+    console.error(
+      "Load products error:",
+      error
+    );
+
+    allProducts =
+      fallbackProducts.map(
+        normalizeProduct
+      );
+
+    products =
+      allProducts.filter(
+        function(product){
+          return product.active !== false;
+        }
+      );
+
+    if(status){
+
+      status.textContent =
+        "Showing available products.";
+
+    }
+
+    renderProducts();
+
+  }
+
+}
+
+
+function renderProducts(){
+
+  const grid =
+    document.getElementById(
+      "productGrid"
+    );
+
+  if(!grid) return;
+
+  grid.innerHTML="";
+
+  if(!products.length){
+
+    grid.innerHTML =
+      '<p class="empty">No products available right now.</p>';
 
     return;
 
   }
 
-  const email =
-    String(
-      currentUser.email || ""
-    ).toLowerCase();
+  products.forEach(
+    function(product){
 
-  if(email === ADMIN_EMAIL.toLowerCase()){
+      const article =
+        document.createElement(
+          "article"
+        );
 
-    accountText.textContent =
-      "Admin";
+      article.className =
+        "product";
 
-    adminButton.style.display =
-      "block";
+      const image =
+        document.createElement(
+          "img"
+        );
 
-  }else{
+      image.src =
+        product.image_url ||
+        "https://picsum.photos/600/600?random=22";
 
-    accountText.textContent =
-      "Account";
+      image.alt =
+        product.name;
 
-    adminButton.style.display =
+      image.loading =
+        "lazy";
+
+      image.onerror =
+        function(){
+
+          this.onerror=null;
+
+          this.src =
+            "https://picsum.photos/600/600?random=22";
+
+        };
+
+
+      const info =
+        document.createElement(
+          "div"
+        );
+
+      info.className =
+        "product-info";
+
+
+      const title =
+        document.createElement(
+          "h3"
+        );
+
+      title.textContent =
+        product.name;
+
+
+      const meta =
+        document.createElement(
+          "div"
+        );
+
+      meta.className =
+        "product-meta";
+
+      const metaParts=[];
+
+      if(product.brand)
+        metaParts.push(
+          product.brand
+        );
+
+      if(product.colour)
+        metaParts.push(
+          "Colour: "+
+          product.colour
+        );
+
+      if(product.quantity)
+        metaParts.push(
+          "Qty: "+
+          product.quantity
+        );
+
+      if(
+        product.volume_value &&
+        product.volume_unit
+      ){
+
+        metaParts.push(
+          product.volume_value+
+          " "+
+          product.volume_unit
+        );
+
+      }
+
+      if(
+        product.weight_value &&
+        product.weight_unit
+      ){
+
+        metaParts.push(
+          product.weight_value+
+          " "+
+          product.weight_unit
+        );
+
+      }
+
+      meta.textContent =
+        metaParts.join(" • ");
+
+
+      const priceRow =
+        document.createElement(
+          "div"
+        );
+
+      priceRow.className =
+        "price-row";
+
+
+      const price =
+        document.createElement(
+          "span"
+        );
+
+      price.className =
+        "price";
+
+      price.textContent =
+        "₹"+
+        product.price.toLocaleString(
+          "en-IN"
+        );
+
+      priceRow.appendChild(
+        price
+      );
+
+
+      if(
+        product.mrp >
+        product.price
+      ){
+
+        const mrp =
+          document.createElement(
+            "span"
+          );
+
+        mrp.className =
+          "mrp";
+
+        mrp.textContent =
+          "₹"+
+          product.mrp.toLocaleString(
+            "en-IN"
+          );
+
+        priceRow.appendChild(
+          mrp
+        );
+
+      }
+
+
+      if(product.discount>0){
+
+        const badge =
+          document.createElement(
+            "span"
+          );
+
+        badge.className =
+          "discount-badge";
+
+        badge.textContent =
+          product.discount+
+          "% OFF";
+
+        priceRow.appendChild(
+          badge
+        );
+
+      }
+
+
+      const stock =
+        document.createElement(
+          "p"
+        );
+
+      stock.className =
+        "stock-line";
+
+      stock.textContent =
+        product.stock<=0
+          ? "Out of stock"
+          : product.stock<=5
+            ? "Only "+
+              product.stock+
+              " left"
+            : "In stock";
+
+
+      const description =
+        document.createElement(
+          "p"
+        );
+
+      description.className =
+        "description";
+
+      description.textContent =
+        product.description;
+
+
+      const detailsButton =
+        document.createElement(
+          "button"
+        );
+
+      detailsButton.className =
+        "details-btn";
+
+      detailsButton.type =
+        "button";
+
+      detailsButton.textContent =
+        "View Details";
+
+      detailsButton.onclick =
+        function(){
+
+          openProductDetails(
+            product.id
+          );
+
+        };
+
+
+      const addButton =
+        document.createElement(
+          "button"
+        );
+
+      addButton.className =
+        "add-btn";
+
+      addButton.type =
+        "button";
+
+      addButton.textContent =
+        "Add to Cart";
+
+      addButton.onclick =
+        function(){
+
+          addToCart(
+            product.id
+          );
+
+        };
+
+
+      const buyButton =
+        document.createElement(
+          "button"
+        );
+
+      buyButton.className =
+        "buy-btn";
+
+      buyButton.type =
+        "button";
+
+      buyButton.textContent =
+        "Buy Now";
+
+      buyButton.onclick =
+        function(){
+
+          buyNow(
+            product.id
+          );
+
+        };
+
+
+      info.appendChild(
+        title
+      );
+
+      if(meta.textContent)
+        info.appendChild(
+          meta
+        );
+
+      info.appendChild(
+        priceRow
+      );
+
+      info.appendChild(
+        stock
+      );
+
+      if(product.description)
+        info.appendChild(
+          description
+        );
+
+      info.appendChild(
+        detailsButton
+      );
+
+      info.appendChild(
+        addButton
+      );
+
+      info.appendChild(
+        buyButton
+      );
+
+      article.appendChild(
+        image
+      );
+
+      article.appendChild(
+        info
+      );
+
+      grid.appendChild(
+        article
+      );
+
+    }
+  );
+
+}
+  /* =========================================================
+   PRODUCT DETAILS
+========================================================= */
+
+function openProductDetails(productId){
+
+  const product =
+    allProducts.find(
+      function(item){
+        return String(item.id) ===
+          String(productId);
+      }
+    ) ||
+    products.find(
+      function(item){
+        return String(item.id) ===
+          String(productId);
+      }
+    );
+
+  if(!product) return;
+
+  const modal =
+    document.getElementById(
+      "productDetailsModal"
+    );
+
+  const content =
+    document.getElementById(
+      "productDetailsContent"
+    );
+
+  if(!modal || !content) return;
+
+  const image =
+    product.image_url ||
+    "https://picsum.photos/600/600?random=22";
+
+  let specs = "";
+
+  if(product.brand){
+
+    specs += `
+      <div>
+        <span>Brand</span>
+        <strong>${escapeHtml(product.brand)}</strong>
+      </div>
+    `;
+
+  }
+
+  if(product.category){
+
+    specs += `
+      <div>
+        <span>Category</span>
+        <strong>${escapeHtml(product.category)}</strong>
+      </div>
+    `;
+
+  }
+
+  if(product.colour){
+
+    specs += `
+      <div>
+        <span>Colour</span>
+        <strong>${escapeHtml(product.colour)}</strong>
+      </div>
+    `;
+
+  }
+
+  if(
+    product.quantity
+  ){
+
+    specs += `
+      <div>
+        <span>Quantity</span>
+        <strong>${product.quantity}</strong>
+      </div>
+    `;
+
+  }
+
+  if(
+    product.volume_value &&
+    product.volume_unit
+  ){
+
+    specs += `
+      <div>
+        <span>Volume</span>
+        <strong>
+          ${product.volume_value}
+          ${escapeHtml(product.volume_unit)}
+        </strong>
+      </div>
+    `;
+
+  }
+
+  if(
+    product.weight_value &&
+    product.weight_unit
+  ){
+
+    specs += `
+      <div>
+        <span>Weight</span>
+        <strong>
+          ${product.weight_value}
+          ${escapeHtml(product.weight_unit)}
+        </strong>
+      </div>
+    `;
+
+  }
+
+  const mrpHtml =
+    product.mrp > product.price
+      ? `
+        <span class="detail-mrp">
+          ₹${product.mrp.toLocaleString("en-IN")}
+        </span>
+      `
+      : "";
+
+  const discountHtml =
+    product.discount > 0
+      ? `
+        <span class="detail-discount">
+          ${product.discount}% OFF
+        </span>
+      `
+      : "";
+
+  const stockText =
+    product.stock <= 0
+      ? "Out of stock"
+      : product.stock <= 5
+        ? `Only ${product.stock} left`
+        : "In stock";
+
+  content.innerHTML = `
+
+    <img
+      class="detail-image"
+      src="${escapeHtml(image)}"
+      alt="${escapeHtml(product.name)}"
+      onerror="
+        this.onerror=null;
+        this.src='https://picsum.photos/600/600?random=22';
+      "
+    >
+
+    <h2 class="detail-title">
+      ${escapeHtml(product.name)}
+    </h2>
+
+    <div class="detail-price-row">
+
+      <strong>
+        ₹${product.price.toLocaleString("en-IN")}
+      </strong>
+
+      ${mrpHtml}
+
+      ${discountHtml}
+
+    </div>
+
+    <div class="stock-line">
+      ${stockText}
+    </div>
+
+    ${
+      product.description
+        ? `
+          <p class="detail-description">
+            ${escapeHtml(product.description)}
+          </p>
+        `
+        : ""
+    }
+
+    ${
+      specs
+        ? `
+          <div class="detail-specs">
+            ${specs}
+          </div>
+        `
+        : ""
+    }
+
+    <button
+      class="main-btn"
+      onclick="
+        addToCart('${String(product.id).replaceAll("'","\\\\'")}');
+        closeProductDetails();
+      "
+      ${product.stock <= 0 ? "disabled" : ""}
+    >
+      🛍️ Add to Cart
+    </button>
+
+    <button
+      class="main-btn dark-btn"
+      onclick="
+        buyNow('${String(product.id).replaceAll("'","\\\\'")}');
+        closeProductDetails();
+      "
+      ${product.stock <= 0 ? "disabled" : ""}
+    >
+      Buy Now
+    </button>
+
+  `;
+
+  modal.style.display =
+    "flex";
+
+}
+
+
+function closeProductDetails(){
+
+  const modal =
+    document.getElementById(
+      "productDetailsModal"
+    );
+
+  if(modal){
+
+    modal.style.display =
       "none";
 
   }
@@ -1521,8 +2770,633 @@ async function updateAuthUI(){
 
 
 /* =========================================================
-   LOGIN
+   CART FUNCTIONS
 ========================================================= */
+
+function findProduct(productId){
+
+  return (
+    allProducts.find(
+      function(product){
+        return String(product.id) ===
+          String(productId);
+      }
+    ) ||
+    products.find(
+      function(product){
+        return String(product.id) ===
+          String(productId);
+      }
+    )
+  );
+
+}
+
+
+function addToCart(productId){
+
+  const product =
+    findProduct(productId);
+
+  if(!product){
+
+    alert(
+      "Product not found."
+    );
+
+    return;
+
+  }
+
+  if(product.stock <= 0){
+
+    alert(
+      "Sorry, this product is out of stock."
+    );
+
+    return;
+
+  }
+
+  const existing =
+    cart.find(
+      function(item){
+        return String(item.id) ===
+          String(product.id);
+      }
+    );
+
+  if(existing){
+
+    if(
+      existing.quantity >=
+      product.stock
+    ){
+
+      alert(
+        "You cannot add more than available stock."
+      );
+
+      return;
+
+    }
+
+    existing.quantity += 1;
+
+  }else{
+
+    cart.push({
+
+      id:product.id,
+
+      name:product.name,
+
+      price:product.price,
+
+      image_url:product.image_url,
+
+      quantity:1
+
+    });
+
+  }
+
+  saveCart();
+
+  updateCartUI();
+
+}
+
+
+function buyNow(productId){
+
+  const product =
+    findProduct(productId);
+
+  if(!product){
+
+    alert(
+      "Product not found."
+    );
+
+    return;
+
+  }
+
+  if(product.stock <= 0){
+
+    alert(
+      "Sorry, this product is out of stock."
+    );
+
+    return;
+
+  }
+
+  cart = [
+
+    {
+      id:product.id,
+
+      name:product.name,
+
+      price:product.price,
+
+      image_url:product.image_url,
+
+      quantity:1
+
+    }
+
+  ];
+
+  saveCart();
+
+  updateCartUI();
+
+  startCheckout();
+
+}
+
+
+function removeFromCart(productId){
+
+  cart =
+    cart.filter(
+      function(item){
+
+        return String(item.id) !==
+          String(productId);
+
+      }
+    );
+
+  saveCart();
+
+  updateCartUI();
+
+}
+
+
+function changeQuantity(
+  productId,
+  change
+){
+
+  const item =
+    cart.find(
+      function(cartItem){
+
+        return String(cartItem.id) ===
+          String(productId);
+
+      }
+    );
+
+  if(!item) return;
+
+  const product =
+    findProduct(productId);
+
+  const maxStock =
+    product
+      ? product.stock
+      : 999999;
+
+  const newQuantity =
+    item.quantity + change;
+
+  if(newQuantity <= 0){
+
+    removeFromCart(
+      productId
+    );
+
+    return;
+
+  }
+
+  if(newQuantity > maxStock){
+
+    alert(
+      "Available stock: "+
+      maxStock
+    );
+
+    return;
+
+  }
+
+  item.quantity =
+    newQuantity;
+
+  saveCart();
+
+  updateCartUI();
+
+}
+
+
+function getCartProductTotal(){
+
+  return cart.reduce(
+    function(total,item){
+
+      return total +
+        (
+          safeNumber(item.price) *
+          safeNumber(item.quantity)
+        );
+
+    },
+    0
+  );
+
+}
+
+
+function getShippingCost(){
+
+  if(!cart.length){
+
+    return 0;
+
+  }
+
+  /*
+    Lux Vault default shipping charge.
+    Change this value later if required.
+  */
+
+  return 50;
+
+}
+
+
+function getCartGrandTotal(){
+
+  return (
+    getCartProductTotal() +
+    getShippingCost()
+  );
+
+}
+
+
+function updateCartUI(){
+
+  const count =
+    cart.reduce(
+      function(total,item){
+
+        return total +
+          safeNumber(
+            item.quantity
+          );
+
+      },
+      0
+    );
+
+  const countElement =
+    document.getElementById(
+      "cartCount"
+    );
+
+  if(countElement){
+
+    countElement.textContent =
+      count;
+
+  }
+
+  renderCart();
+
+}
+
+
+function renderCart(){
+
+  const container =
+    document.getElementById(
+      "cartItems"
+    );
+
+  const productTotalElement =
+    document.getElementById(
+      "productTotal"
+    );
+
+  const shippingElement =
+    document.getElementById(
+      "shipping"
+    );
+
+  const totalElement =
+    document.getElementById(
+      "cartTotal"
+    );
+
+  if(!container) return;
+
+  if(!cart.length){
+
+    container.innerHTML =
+      `
+        <p class="empty">
+          Your cart is empty.
+        </p>
+      `;
+
+  }else{
+
+    container.innerHTML =
+      "";
+
+    cart.forEach(
+      function(item){
+
+        const itemDiv =
+          document.createElement(
+            "div"
+          );
+
+        itemDiv.className =
+          "cart-item";
+
+        const subtotal =
+          safeNumber(item.price) *
+          safeNumber(item.quantity);
+
+        itemDiv.innerHTML = `
+
+          <div class="cart-item-top">
+
+            <div>
+
+              <div class="cart-item-name">
+                ${escapeHtml(item.name)}
+              </div>
+
+              <div
+                style="
+                  font-size:12px;
+                  color:#766a70;
+                  margin-top:4px;
+                "
+              >
+                ₹${safeNumber(item.price).toLocaleString("en-IN")}
+                each
+              </div>
+
+            </div>
+
+            <div class="cart-item-price">
+              ₹${subtotal.toLocaleString("en-IN")}
+            </div>
+
+          </div>
+
+          <div class="quantity">
+
+            <button
+              class="qty-btn"
+              onclick="
+                changeQuantity(
+                  '${String(item.id).replaceAll("'","\\\\'")}',
+                  -1
+                )
+              "
+            >
+              −
+            </button>
+
+            <strong>
+              ${item.quantity}
+            </strong>
+
+            <button
+              class="qty-btn"
+              onclick="
+                changeQuantity(
+                  '${String(item.id).replaceAll("'","\\\\'")}',
+                  1
+                )
+              "
+            >
+              +
+            </button>
+
+            <button
+              class="remove-btn"
+              onclick="
+                removeFromCart(
+                  '${String(item.id).replaceAll("'","\\\\'")}'
+                )
+              "
+            >
+              Remove
+            </button>
+
+          </div>
+
+        `;
+
+        container.appendChild(
+          itemDiv
+        );
+
+      }
+    );
+
+  }
+
+  const productTotal =
+    getCartProductTotal();
+
+  const shipping =
+    getShippingCost();
+
+  const grandTotal =
+    productTotal +
+    shipping;
+
+  if(productTotalElement){
+
+    productTotalElement.textContent =
+      productTotal.toLocaleString(
+        "en-IN"
+      );
+
+  }
+
+  if(shippingElement){
+
+    shippingElement.textContent =
+      shipping.toLocaleString(
+        "en-IN"
+      );
+
+  }
+
+  if(totalElement){
+
+    totalElement.textContent =
+      grandTotal.toLocaleString(
+        "en-IN"
+      );
+
+  }
+
+}
+
+
+/* =========================================================
+   CART MODAL
+========================================================= */
+
+function openCart(){
+
+  updateCartUI();
+
+  const modal =
+    document.getElementById(
+      "cart"
+    );
+
+  if(modal){
+
+    modal.style.display =
+      "flex";
+
+  }
+
+}
+
+
+function closeCart(){
+
+  const modal =
+    document.getElementById(
+      "cart"
+    );
+
+  if(modal){
+
+    modal.style.display =
+      "none";
+
+  }
+
+}
+
+
+/* =========================================================
+   ACCOUNT MODAL
+========================================================= */
+
+function openAccount(){
+
+  const modal =
+    document.getElementById(
+      "accountModal"
+    );
+
+  if(!modal) return;
+
+  updateAccountUI();
+
+  document.getElementById(
+    "loginForm"
+  ).style.display =
+    currentUser
+      ? "none"
+      : "block";
+
+  document.getElementById(
+    "signupForm"
+  ).style.display =
+    "none";
+
+  document.getElementById(
+    "loggedInAccount"
+  ).style.display =
+    currentUser
+      ? "block"
+      : "none";
+
+  modal.style.display =
+    "flex";
+
+}
+
+
+function closeAccount(){
+
+  const modal =
+    document.getElementById(
+      "accountModal"
+    );
+
+  if(modal){
+
+    modal.style.display =
+      "none";
+
+  }
+
+}
+
+
+function showSignup(){
+
+  document.getElementById(
+    "loginForm"
+  ).style.display =
+    "none";
+
+  document.getElementById(
+    "signupForm"
+  ).style.display =
+    "block";
+
+  document.getElementById(
+    "loggedInAccount"
+  ).style.display =
+    "none";
+
+  document.getElementById(
+    "authTitle"
+  ).textContent =
+    "Create Account";
+
+}
+
+
+function showLogin(){
+
+  document.getElementById(
+    "loginForm"
+  ).style.display =
+    "block";
+
+  document.getElementById(
+    "signupForm"
+  ).style.display =
+    "none";
+
+  document.getElementById(
+    "loggedInAccount"
+  ).style.display =
+    "none";
+
+  document.getElementById(
+    "authTitle"
+  ).textContent =
+    "Login";
+
+}
+
 
 async function loginUser(){
 
@@ -1541,9 +3415,6 @@ async function loginUser(){
       "loginMessage"
     );
 
-  message.textContent =
-    "Logging in...";
-
   if(!email || !password){
 
     message.textContent =
@@ -1553,32 +3424,35 @@ async function loginUser(){
 
   }
 
+  message.textContent =
+    "Logging in...";
+
   try{
 
     const result =
       await supabaseClient.auth.signInWithPassword({
+
         email:email,
+
         password:password
+
       });
 
     if(result.error){
+
       throw result.error;
+
     }
 
     currentUser =
       result.data.user;
 
     message.textContent =
-      "Login successful!";
+      "";
 
-    await updateAuthUI();
+    updateAccountUI();
 
-    setTimeout(
-      function(){
-        closeAccount();
-      },
-      500
-    );
+    openAccount();
 
   }catch(error){
 
@@ -1596,16 +3470,7 @@ async function loginUser(){
 }
 
 
-/* =========================================================
-   SIGNUP
-========================================================= */
-
 async function signupUser(){
-
-  const name =
-    document.getElementById(
-      "signupName"
-    ).value.trim();
 
   const email =
     document.getElementById(
@@ -1617,33 +3482,38 @@ async function signupUser(){
       "signupPassword"
     ).value;
 
+  const confirmPassword =
+    document.getElementById(
+      "signupConfirmPassword"
+    ).value;
+
   const message =
     document.getElementById(
       "signupMessage"
     );
 
-  if(!name){
+  if(!email || !password){
 
     message.textContent =
-      "Please enter your name.";
+      "Please fill all fields.";
 
     return;
 
   }
 
-  if(!email){
+  if(password !== confirmPassword){
 
     message.textContent =
-      "Please enter your email.";
+      "Passwords do not match.";
 
     return;
 
   }
 
-  if(password.length<6){
+  if(password.length < 6){
 
     message.textContent =
-      "Password must contain at least 6 characters.";
+      "Password must be at least 6 characters.";
 
     return;
 
@@ -1659,42 +3529,34 @@ async function signupUser(){
 
         email:email,
 
-        password:password,
-
-        options:{
-  emailRedirectTo:"https://lux-vault.github.io/lux-vault/",
-  data:{
-    full_name:name
-  }
-}
+        password:password
 
       });
 
     if(result.error){
+
       throw result.error;
+
     }
 
-    if(result.data.session){
+    if(result.data.user){
 
-      currentUser =
-        result.data.user;
+      if(result.data.session){
 
-      message.textContent =
-        "Account created successfully.";
+        currentUser =
+          result.data.user;
 
-      await updateAuthUI();
+        message.textContent =
+          "Account created successfully.";
 
-      setTimeout(
-        function(){
-          closeAccount();
-        },
-        700
-      );
+        updateAccountUI();
 
-    }else{
+      }else{
 
-      message.textContent =
-        "Account created. Please check your email to verify your account, then login.";
+        message.textContent =
+          "Account created. Please check your email to confirm your account.";
+
+      }
 
     }
 
@@ -1707,40 +3569,20 @@ async function signupUser(){
 
     message.textContent =
       error.message ||
-      "Account creation failed.";
+      "Could not create account.";
 
   }
 
-}
-
-
-/* =========================================================
-   LOGOUT
+  }
+  /* =========================================================
+   AUTH / LOGOUT CONTINUATION
 ========================================================= */
 
 async function logoutUser(){
 
   try{
 
-    const result =
-      await supabaseClient.auth.signOut();
-
-    if(result.error){
-      throw result.error;
-    }
-
-    currentUser =
-      null;
-
-    closeAccount();
-    closeAdmin();
-    closeMyOrders();
-
-    await updateAuthUI();
-
-    alert(
-      "You have been logged out."
-    );
+    await supabaseClient.auth.signOut();
 
   }catch(error){
 
@@ -1749,1465 +3591,32 @@ async function logoutUser(){
       error
     );
 
-    alert(
-      "Logout failed. Please try again."
-    );
-
   }
 
-}
+  currentUser = null;
 
-
-/* =========================================================
-   ACCOUNT UI
-========================================================= */
-
-function openAccount(){
-
-  document.getElementById(
-    "accountModal"
-  ).style.display="flex";
-
-  if(currentUser){
-
-    document.getElementById(
-      "loginForm"
-    ).style.display="none";
-
-    document.getElementById(
-      "signupForm"
-    ).style.display="none";
-
-    document.getElementById(
-      "loggedInAccount"
-    ).style.display="block";
-
-    const email =
-      currentUser.email || "";
-
-    const metadata =
-      currentUser.user_metadata || {};
-
-    document.getElementById(
-      "accountEmail"
-    ).textContent =
-      email;
-
-    document.getElementById(
-      "accountName"
-    ).textContent =
-      metadata.full_name ||
-      metadata.name ||
-      "Lux Vault Customer";
-
-    const isAdmin =
-      email.toLowerCase() ===
-      ADMIN_EMAIL.toLowerCase();
-
-    document.getElementById(
-      "accountRole"
-    ).style.display =
-      isAdmin
-        ? "inline-block"
-        : "none";
-
-    document.getElementById(
-      "accountAdminButton"
-    ).style.display =
-      isAdmin
-        ? "block"
-        : "none";
-
-  }else{
-
-    showLogin();
-
-  }
-
-}
-
-
-function closeAccount(){
-
-  document.getElementById(
-    "accountModal"
-  ).style.display="none";
-
-}
-
-
-function showLogin(){
-
-  document.getElementById(
-    "authTitle"
-  ).textContent="Login";
-
-  document.getElementById(
-    "loginForm"
-  ).style.display="block";
-
-  document.getElementById(
-    "signupForm"
-  ).style.display="none";
-
-  document.getElementById(
-    "loggedInAccount"
-  ).style.display="none";
-
-  document.getElementById(
-    "loginMessage"
-  ).textContent="";
-
-}
-
-
-function showSignup(){
-
-  document.getElementById(
-    "authTitle"
-  ).textContent="Create Account";
-
-  document.getElementById(
-    "loginForm"
-  ).style.display="none";
-
-  document.getElementById(
-    "signupForm"
-  ).style.display="block";
-
-  document.getElementById(
-    "loggedInAccount"
-  ).style.display="none";
-
-  document.getElementById(
-    "signupMessage"
-  ).textContent="";
-
-}
-
-
-/* =========================================================
-   ADMIN
-========================================================= */
-
-function isAdmin(){
-
-  return(
-    currentUser &&
-    String(currentUser.email || "")
-      .toLowerCase() ===
-      ADMIN_EMAIL.toLowerCase()
-  );
-
-}
-
-
-function openAdmin(){
-
-  if(!currentUser){
-
-    openAdminLogin();
-
-    return;
-
-  }
-
-  if(!isAdmin()){
-
-    alert(
-      "Admin access denied."
-    );
-
-    return;
-
-  }
+  updateAccountUI();
 
   closeAccount();
 
-  document.getElementById(
-    "adminModal"
-  ).style.display="flex";
-
-  loadAdminOrders();
-
 }
 
 
-function closeAdmin(){
+function openOrdersFromAccount(){
 
-  document.getElementById(
-    "adminModal"
-  ).style.display="none";
+  closeAccount();
 
-}
+  if(!currentUser){
 
-
-function openAdminLogin(){
-
-  document.getElementById(
-    "adminLoginModal"
-  ).style.display="flex";
-
-}
-
-
-function closeAdminLogin(){
-
-  document.getElementById(
-    "adminLoginModal"
-  ).style.display="none";
-
-}
-
-
-async function adminLogin(){
-
-  const password =
-    document.getElementById(
-      "adminPassword"
-    ).value;
-
-  const message =
-    document.getElementById(
-      "adminLoginMessage"
-    );
-
-  if(!password){
-
-    message.textContent =
-      "Enter admin password.";
+    openAccount();
 
     return;
 
   }
-
-  message.textContent =
-    "Logging in...";
-
-  try{
-
-    const result =
-      await supabaseClient.auth.signInWithPassword({
-
-        email:
-          ADMIN_EMAIL,
-
-        password:
-          password
-
-      });
-
-    if(result.error){
-      throw result.error;
-    }
-
-    currentUser =
-      result.data.user;
-
-    if(!isAdmin()){
-
-      await supabaseClient.auth.signOut();
-
-      currentUser=null;
-
-      throw new Error(
-        "This account is not authorized as admin."
-      );
-
-    }
-
-    message.textContent =
-      "Admin login successful.";
-
-    await updateAuthUI();
-
-    setTimeout(
-      function(){
-
-        closeAdminLogin();
-
-        openAdmin();
-
-      },
-      500
-    );
-
-  }catch(error){
-
-    console.error(
-      "Admin login error:",
-      error
-    );
-
-    message.textContent =
-      error.message ||
-      "Admin login failed.";
-
-  }
-
-}
-
-
-/* =========================================================
-   PRODUCTS
-========================================================= */
-
-async function loadProducts(){
-
-  const status =
-    document.getElementById(
-      "productStatus"
-    );
-
-  status.textContent =
-    "Loading products...";
-
-  try{
-
-    const result =
-      await supabaseClient
-        .from("products")
-        .select("*");
-
-    if(result.error){
-      throw result.error;
-    }
-
-    const rows =
-      Array.isArray(result.data)
-        ? result.data
-        : [];
-document.getElementById("adminProductCount").textContent = rows.length;
-    if(rows.length===0){
-
-      products =
-        fallbackProducts;
-
-      status.textContent =
-        "No products found in database. Showing sample products.";
-
-    }else{
-
-      products =
-        rows
-          .filter(function(product){
-
-            const active =
-              getProductValue(
-                product,
-                ["Active","active"],
-                true
-              );
-
-            const stock =
-              safeNumber(
-                getProductValue(
-                  product,
-                  ["Stock","stock"],
-                  1
-                )
-              );
-
-            return(
-              active === true &&
-              stock > 0
-            );
-
-          })
-          .map(function(product,index){
-
-            let productId =
-              getProductValue(
-                product,
-                ["id","product_id"],
-                null
-              );
-
-            if(!productId){
-
-              productId =
-                "product-"+index;
-
-            }
-
-            return{
-
-              id:productId,
-
-              name:String(
-                getProductValue(
-                  product,
-                  ["Name","name","product_name","title"],
-                  "Lux Vault Product"
-                )
-              ),
-
-              description:String(
-                getProductValue(
-                  product,
-                  ["Description","description","details"],
-                  "Premium product from Lux Vault."
-                )
-              ),
-
-              price:safeNumber(
-                getProductValue(
-                  product,
-                  ["Price","price","selling_price","amount"],
-                  0
-                )
-              ),
-
-              image:String(
-                getProductValue(
-                  product,
-                  [
-                    "image_url",
-                    "image",
-                    "imageurl",
-                    "photo_url",
-                    "product_image"
-                  ],
-                  "https://picsum.photos/600/600?random=22"
-                )
-              )
-
-            };
-
-          });
-
-      status.textContent="";
-
-    }
-
-  }catch(error){
-
-    console.error(
-      "Supabase product error:",
-      error
-    );
-
-    products =
-      fallbackProducts;
-
-    status.textContent =
-      "Database products could not be loaded. Showing available products.";
-
-  }
-
-  renderProducts();
-
-}
-
-
-function renderProducts(){
-
-  const grid =
-    document.getElementById(
-      "productGrid"
-    );
-
-  grid.innerHTML="";
-
-  if(!products.length){
-
-    grid.innerHTML =
-      '<p class="empty">No products available.</p>';
-
-    return;
-
-  }
-
-  products.forEach(function(product){
-
-    const article =
-      document.createElement("article");
-
-    article.className="product";
-
-    const image =
-      document.createElement("img");
-
-    image.src=product.image;
-    image.alt=product.name;
-    image.loading="lazy";
-
-    image.onerror=function(){
-
-      this.onerror=null;
-
-      this.src =
-        "https://picsum.photos/600/600?random=22";
-
-    };
-
-    const info =
-      document.createElement("div");
-
-    info.className="product-info";
-
-    const title =
-      document.createElement("h3");
-
-    title.textContent=
-      product.name;
-
-    const description =
-      document.createElement("p");
-
-    description.className=
-      "description";
-
-    description.textContent=
-      product.description;
-
-    const price =
-      document.createElement("p");
-
-    price.className="price";
-
-    price.textContent =
-      "₹"+
-      safeNumber(product.price)
-        .toLocaleString("en-IN");
-
-    const addButton =
-      document.createElement("button");
-
-    addButton.className="add-btn";
-    addButton.type="button";
-    addButton.textContent="Add to Cart";
-
-    addButton.onclick=function(){
-
-      addToCart(product.id);
-
-    };
-
-    const buyButton =
-      document.createElement("button");
-
-    buyButton.className="buy-btn";
-    buyButton.type="button";
-    buyButton.textContent="Buy Now";
-
-    buyButton.onclick=function(){
-
-      buyNow(product.id);
-
-    };
-
-    info.appendChild(title);
-    info.appendChild(description);
-    info.appendChild(price);
-    info.appendChild(addButton);
-    info.appendChild(buyButton);
-
-    article.appendChild(image);
-    article.appendChild(info);
-
-    grid.appendChild(article);
-
-  });
-
-}
-function openAddProduct(){
-
-  if(!isAdmin()){
-
-    alert("Admin access denied.");
-
-    return;
-
-  }
-
-  document.getElementById(
-    "addProductModal"
-  ).style.display="flex";
-
-}
-function closeAddProduct(){
-
-  document.getElementById(
-    "addProductModal"
-  ).style.display="none";
-
-  }
-  async function saveNewProduct(){
-
-  if(!isAdmin()){
-
-    alert("Admin access denied.");
-
-    return;
-
-  }
-
-  const message =
-    document.getElementById(
-      "addProductMessage"
-    );
-
-  const photo =
-    document.getElementById(
-      "productPhoto"
-    ).files[0];
-
-  const name =
-    document.getElementById(
-      "productName"
-    ).value.trim();
-
-  const description =
-    document.getElementById(
-      "productDescription"
-    ).value.trim();
-
-  const category =
-    document.getElementById(
-      "productCategory"
-    ).value.trim();
-
-  const price =
-    safeNumber(
-      document.getElementById(
-        "productPrice"
-      ).value
-    );
-
-  const stock =
-    Math.floor(
-      safeNumber(
-        document.getElementById(
-          "productStock"
-        ).value
-      )
-    );
-
-
-  if(!photo){
-
-    message.textContent =
-      "Please select a product photo.";
-
-    return;
-
-  }
-
-  if(!name){
-
-    message.textContent =
-      "Please enter product name.";
-
-    return;
-
-  }
-
-  if(!description){
-
-    message.textContent =
-      "Please enter product description.";
-
-    return;
-
-  }
-
-  if(!category){
-
-    message.textContent =
-      "Please enter product category.";
-
-    return;
-
-  }
-
-  if(price<=0){
-
-    message.textContent =
-      "Please enter a valid price.";
-
-    return;
-
-  }
-
-  if(stock<0){
-
-    message.textContent =
-      "Please enter valid stock.";
-
-    return;
-
-  }
-
-
-  try{
-
-    message.textContent =
-      "Uploading photo...";
-
-
-    const extension =
-      photo.name.includes(".")
-        ? photo.name
-            .split(".")
-            .pop()
-            .toLowerCase()
-        : "jpg";
-
-
-    const fileName =
-      "product-" +
-      Date.now() +
-      "-" +
-      Math.random()
-        .toString(36)
-        .substring(2,8) +
-      "." +
-      extension;
-
-
-    const uploadResult =
-      await supabaseClient
-        .storage
-        .from("product-images")
-        .upload(
-          fileName,
-          photo,
-          {
-            cacheControl:"3600",
-            upsert:false,
-            contentType:
-              photo.type || "image/jpeg"
-          }
-        );
-
-
-    if(uploadResult.error){
-
-      throw uploadResult.error;
-
-    }
-
-
-    const publicResult =
-      supabaseClient
-        .storage
-        .from("product-images")
-        .getPublicUrl(
-          fileName
-        );
-
-
-    const imageUrl =
-      publicResult.data.publicUrl;
-
-
-    message.textContent =
-      "Saving product...";
-
-
-    const result =
-      await supabaseClient
-        .from("products")
-        .insert({
-
-          Name:name,
-
-          Category:category,
-
-          Price:price,
-
-          Stock:stock,
-
-          Description:description,
-
-          image_url:imageUrl,
-
-          Active:true
-
-        });
-
-
-    if(result.error){
-
-      throw result.error;
-
-    }
-
-
-    message.textContent =
-      "✅ Product added successfully!";
-
-
-    alert(
-      "Product added successfully!"
-    );
-
-
-    closeAddProduct();
-
-    await loadProducts();
-
-
-  }catch(error){
-
-    console.error(
-      "Save product error:",
-      error
-    );
-
-    message.textContent =
-      error.message ||
-      "Could not save product.";
-
-    alert(
-      "Product could not be saved.\n\n" +
-      (
-        error.message ||
-        "Unknown error."
-      )
-    );
-
-  }
-
-  }
-function openManageProducts(){
-  if(!isAdmin()){
-    alert("Admin access denied.");
-    return;
-  }
-
-  const existing = document.getElementById("manageProductsModal");
-  if(existing) existing.remove();
-
-  const modal = document.createElement("div");
-  modal.id = "manageProductsModal";
-
-  modal.innerHTML = `
-    <div style="
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.65);
-      z-index:99999;
-      padding:20px;
-      overflow-y:auto;
-    ">
-      <div style="
-        max-width:600px;
-        margin:20px auto;
-        background:#fff;
-        border-radius:22px;
-        padding:20px;
-      ">
-        <div style="
-          display:flex;
-          justify-content:space-between;
-          align-items:center;
-          margin-bottom:18px;
-        ">
-          <h2 style="margin:0;color:#54263b;">🛍️ Manage Products</h2>
-          <button id="closeManageProducts"
-            style="
-              border:0;
-              background:#f5dce5;
-              border-radius:50%;
-              width:42px;
-              height:42px;
-              font-size:22px;
-            ">×</button>
-        </div>
-
-        <div id="manageProductsList"></div>
-      </div>
-    </div>
-  `;
-
-  document.body.appendChild(modal);
-
-  document.getElementById("closeManageProducts").onclick = function(){
-    modal.remove();
-  };
-
-  renderManageProducts();
-}
-
-
-function renderManageProducts(){
-  const container = document.getElementById("manageProductsList");
-
-  if(!container) return;
-
-  if(!Array.isArray(products) || products.length === 0){
-    container.innerHTML = `
-      <p style="text-align:center;padding:30px;">
-        No products found.
-      </p>
-    `;
-    return;
-  }
-
-  container.innerHTML = products.map(function(product,index){
-
-    const id = getProductValue(product,["id","product_id"],"");
-    const name = getProductValue(product,["Name","name"],"Unnamed Product");
-    const price = getProductValue(product,["Price","price"],0);
-    const stock = getProductValue(product,["Stock","stock"],0);
-    const active = getProductValue(product,["Active","active"],true);
-    const image = getProductValue(product,["image_url","Image_URL","image"],"");
-
-    return `
-      <div style="
-        border:1px solid #ead8df;
-        border-radius:18px;
-        padding:15px;
-        margin-bottom:15px;
-        background:#fff8fb;
-      ">
-
-        <div style="
-          display:flex;
-          gap:12px;
-          align-items:center;
-        ">
-
-          ${
-            image
-            ? `<img src="${image}"
-                style="
-                  width:75px;
-                  height:75px;
-                  object-fit:cover;
-                  border-radius:12px;
-                ">`
-            : `<div style="
-                  width:75px;
-                  height:75px;
-                  border-radius:12px;
-                  background:#f3dce5;
-                  display:flex;
-                  align-items:center;
-                  justify-content:center;
-                  font-size:30px;
-                ">🛍️</div>`
-          }
-
-          <div style="flex:1;">
-            <h3 style="margin:0 0 5px;color:#54263b;">
-              ${name}
-            </h3>
-
-            <div>💰 ₹${price}</div>
-            <div>📦 Stock: ${stock}</div>
-            <div>
-              ${active ? "🟢 Active" : "🔴 Inactive"}
-            </div>
-          </div>
-
-        </div>
-
-        <div style="
-          display:grid;
-          grid-template-columns:1fr 1fr;
-          gap:8px;
-          margin-top:14px;
-        ">
-
-          <button onclick="editManageProduct('${id}')"
-            style="
-              padding:11px;
-              border:0;
-              border-radius:10px;
-              background:#bd4f78;
-              color:white;
-              font-weight:bold;
-            ">
-            ✏️ Edit
-          </button>
-
-          <button onclick="toggleManageProduct('${id}',${active})"
-            style="
-              padding:11px;
-              border:0;
-              border-radius:10px;
-              background:#7d3154;
-              color:white;
-              font-weight:bold;
-            ">
-            ${active ? "🔴 Disable" : "🟢 Enable"}
-          </button>
-
-          <button onclick="deleteManageProduct('${id}')"
-            style="
-              grid-column:1 / -1;
-              padding:11px;
-              border:0;
-              border-radius:10px;
-              background:#9b263f;
-              color:white;
-              font-weight:bold;
-            ">
-            🗑️ Delete Product
-          </button>
-
-        </div>
-
-      </div>
-    `;
-  }).join("");
-}
-
-
-async function editManageProduct(productId){
-
-  const product = products.find(function(item){
-    return String(getProductValue(item,["id","product_id"],"")) === String(productId);
-  });
-
-  if(!product){
-    alert("Product not found.");
-    return;
-  }
-
-  const currentName = getProductValue(product,["Name","name"],"");
-  const currentPrice = getProductValue(product,["Price","price"],0);
-  const currentStock = getProductValue(product,["Stock","stock"],0);
-
-  const name = prompt("Product name:",currentName);
-  if(name === null) return;
-
-  const price = prompt("Price:",currentPrice);
-  if(price === null) return;
-
-  const stock = prompt("Stock:",currentStock);
-  if(stock === null) return;
-
-  const priceNumber = Number(price);
-  const stockNumber = Number(stock);
-
-  if(!name.trim() || !Number.isFinite(priceNumber) || !Number.isFinite(stockNumber)){
-    alert("Please enter valid details.");
-    return;
-  }
-
-  try{
-
-    const result = await supabaseClient
-      .from("products")
-      .update({
-        Name:name.trim(),
-        Price:priceNumber,
-        Stock:stockNumber
-      })
-      .eq("id",productId);
-
-    if(result.error){
-      throw result.error;
-    }
-
-    alert("Product updated successfully! ✅");
-
-    await loadProducts();
-    renderManageProducts();
-
-  }catch(error){
-
-    console.error("Update product error:",error);
-
-    alert(
-      "Could not update product.\n\n" +
-      (error.message || "Unknown error.")
-    );
-  }
-}
-
-
-async function toggleManageProduct(productId,currentActive){
-
-  try{
-
-    const result = await supabaseClient
-      .from("products")
-      .update({
-        Active:!currentActive
-      })
-      .eq("id",productId);
-
-    if(result.error){
-      throw result.error;
-    }
-
-    await loadProducts();
-    renderManageProducts();
-
-  }catch(error){
-
-    console.error("Toggle product error:",error);
-
-    alert(
-      "Could not change product status.\n\n" +
-      (error.message || "Unknown error.")
-    );
-  }
-}
-
-
-async function deleteManageProduct(productId){
-
-  const product = products.find(function(item){
-    return String(getProductValue(item,["id","product_id"],"")) === String(productId);
-  });
-
-  const name = product
-    ? getProductValue(product,["Name","name"],"this product")
-    : "this product";
-
-  if(!confirm("Delete " + name + " permanently?")){
-    return;
-  }
-
-  try{
-
-    const result = await supabaseClient
-      .from("products")
-      .delete()
-      .eq("id",productId);
-
-    if(result.error){
-      throw result.error;
-    }
-
-    alert("Product deleted successfully! 🗑️");
-
-    await loadProducts();
-    renderManageProducts();
-
-  }catch(error){
-
-    console.error("Delete product error:",error);
-
-    alert(
-      "Could not delete product.\n\n" +
-      (error.message || "Unknown error.")
-    );
-  }
-}
-/* =========================================================
-   CART
-========================================================= */
-
-function addToCart(productId){
-
-  const product =
-    products.find(function(item){
-
-      return String(item.id) ===
-        String(productId);
-
-    });
-
-  if(!product){
-
-    alert("Product could not be found.");
-
-    return;
-
-  }
-
-  const existing =
-    cart.find(function(item){
-
-      return String(item.id) ===
-        String(product.id);
-
-    });
-
-  if(existing){
-
-    existing.quantity += 1;
-
-  }else{
-
-    cart.push({
-
-      id:product.id,
-      name:product.name,
-      price:safeNumber(product.price),
-      quantity:1
-
-    });
-
-  }
-
-  saveCart();
-  updateCart();
 
   alert(
-    product.name+
-    " added to cart!"
+    "Your orders will appear here after placing an order."
   );
-
-}
-
-
-function buyNow(productId){
-
-  const product =
-    products.find(function(item){
-
-      return String(item.id) ===
-        String(productId);
-
-    });
-
-  if(!product){
-
-    alert(
-      "Product could not be found."
-    );
-
-    return;
-
-  }
-
-  cart=[{
-
-    id:product.id,
-    name:product.name,
-    price:safeNumber(product.price),
-    quantity:1
-
-  }];
-
-  saveCart();
-  updateCart();
-
-  startCheckout();
-
-}
-
-
-function getProductTotal(){
-
-  return cart.reduce(
-    function(sum,item){
-
-      return sum+
-        (
-          safeNumber(item.price)*
-          safeNumber(item.quantity)
-        );
-
-    },
-    0
-  );
-
-}
-
-
-function getShipping(total){
-
-  if(total<=0){
-    return 0;
-  }
-
-  return total<499
-    ? 50
-    : 0;
-
-}
-
-
-function getGrandTotal(){
-
-  const total =
-    getProductTotal();
-
-  return total+
-    getShipping(total);
-
-}
-
-
-function updateCart(){
-
-  const count =
-    document.getElementById(
-      "cartCount"
-    );
-
-  const items =
-    document.getElementById(
-      "cartItems"
-    );
-
-  let itemCount=0;
-
-  cart.forEach(function(item){
-
-    itemCount +=
-      Math.max(
-        0,
-        Math.floor(
-          safeNumber(item.quantity)
-        )
-      );
-
-  });
-
-  count.textContent=
-    itemCount;
-
-  if(cart.length===0){
-
-    items.innerHTML =
-      '<p class="empty">Your cart is empty.</p>';
-
-  }else{
-
-    items.innerHTML =
-      cart.map(function(item,index){
-
-        const itemTotal =
-          safeNumber(item.price)*
-          safeNumber(item.quantity);
-
-        return`
-
-          <div class="cart-item">
-
-            <div class="cart-item-top">
-
-              <span class="cart-item-name">
-                ${escapeHtml(item.name)}
-              </span>
-
-              <span class="cart-item-price">
-                ₹${itemTotal.toLocaleString("en-IN")}
-              </span>
-
-            </div>
-
-            <div class="quantity">
-
-              <button
-                class="qty-btn"
-                onclick="changeQuantity(${index},-1)"
-              >
-                −
-              </button>
-
-              <span>
-                ${safeNumber(item.quantity)}
-              </span>
-
-              <button
-                class="qty-btn"
-                onclick="changeQuantity(${index},1)"
-              >
-                +
-              </button>
-
-              <button
-                class="remove-btn"
-                onclick="removeItem(${index})"
-              >
-                Remove
-              </button>
-
-            </div>
-
-          </div>
-
-        `;
-
-      }).join("");
-
-  }
-
-  const total =
-    getProductTotal();
-
-  const shipping =
-    getShipping(total);
-
-  const grandTotal =
-    total+shipping;
-
-  document.getElementById(
-    "productTotal"
-  ).textContent=
-    total.toLocaleString("en-IN");
-
-  document.getElementById(
-    "shipping"
-  ).textContent=
-    shipping.toLocaleString("en-IN");
-
-  document.getElementById(
-    "cartTotal"
-  ).textContent=
-    grandTotal.toLocaleString("en-IN");
-
-  saveCart();
-
-}
-
-
-function changeQuantity(index,amount){
-
-  if(!cart[index]){
-    return;
-  }
-
-  cart[index].quantity =
-    safeNumber(
-      cart[index].quantity,
-      1
-    )+
-    Number(amount);
-
-  if(cart[index].quantity<=0){
-
-    cart.splice(index,1);
-
-  }
-
-  saveCart();
-  updateCart();
-
-}
-
-
-function removeItem(index){
-
-  if(!cart[index]){
-    return;
-  }
-
-  cart.splice(index,1);
-
-  saveCart();
-  updateCart();
-
-}
-
-
-function openCart(){
-
-  document.getElementById(
-    "cart"
-  ).style.display="flex";
-
-  updateCart();
-
-}
-
-
-function closeCart(){
-
-  document.getElementById(
-    "cart"
-  ).style.display="none";
 
 }
 
@@ -3218,7 +3627,7 @@ function closeCart(){
 
 function startCheckout(){
 
-  if(cart.length===0){
+  if(!cart.length){
 
     alert(
       "Your cart is empty."
@@ -3232,33 +3641,55 @@ function startCheckout(){
 
   if(!currentUser){
 
-    alert(
-      "Please login or create an account before checkout."
-    );
-
     openAccount();
 
     return;
 
   }
 
-  document.getElementById(
-    "checkoutModal"
-  ).style.display="flex";
+  const checkoutModal =
+    document.getElementById(
+      "checkoutModal"
+    );
+
+  if(checkoutModal){
+
+    checkoutModal.style.display =
+      "flex";
+
+  }
 
 }
 
 
 function closeCheckout(){
 
-  document.getElementById(
-    "checkoutModal"
-  ).style.display="none";
+  const modal =
+    document.getElementById(
+      "checkoutModal"
+    );
+
+  if(modal){
+
+    modal.style.display =
+      "none";
+
+  }
 
 }
 
 
 function continueToPayment(){
+
+  if(!cart.length){
+
+    alert(
+      "Your cart is empty."
+    );
+
+    return;
+
+  }
 
   const name =
     document.getElementById(
@@ -3280,6 +3711,7 @@ function continueToPayment(){
       "customerPin"
     ).value.trim();
 
+
   if(!name){
 
     alert(
@@ -3290,7 +3722,8 @@ function continueToPayment(){
 
   }
 
-  if(!/^\d{10}$/.test(phone)){
+
+  if(!/^[0-9]{10}$/.test(phone)){
 
     alert(
       "Please enter a valid 10-digit phone number."
@@ -3299,6 +3732,7 @@ function continueToPayment(){
     return;
 
   }
+
 
   if(!address){
 
@@ -3310,7 +3744,8 @@ function continueToPayment(){
 
   }
 
-  if(!/^\d{6}$/.test(pin)){
+
+  if(!/^[0-9]{6}$/.test(pin)){
 
     alert(
       "Please enter a valid 6-digit PIN code."
@@ -3320,338 +3755,34 @@ function continueToPayment(){
 
   }
 
-  customer={
+
+  customer = {
+
     name:name,
+
     phone:phone,
+
     address:address,
+
     pin:pin
+
   };
 
-  showPayment();
-
-}
-
-
-function generateNewOrderId(){
-
-  const timestamp =
-    Date.now()
-      .toString()
-      .slice(-8);
-
-  const random =
-    Math.floor(
-      100+
-      Math.random()*900
-    );
-
-  return(
-    "LV-"+
-    timestamp+
-    "-"+
-    random
-  );
-
-}
-
-
-function getCurrentOrderId(){
-
-  if(!currentOrderId){
-
-    currentOrderId =
-      generateNewOrderId();
-
-  }
-
-  return currentOrderId;
-
-}
-
-
-function showPayment(){
-
-  currentOrderId =
-    generateNewOrderId();
-
-  orderSaved=false;
-
-  const total =
-    getGrandTotal();
-
-  document.getElementById(
-    "paymentTotal"
-  ).textContent=
-    total.toLocaleString("en-IN");
-
-  document.getElementById(
-    "paymentOrderId"
-  ).textContent=
-    "Order ID: "+
-    currentOrderId;
-
-  const button =
-    document.getElementById(
-      "finishPaymentButton"
-    );
-
-  button.disabled=false;
-
-  button.textContent=
-    "✅ I've Completed Payment";
 
   closeCheckout();
 
-  document.getElementById(
-    "paymentModal"
-  ).style.display="flex";
-
-}
-
-
-function closePayment(){
-
-  document.getElementById(
-    "paymentModal"
-  ).style.display="none";
+  openPayment();
 
 }
 
 
 /* =========================================================
-   SAVE ORDER
+   PAYMENT
 ========================================================= */
 
-async function saveOrderToSupabase(){
+async function openPayment(){
 
-  if(orderSaved){
-
-    return{
-      success:true,
-      alreadySaved:true
-    };
-
-  }
-
-  if(!currentUser){
-
-    return{
-      success:false,
-      error:new Error(
-        "Please login before placing an order."
-      )
-    };
-
-  }
-
-  if(cart.length===0){
-
-    return{
-      success:false,
-      error:new Error(
-        "Cart is empty."
-      )
-    };
-
-  }
-
-  const productTotal =
-    getProductTotal();
-
-  const shipping =
-    getShipping(productTotal);
-
-  const grandTotal =
-    productTotal+
-    shipping;
-
-  const firstItem =
-    cart[0];
-
-  /*
-    This uses the orders columns already used
-    by the Lux Vault project.
-  */
-
-  const orderData={
-
-    product_name:
-      cart.map(function(item){
-        return item.name+
-          " x"+
-          item.quantity;
-      }).join(", "),
-
-    price:
-      grandTotal,
-
-    quantity:
-      cart.reduce(
-        function(sum,item){
-          return sum+
-            safeNumber(item.quantity);
-        },
-        0
-      ),
-
-    customer_name:
-      customer.name,
-
-    phone:
-      customer.phone,
-
-    address:
-      customer.address+
-      ", PIN: "+
-      customer.pin,
-
-    status:
-      "payment_submitted",
-
-    payment_method:
-      "UPI",
-
-    notes:
-      "Order ID: "+
-      getCurrentOrderId()+
-      " | Product Total: ₹"+
-      productTotal+
-      " | Shipping: ₹"+
-      shipping,
-
-    image_url:
-      firstItem
-        ? firstItem.image || null
-        : null,
-
-    user_id:
-      currentUser.id
-
-  };
-
-  const result =
-    await supabaseClient
-      .from("orders")
-      .insert(orderData);
-
-  if(result.error){
-
-    console.error(
-      "Supabase order insert error:",
-      result.error
-    );
-
-    return{
-      success:false,
-      error:result.error
-    };
-
-  }
-
-  orderSaved=true;
-
-  return{
-    success:true,
-    alreadySaved:false
-  };
-
-}
-
-
-/* =========================================================
-   WHATSAPP
-========================================================= */
-
-function createWhatsAppMessage(){
-
-  const productTotal =
-    getProductTotal();
-
-  const shipping =
-    getShipping(productTotal);
-
-  const grandTotal =
-    productTotal+
-    shipping;
-
-  const items =
-    cart.map(function(item){
-
-      const itemTotal =
-        safeNumber(item.price)*
-        safeNumber(item.quantity);
-
-      return(
-        "• "+
-        item.name+
-        " x"+
-        item.quantity+
-        " - ₹"+
-        itemTotal.toLocaleString("en-IN")
-      );
-
-    }).join("\n");
-
-  return(
-
-    "🛍️ *NEW LUX VAULT ORDER*\n\n"+
-
-    "🆔 *Order ID:* "+
-    getCurrentOrderId()+
-    "\n\n"+
-
-    "👤 *Name:* "+
-    customer.name+
-    "\n"+
-
-    "📱 *Phone:* "+
-    customer.phone+
-    "\n"+
-
-    "📍 *Address:* "+
-    customer.address+
-    "\n"+
-
-    "📮 *PIN Code:* "+
-    customer.pin+
-    "\n\n"+
-
-    "🛒 *ORDER:*\n"+
-    items+
-    "\n\n"+
-
-    "💰 *Product Total: ₹"+
-    productTotal.toLocaleString("en-IN")+
-    "*\n"+
-
-    "🚚 *Shipping: ₹"+
-    shipping.toLocaleString("en-IN")+
-    "*\n"+
-
-    "💵 *Grand Total: ₹"+
-    grandTotal.toLocaleString("en-IN")+
-    "*\n\n"+
-
-    "💳 *Payment:* UPI payment submitted"
-
-  );
-
-}
-
-
-function sendWhatsAppOrder(){
-
-  if(!customer.name){
-
-    alert(
-      "Please enter your delivery details first."
-    );
-
-    return;
-
-  }
-
-  if(cart.length===0){
+  if(!cart.length){
 
     alert(
       "Your cart is empty."
@@ -3661,20 +3792,419 @@ function sendWhatsAppOrder(){
 
   }
 
+
+  const paymentModal =
+    document.getElementById(
+      "paymentModal"
+    );
+
+  if(!paymentModal) return;
+
+
+  orderSaved = false;
+
+
+  const paymentTotal =
+    document.getElementById(
+      "paymentTotal"
+    );
+
+  if(paymentTotal){
+
+    paymentTotal.textContent =
+      getCartGrandTotal().toLocaleString(
+        "en-IN"
+      );
+
+  }
+
+
+  const paymentOrderId =
+    document.getElementById(
+      "paymentOrderId"
+    );
+
+  if(paymentOrderId){
+
+    paymentOrderId.textContent =
+      "Preparing order...";
+
+  }
+
+
+  paymentModal.style.display =
+    "flex";
+
+
+  try{
+
+    currentOrderId =
+      await createPendingOrder();
+
+    if(paymentOrderId){
+
+      paymentOrderId.textContent =
+        "Order ID: "+
+        currentOrderId;
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Could not create order:",
+      error
+    );
+
+    currentOrderId =
+      generateOrderId();
+
+    if(paymentOrderId){
+
+      paymentOrderId.textContent =
+        "Order ID: "+
+        currentOrderId;
+
+    }
+
+  }
+
+}
+
+
+function closePayment(){
+
+  const modal =
+    document.getElementById(
+      "paymentModal"
+    );
+
+  if(modal){
+
+    modal.style.display =
+      "none";
+
+  }
+
+}
+
+
+/* =========================================================
+   ORDER ID
+========================================================= */
+
+function generateOrderId(){
+
+  const now =
+    new Date();
+
+  const datePart =
+    now
+      .toISOString()
+      .replace(
+        /[-:TZ.]/g,
+        ""
+      )
+      .slice(
+        0,
+        14
+      );
+
+  const randomPart =
+    Math.random()
+      .toString(36)
+      .substring(
+        2,
+        7
+      )
+      .toUpperCase();
+
+  return (
+    "LV-"+
+    datePart+
+    "-"+
+    randomPart
+  );
+
+}
+
+
+/* =========================================================
+   CREATE ORDER
+========================================================= */
+
+async function createPendingOrder(){
+
+  if(!currentUser){
+
+    throw new Error(
+      "Please login before placing an order."
+    );
+
+  }
+
+
+  const orderId =
+    generateOrderId();
+
+
+  const items =
+    cart.map(
+      function(item){
+
+        return {
+
+          product_id:item.id,
+
+          product_name:item.name,
+
+          price:safeNumber(
+            item.price
+          ),
+
+          quantity:safeNumber(
+            item.quantity
+          ),
+
+          subtotal:
+            safeNumber(item.price) *
+            safeNumber(item.quantity)
+
+        };
+
+      }
+    );
+
+
+  const productTotal =
+    getCartProductTotal();
+
+  const shipping =
+    getShippingCost();
+
+  const total =
+    productTotal +
+    shipping;
+
+
+  const orderPayload = {
+
+    order_id:orderId,
+
+    user_id:currentUser.id,
+
+    customer_name:
+      customer.name,
+
+    customer_phone:
+      customer.phone,
+
+    customer_address:
+      customer.address,
+
+    customer_pin:
+      customer.pin,
+
+    items:items,
+
+    product_total:
+      productTotal,
+
+    shipping:
+      shipping,
+
+    total:
+      total,
+
+    payment_status:
+      "pending",
+
+    order_status:
+      "pending"
+
+  };
+
+
+  const result =
+    await supabaseClient
+      .from("orders")
+      .insert(
+        orderPayload
+      );
+
+
+  if(result.error){
+
+    throw result.error;
+
+  }
+
+
+  return orderId;
+
+}
+
+
+/* =========================================================
+   WHATSAPP ORDER
+========================================================= */
+
+function buildWhatsAppMessage(){
+
+  const lines=[];
+
+
+  lines.push(
+    "🛍️ *LUX VAULT ORDER*"
+  );
+
+  lines.push("");
+
+  lines.push(
+    "*Order ID:* "+
+    (
+      currentOrderId ||
+      "Pending"
+    )
+  );
+
+  lines.push("");
+
+  lines.push(
+    "*Customer:* "+
+    customer.name
+  );
+
+  lines.push(
+    "*Phone:* "+
+    customer.phone
+  );
+
+  lines.push("");
+
+  lines.push(
+    "*Delivery Address:*"
+  );
+
+  lines.push(
+    customer.address
+  );
+
+  lines.push(
+    "PIN: "+
+    customer.pin
+  );
+
+  lines.push("");
+
+  lines.push(
+    "*Products:*"
+  );
+
+
+  cart.forEach(
+    function(item){
+
+      const subtotal =
+        safeNumber(item.price) *
+        safeNumber(item.quantity);
+
+      lines.push(
+
+        "• "+
+        item.name+
+        " × "+
+        item.quantity+
+        " = ₹"+
+        subtotal.toLocaleString(
+          "en-IN"
+        )
+
+      );
+
+    }
+  );
+
+
+  lines.push("");
+
+  lines.push(
+    "Product Total: ₹"+
+    getCartProductTotal()
+      .toLocaleString(
+        "en-IN"
+      )
+  );
+
+  lines.push(
+    "Shipping: ₹"+
+    getShippingCost()
+      .toLocaleString(
+        "en-IN"
+      )
+  );
+
+  lines.push(
+    "*Grand Total: ₹"+
+    getCartGrandTotal()
+      .toLocaleString(
+        "en-IN"
+      )+
+    "*"
+  );
+
+  lines.push("");
+
+  lines.push(
+    "Payment: UPI"
+  );
+
+
+  return lines.join(
+    "\n"
+  );
+
+}
+
+
+function sendWhatsAppOrder(){
+
+  if(!cart.length){
+
+    alert(
+      "Your cart is empty."
+    );
+
+    return;
+
+  }
+
+
   const message =
-    createWhatsAppMessage();
+    buildWhatsAppMessage();
+
+
+  /*
+    Replace this number with the
+    Lux Vault WhatsApp business number.
+    Use country code without +.
+  */
 
   const whatsappNumber =
-    "918943657525";
+    "919048305367";
 
-  const whatsappURL =
+
+  const url =
     "https://wa.me/"+
     whatsappNumber+
     "?text="+
-    encodeURIComponent(message);
+    encodeURIComponent(
+      message
+    );
+
 
   window.open(
-    whatsappURL,
+    url,
     "_blank"
   );
 
@@ -3687,73 +4217,102 @@ function sendWhatsAppOrder(){
 
 async function finishOrder(){
 
-  if(!currentUser){
+  if(orderSaved){
 
-    alert(
-      "Please login before completing your order."
-    );
+    closePayment();
 
     return;
 
   }
 
-  if(cart.length===0){
-
-    alert(
-      "Your cart is empty."
-    );
-
-    return;
-
-  }
 
   const button =
     document.getElementById(
       "finishPaymentButton"
     );
 
-  button.disabled=true;
 
-  button.textContent=
-    "Saving Order...";
+  if(button){
+
+    button.disabled =
+      true;
+
+    button.textContent =
+      "Saving Order...";
+
+  }
+
 
   try{
 
-    const result =
-      await saveOrderToSupabase();
+    if(
+      currentOrderId &&
+      currentUser
+    ){
 
-    if(result.success){
+      const result =
+        await supabaseClient
+          .from("orders")
+          .update({
 
-      const savedOrderId =
-        getCurrentOrderId();
+            payment_status:
+              "paid",
 
-      alert(
-        "Order saved successfully!\n\nOrder ID: "+
-        savedOrderId
-      );
+            order_status:
+              "confirmed"
 
-      closePayment();
+          })
+          .eq(
+            "order_id",
+            currentOrderId
+          )
+          .eq(
+            "user_id",
+            currentUser.id
+          );
 
-      cart=[];
 
-      saveCart();
-      updateCart();
+      if(result.error){
 
-      currentOrderId=null;
-      orderSaved=false;
+        throw result.error;
 
-    }else{
-
-      console.error(
-        "Order was not saved:",
-        result.error
-      );
-
-      alert(
-        "The order could not be saved to the database.\n\nPlease use the WhatsApp button to send your order."
-      );
+      }
 
     }
+
+
+    orderSaved =
+      true;
+
+
+    cart=[];
+
+    saveCart();
+
+    updateCartUI();
+
+
+    alert(
+      "Order placed successfully! 🎉"
+    );
+
+
+    closePayment();
+
+
+    if(button){
+
+      button.disabled =
+        false;
+
+      button.textContent =
+        "✅ I've Completed Payment";
+
+    }
+
+
+    await loadProducts();
+
 
   }catch(error){
 
@@ -3762,192 +4321,347 @@ async function finishOrder(){
       error
     );
 
+
+    if(button){
+
+      button.disabled =
+        false;
+
+      button.textContent =
+        "✅ I've Completed Payment";
+
+    }
+
+
     alert(
-      "The order could not be saved.\n\nPlease use the WhatsApp button to send your order."
+      "Could not confirm the order. Please try again."
     );
 
   }
-
-  button.disabled=false;
-
-  button.textContent=
-    "✅ I've Completed Payment";
 
 }
 
 
 /* =========================================================
-   MY ORDERS
+   ADMIN LOGIN
 ========================================================= */
 
-function openMyOrders(){
+function openAdmin(){
 
-  if(!currentUser){
+  if(isAdmin()){
 
-    alert(
-      "Please login first."
-    );
+    openAdminDashboard();
 
     return;
 
   }
 
-  closeAccount();
 
-  document.getElementById(
-    "myOrdersModal"
-  ).style.display="flex";
-
-  loadMyOrders();
-
-}
-
-
-function closeMyOrders(){
-
-  document.getElementById(
-    "myOrdersModal"
-  ).style.display="none";
-
-}
-
-
-async function loadMyOrders(){
-
-  const list =
+  const modal =
     document.getElementById(
-      "myOrdersList"
+      "adminLoginModal"
     );
 
-  list.innerHTML =
-    '<p class="empty">Loading orders...</p>';
+  if(modal){
 
-  if(!currentUser){
+    modal.style.display =
+      "flex";
 
-    list.innerHTML =
-      '<p class="empty">Please login first.</p>';
+  }
+
+}
+
+
+function closeAdminLogin(){
+
+  const modal =
+    document.getElementById(
+      "adminLoginModal"
+    );
+
+  if(modal){
+
+    modal.style.display =
+      "none";
+
+  }
+
+}
+
+
+async function adminLogin(){
+
+  const password =
+    document.getElementById(
+      "adminPassword"
+    ).value;
+
+
+  const message =
+    document.getElementById(
+      "adminLoginMessage"
+    );
+
+
+  if(!password){
+
+    message.textContent =
+      "Enter admin password.";
 
     return;
 
   }
+
+
+  /*
+    Admin access uses the same
+    Supabase account authentication.
+    Enter the admin account email
+    and password through normal login.
+  */
+
+  try{
+
+    const result =
+      await supabaseClient.auth.signInWithPassword({
+
+        email:ADMIN_EMAIL,
+
+        password:password
+
+      });
+
+
+    if(result.error){
+
+      throw result.error;
+
+    }
+
+
+    currentUser =
+      result.data.user;
+
+
+    if(!isAdmin()){
+
+      await supabaseClient.auth.signOut();
+
+      currentUser =
+        null;
+
+      throw new Error(
+        "This account is not authorized as admin."
+      );
+
+    }
+
+
+    message.textContent =
+      "";
+
+    closeAdminLogin();
+
+    updateAccountUI();
+
+    openAdminDashboard();
+
+
+  }catch(error){
+
+    console.error(
+      "Admin login error:",
+      error
+    );
+
+    message.textContent =
+      error.message ||
+      "Admin login failed.";
+
+  }
+
+}
+
+
+/* =========================================================
+   ADMIN DASHBOARD
+========================================================= */
+
+function openAdminDashboard(){
+
+  if(!isAdmin()){
+
+    openAdmin();
+
+    return;
+
+  }
+
+
+  const modal =
+    document.getElementById(
+      "adminModal"
+    );
+
+
+  if(modal){
+
+    modal.style.display =
+      "flex";
+
+  }
+
+
+  updateAdminStats();
+
+  loadAdminOrders();
+
+}
+
+
+function closeAdmin(){
+
+  const modal =
+    document.getElementById(
+      "adminModal"
+    );
+
+  if(modal){
+
+    modal.style.display =
+      "none";
+
+  }
+
+}
+
+
+/* =========================================================
+   ADMIN STATS
+========================================================= */
+
+async function updateAdminStats(){
+
+  const productCount =
+    document.getElementById(
+      "adminProductCount"
+    );
+
+  const orderCount =
+    document.getElementById(
+      "adminOrderCount"
+    );
+
+  const revenue =
+    document.getElementById(
+      "adminRevenue"
+    );
+
+
+  if(productCount){
+
+    productCount.textContent =
+      allProducts.length;
+
+  }
+
 
   try{
 
     const result =
       await supabaseClient
         .from("orders")
-        .select("*")
-        .eq(
-          "user_id",
-          currentUser.id
-        )
-        .order(
-          "created_at",
-          {ascending:false}
+        .select(
+          "total,payment_status"
         );
 
+
     if(result.error){
+
       throw result.error;
+
     }
+
 
     const orders =
       Array.isArray(result.data)
         ? result.data
         : [];
 
-    if(!orders.length){
 
-      list.innerHTML =
-        '<p class="empty">You have no orders yet.</p>';
+    if(orderCount){
 
-      return;
+      orderCount.textContent =
+        orders.length;
 
     }
 
-    list.innerHTML =
-      orders.map(function(order){
 
-        return`
+    const totalRevenue =
+      orders.reduce(
+        function(sum,order){
 
-          <div class="admin-order">
+          if(
+            String(
+              order.payment_status
+            ).toLowerCase() ===
+            "paid"
+          ){
 
-            <h3>
-              Order #${escapeHtml(
-                order.id || "N/A"
-              )}
-            </h3>
+            return sum +
+              safeNumber(
+                order.total
+              );
 
-            <p>
-              <strong>Product:</strong>
-              ${escapeHtml(
-                order.product_name || ""
-              )}
-            </p>
+          }
 
-            <p>
-              <strong>Total:</strong>
-              ₹${safeNumber(
-                order.price
-              ).toLocaleString("en-IN")}
-            </p>
+          return sum;
 
-            <p>
-              <strong>Status:</strong>
-              ${escapeHtml(
-                order.status || "Pending"
-              )}
-            </p>
+        },
+        0
+      );
 
-            <p>
-              <strong>Payment:</strong>
-              ${escapeHtml(
-                order.payment_method || "UPI"
-              )}
-            </p>
 
-          </div>
+    if(revenue){
 
-        `;
+      revenue.textContent =
+        totalRevenue.toLocaleString(
+          "en-IN"
+        );
 
-      }).join("");
+    }
+
 
   }catch(error){
 
     console.error(
-      "My orders error:",
+      "Admin stats error:",
       error
     );
 
-    list.innerHTML =
-      '<p class="empty">Unable to load your orders.</p>';
-
   }
 
-}
-
-
-/* =========================================================
+  }
+  /* =========================================================
    ADMIN ORDERS
 ========================================================= */
 
 async function loadAdminOrders(){
 
-  const list =
+  const container =
     document.getElementById(
       "adminOrdersList"
     );
 
-  if(!isAdmin()){
+  if(!container) return;
 
-    list.innerHTML =
-      '<p class="empty">Admin access denied.</p>';
+  container.innerHTML =
+    `
+      <p class="empty">
+        Loading orders...
+      </p>
+    `;
 
-    return;
-
-  }
-
-  list.innerHTML =
-    '<p class="empty">Loading orders...</p>';
 
   try{
 
@@ -3958,182 +4672,367 @@ async function loadAdminOrders(){
         .order(
           "created_at",
           {ascending:false}
-        );
+        )
+        .limit(50);
+
 
     if(result.error){
+
       throw result.error;
+
     }
+
 
     const orders =
       Array.isArray(result.data)
         ? result.data
         : [];
 
-    document.getElementById(
-      "adminOrderCount"
-    ).textContent=
-      orders.length;
 
     if(!orders.length){
 
-      list.innerHTML =
-        '<p class="empty">No orders yet.</p>';
+      container.innerHTML =
+        `
+          <p class="empty">
+            No orders yet.
+          </p>
+        `;
 
       return;
 
     }
 
-    list.innerHTML =
-      orders.map(function(order,index){
 
-        const status =
-          order.status ||
-          "pending";
+    container.innerHTML =
+      "";
 
-        return`
 
-          <div class="admin-order">
+    orders.forEach(
+      function(order){
 
-            <h3>
-              🛍️ Order ${index+1}
-            </h3>
+        const card =
+          document.createElement(
+            "div"
+          );
 
-            <p>
-              <strong>Database ID:</strong>
-              ${escapeHtml(
-                String(order.id || "")
-              )}
-            </p>
+        card.className =
+          "admin-order";
 
-            <p>
-              <strong>Customer:</strong>
-              ${escapeHtml(
-                order.customer_name || ""
-              )}
-            </p>
 
-            <p>
-              <strong>Phone:</strong>
-              ${escapeHtml(
-                order.phone || ""
-              )}
-            </p>
+        const items =
+          Array.isArray(order.items)
+            ? order.items
+            : [];
 
-            <p>
-              <strong>Address:</strong>
-              ${escapeHtml(
-                order.address || ""
-              )}
-            </p>
 
-            <div class="admin-order-items">
+        const itemHtml =
+          items.map(
+            function(item){
 
-              <p>
-                <strong>Order:</strong>
-              </p>
+              return `
+                <div class="order-item">
 
-              <p>
+                  <span>
+                    ${escapeHtml(
+                      item.product_name ||
+                      "Product"
+                    )}
+                    ×
+                    ${safeNumber(
+                      item.quantity,
+                      1
+                    )}
+                  </span>
+
+                  <strong>
+                    ₹${safeNumber(
+                      item.subtotal
+                    ).toLocaleString(
+                      "en-IN"
+                    )}
+                  </strong>
+
+                </div>
+              `;
+
+            }
+          ).join("");
+
+
+        const paymentStatus =
+          String(
+            order.payment_status ||
+            "pending"
+          ).toLowerCase();
+
+
+        const orderStatus =
+          String(
+            order.order_status ||
+            "pending"
+          ).toLowerCase();
+
+
+        card.innerHTML = `
+
+          <div class="admin-order-header">
+
+            <div>
+
+              <strong>
                 ${escapeHtml(
-                  order.product_name || ""
+                  order.order_id ||
+                  "Order"
                 )}
-              </p>
+              </strong>
+
+              <small>
+                ${
+                  order.created_at
+                    ? new Date(
+                        order.created_at
+                      ).toLocaleString(
+                        "en-IN"
+                      )
+                    : ""
+                }
+              </small>
 
             </div>
 
-            <p>
-              <strong>Total:</strong>
-              ₹${safeNumber(
-                order.price
-              ).toLocaleString("en-IN")}
-            </p>
-
-            <p>
-              <strong>Payment:</strong>
+            <span
+              class="
+                status-badge
+                ${escapeHtml(
+                  paymentStatus
+                )}
+              "
+            >
               ${escapeHtml(
-                order.payment_method || ""
+                paymentStatus
               )}
-            </p>
+            </span>
 
-            <p>
-              <strong>Current Status:</strong>
-              ${escapeHtml(status)}
-            </p>
+          </div>
 
-            <div class="admin-actions">
 
-              <select
-                id="status-${escapeHtml(
-                  String(order.id)
-                )}"
+          <div class="admin-customer">
+
+            <strong>
+              Customer
+            </strong>
+
+            <span>
+              ${escapeHtml(
+                order.customer_name ||
+                ""
+              )}
+            </span>
+
+            <span>
+              ${escapeHtml(
+                order.customer_phone ||
+                ""
+              )}
+            </span>
+
+            <span>
+              ${escapeHtml(
+                order.customer_address ||
+                ""
+              )}
+            </span>
+
+            <span>
+              PIN:
+              ${escapeHtml(
+                order.customer_pin ||
+                ""
+              )}
+            </span>
+
+          </div>
+
+
+          <div class="order-items">
+
+            ${itemHtml}
+
+          </div>
+
+
+          <div class="admin-order-total">
+
+            <span>
+              Product Total
+            </span>
+
+            <strong>
+              ₹${safeNumber(
+                order.product_total
+              ).toLocaleString(
+                "en-IN"
+              )}
+            </strong>
+
+          </div>
+
+
+          <div class="admin-order-total">
+
+            <span>
+              Shipping
+            </span>
+
+            <strong>
+              ₹${safeNumber(
+                order.shipping
+              ).toLocaleString(
+                "en-IN"
+              )}
+            </strong>
+
+          </div>
+
+
+          <div class="admin-order-total grand">
+
+            <span>
+              Grand Total
+            </span>
+
+            <strong>
+              ₹${safeNumber(
+                order.total
+              ).toLocaleString(
+                "en-IN"
+              )}
+            </strong>
+
+          </div>
+
+
+          <div class="admin-order-actions">
+
+            <select
+              onchange="
+                updateOrderStatus(
+                  '${String(
+                    order.order_id ||
+                    ""
+                  ).replaceAll(
+                    "'",
+                    "\\'"
+                  )}',
+                  this.value
+                )
+              "
+            >
+
+              <option
+                value="pending"
+                ${
+                  orderStatus ===
+                  "pending"
+                    ? "selected"
+                    : ""
+                }
               >
+                Pending
+              </option>
 
-                <option
-                  value="pending"
-                  ${status==="pending"?"selected":""}
-                >
-                  Pending
-                </option>
-
-                <option
-                  value="payment_submitted"
-                  ${status==="payment_submitted"?"selected":""}
-                >
-                  Payment Submitted
-                </option>
-
-                <option
-                  value="confirmed"
-                  ${status==="confirmed"?"selected":""}
-                >
-                  Confirmed
-                </option>
-
-                <option
-                  value="processing"
-                  ${status==="processing"?"selected":""}
-                >
-                  Processing
-                </option>
-
-                <option
-                  value="shipped"
-                  ${status==="shipped"?"selected":""}
-                >
-                  Shipped
-                </option>
-
-                <option
-                  value="delivered"
-                  ${status==="delivered"?"selected":""}
-                >
-                  Delivered
-                </option>
-
-                <option
-                  value="cancelled"
-                  ${status==="cancelled"?"selected":""}
-                >
-                  Cancelled
-                </option>
-
-              </select>
-
-              <button
-                class="small-btn"
-                onclick="updateOrderStatus('${escapeHtml(
-                  String(order.id)
-                )}')"
+              <option
+                value="confirmed"
+                ${
+                  orderStatus ===
+                  "confirmed"
+                    ? "selected"
+                    : ""
+                }
               >
-                Save Status
-              </button>
+                Confirmed
+              </option>
 
-            </div>
+              <option
+                value="processing"
+                ${
+                  orderStatus ===
+                  "processing"
+                    ? "selected"
+                    : ""
+                }
+              >
+                Processing
+              </option>
+
+              <option
+                value="shipped"
+                ${
+                  orderStatus ===
+                  "shipped"
+                    ? "selected"
+                    : ""
+                }
+              >
+                Shipped
+              </option>
+
+              <option
+                value="delivered"
+                ${
+                  orderStatus ===
+                  "delivered"
+                    ? "selected"
+                    : ""
+                }
+              >
+                Delivered
+              </option>
+
+              <option
+                value="cancelled"
+                ${
+                  orderStatus ===
+                  "cancelled"
+                    ? "selected"
+                    : ""
+                }
+              >
+                Cancelled
+              </option>
+
+            </select>
+
+
+            <button
+              class="secondary-btn"
+              onclick="
+                deleteOrder(
+                  '${String(
+                    order.order_id ||
+                    ""
+                  ).replaceAll(
+                    "'",
+                    "\\'"
+                  )}'
+                )
+              "
+            >
+              Delete
+            </button>
 
           </div>
 
         `;
 
-      }).join("");
+
+        container.appendChild(
+          card
+        );
+
+      }
+    );
+
 
   }catch(error){
 
@@ -4142,39 +5041,38 @@ async function loadAdminOrders(){
       error
     );
 
-    list.innerHTML =
-      '<p class="empty">Unable to load orders. Check your Supabase orders table policies.</p>';
+
+    container.innerHTML =
+      `
+        <p class="empty">
+          Could not load orders.
+        </p>
+      `;
 
   }
 
 }
 
 
-async function updateOrderStatus(orderId){
+/* =========================================================
+   UPDATE ORDER STATUS
+========================================================= */
+
+async function updateOrderStatus(
+  orderId,
+  status
+){
 
   if(!isAdmin()){
 
     alert(
-      "Admin access denied."
+      "Admin access required."
     );
 
     return;
 
   }
 
-  const select =
-    document.getElementById(
-      "status-"+orderId
-    );
-
-  if(!select){
-
-    return;
-
-  }
-
-  const newStatus =
-    select.value;
 
   try{
 
@@ -4182,32 +5080,38 @@ async function updateOrderStatus(orderId){
       await supabaseClient
         .from("orders")
         .update({
-          status:newStatus
+
+          order_status:
+            status
+
         })
         .eq(
-          "id",
+          "order_id",
           orderId
         );
 
+
     if(result.error){
+
       throw result.error;
+
     }
 
-    alert(
-      "Order status updated."
-    );
 
-    loadAdminOrders();
+    await loadAdminOrders();
+
+    await updateAdminStats();
+
 
   }catch(error){
 
     console.error(
-      "Status update error:",
+      "Update order error:",
       error
     );
 
     alert(
-      "Could not update order status.\n\nCheck the orders table UPDATE policy in Supabase."
+      "Could not update order status."
     );
 
   }
@@ -4216,77 +5120,1380 @@ async function updateOrderStatus(orderId){
 
 
 /* =========================================================
-   OUTSIDE CLICK
+   DELETE ORDER
 ========================================================= */
 
-[
-  "accountModal",
-  "myOrdersModal",
-  "adminLoginModal",
-  "adminModal",
-  "cart",
-  "checkoutModal",
-  "paymentModal"
-].forEach(function(id){
+async function deleteOrder(
+  orderId
+){
 
-  const element =
-    document.getElementById(id);
+  if(!isAdmin()){
 
-  if(!element){
+    alert(
+      "Admin access required."
+    );
+
     return;
+
   }
 
-  element.addEventListener(
-    "click",
-    function(event){
 
-      if(event.target!==this){
-        return;
+  const confirmed =
+    confirm(
+      "Delete this order permanently?"
+    );
+
+
+  if(!confirmed){
+
+    return;
+
+  }
+
+
+  try{
+
+    const result =
+      await supabaseClient
+        .from("orders")
+        .delete()
+        .eq(
+          "order_id",
+          orderId
+        );
+
+
+    if(result.error){
+
+      throw result.error;
+
+    }
+
+
+    await loadAdminOrders();
+
+    await updateAdminStats();
+
+
+  }catch(error){
+
+    console.error(
+      "Delete order error:",
+      error
+    );
+
+    alert(
+      "Could not delete order."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   ADD PRODUCT MODAL
+========================================================= */
+
+function openAddProduct(){
+
+  if(!isAdmin()){
+
+    alert(
+      "Admin access required."
+    );
+
+    return;
+
+  }
+
+
+  const modal =
+    document.getElementById(
+      "addProductModal"
+    );
+
+
+  if(modal){
+
+    modal.style.display =
+      "flex";
+
+  }
+
+}
+
+
+function closeAddProduct(){
+
+  const modal =
+    document.getElementById(
+      "addProductModal"
+    );
+
+
+  if(modal){
+
+    modal.style.display =
+      "none";
+
+  }
+
+
+  clearProductForm();
+
+}
+
+
+function clearProductForm(){
+
+  const fields = [
+
+    "productName",
+
+    "productCategory",
+
+    "productBrand",
+
+    "productMRP",
+
+    "productDiscount",
+
+    "productPrice",
+
+    "productStock",
+
+    "productColour",
+
+    "productQuantity",
+
+    "productVolumeValue",
+
+    "productWeightValue",
+
+    "productDescription"
+
+  ];
+
+
+  fields.forEach(
+    function(id){
+
+      const element =
+        document.getElementById(
+          id
+        );
+
+      if(element){
+
+        element.value =
+          "";
+
       }
-
-      this.style.display="none";
 
     }
   );
 
-});
+
+  const volumeUnit =
+    document.getElementById(
+      "productVolumeUnit"
+    );
+
+  if(volumeUnit){
+
+    volumeUnit.value =
+      "";
+
+  }
+
+
+  const weightUnit =
+    document.getElementById(
+      "productWeightUnit"
+    );
+
+  if(weightUnit){
+
+    weightUnit.value =
+      "";
+
+  }
+
+
+  const active =
+    document.getElementById(
+      "productActive"
+    );
+
+  if(active){
+
+    active.value =
+      "true";
+
+  }
+
+
+  const photo =
+    document.getElementById(
+      "productPhoto"
+    );
+
+  if(photo){
+
+    photo.value =
+      "";
+
+  }
+
+
+  const message =
+    document.getElementById(
+      "addProductMessage"
+    );
+
+  if(message){
+
+    message.textContent =
+      "";
+
+  }
+
+}
 
 
 /* =========================================================
-   ESC KEY
+   SAVE NEW PRODUCT
 ========================================================= */
 
-document.addEventListener(
-  "keydown",
-  function(event){
+async function saveNewProduct(){
 
-    if(event.key!=="Escape"){
-      return;
+  if(!isAdmin()){
+
+    alert(
+      "Admin access required."
+    );
+
+    return;
+
+  }
+
+
+  const message =
+    document.getElementById(
+      "addProductMessage"
+    );
+
+
+  const name =
+    document.getElementById(
+      "productName"
+    ).value.trim();
+
+
+  const category =
+    document.getElementById(
+      "productCategory"
+    ).value.trim();
+
+
+  const brand =
+    document.getElementById(
+      "productBrand"
+    ).value.trim();
+
+
+  const mrp =
+    safeNumber(
+      document.getElementById(
+        "productMRP"
+      ).value
+    );
+
+
+  const discount =
+    safeNumber(
+      document.getElementById(
+        "productDiscount"
+      ).value
+    );
+
+
+  const price =
+    safeNumber(
+      document.getElementById(
+        "productPrice"
+      ).value
+    );
+
+
+  const stock =
+    Math.max(
+      0,
+      Math.floor(
+        safeNumber(
+          document.getElementById(
+            "productStock"
+          ).value
+        )
+      )
+    );
+
+
+  const colour =
+    document.getElementById(
+      "productColour"
+    ).value.trim();
+
+
+  const quantity =
+    Math.max(
+      0,
+      Math.floor(
+        safeNumber(
+          document.getElementById(
+            "productQuantity"
+          ).value
+        )
+      )
+    );
+
+
+  const volumeValue =
+    safeNumber(
+      document.getElementById(
+        "productVolumeValue"
+      ).value
+    );
+
+
+  const volumeUnit =
+    document.getElementById(
+      "productVolumeUnit"
+    ).value;
+
+
+  const weightValue =
+    safeNumber(
+      document.getElementById(
+        "productWeightValue"
+      ).value
+    );
+
+
+  const weightUnit =
+    document.getElementById(
+      "productWeightUnit"
+    ).value;
+
+
+  const description =
+    document.getElementById(
+      "productDescription"
+    ).value.trim();
+
+
+  const active =
+    document.getElementById(
+      "productActive"
+    ).value ===
+    "true";
+
+
+  const photoInput =
+    document.getElementById(
+      "productPhoto"
+    );
+
+
+  const file =
+    photoInput?.files?.[0] ||
+    null;
+
+
+  if(!name){
+
+    message.textContent =
+      "Product name is required.";
+
+    return;
+
+  }
+
+
+  if(price <= 0){
+
+    message.textContent =
+      "Selling price must be greater than 0.";
+
+    return;
+
+  }
+
+
+  if(mrp > 0 && price > mrp){
+
+    message.textContent =
+      "Selling price cannot be higher than MRP.";
+
+    return;
+
+  }
+
+
+  message.textContent =
+    "Saving product...";
+
+
+  try{
+
+    let imageUrl =
+      "";
+
+
+    if(file){
+
+      imageUrl =
+        await uploadProductImage(
+          file
+        );
+
     }
 
-    closeAccount();
-    closeMyOrders();
-    closeAdminLogin();
-    closeAdmin();
-    closeCart();
-    closeCheckout();
-    closePayment();
+
+    const productData = {
+
+      name:name,
+
+      category:category,
+
+      brand:brand,
+
+      mrp:mrp,
+
+      discount:discount,
+
+      price:price,
+
+      stock:stock,
+
+      colour:colour,
+
+      quantity:quantity,
+
+      volume_value:
+        volumeValue,
+
+      volume_unit:
+        volumeUnit,
+
+      weight_value:
+        weightValue,
+
+      weight_unit:
+        weightUnit,
+
+      description:
+        description,
+
+      image_url:
+        imageUrl,
+
+      active:
+        active
+
+    };
+
+
+    const result =
+      await supabaseClient
+        .from("products")
+        .insert(
+          productData
+        );
+
+
+    if(result.error){
+
+      throw result.error;
+
+    }
+
+
+    message.textContent =
+      "Product added successfully!";
+
+
+    await loadProducts();
+
+
+    setTimeout(
+      function(){
+
+        closeAddProduct();
+
+      },
+      600
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "Save product error:",
+      error
+    );
+
+
+    message.textContent =
+      error.message ||
+      "Could not save product.";
+
+  }
+
+}
+
+
+/* =========================================================
+   PRODUCT IMAGE UPLOAD
+========================================================= */
+
+async function uploadProductImage(
+  file
+){
+
+  if(!file){
+
+    return "";
+
+  }
+
+
+  const extension =
+    (
+      file.name.split(".").pop() ||
+      "jpg"
+    ).toLowerCase();
+
+
+  const filename =
+    "products/"+
+    Date.now()+
+    "-"+
+    Math.random()
+      .toString(36)
+      .substring(
+        2,
+        9
+      )+
+    "."+
+    extension;
+
+
+  const result =
+    await supabaseClient
+      .storage
+      .from("products")
+      .upload(
+        filename,
+        file,
+        {
+          cacheControl:
+            "3600",
+
+          upsert:false
+        }
+      );
+
+
+  if(result.error){
+
+    throw result.error;
+
+  }
+
+
+  const publicUrl =
+    supabaseClient
+      .storage
+      .from("products")
+      .getPublicUrl(
+        filename
+      );
+
+
+  return (
+    publicUrl.data.publicUrl ||
+    ""
+  );
+
+}
+
+
+/* =========================================================
+   SITE ASSET UPLOAD
+========================================================= */
+
+async function uploadSiteAsset(
+  type,
+  file
+){
+
+  if(!isAdmin()){
+
+    alert(
+      "Admin access required."
+    );
+
+    return;
+
+  }
+
+
+  if(!file){
+
+    return;
+
+  }
+
+
+  const message =
+    document.getElementById(
+      "appearanceMessage"
+    );
+
+
+  if(message){
+
+    message.textContent =
+      "Uploading "+type+"...";
+
+  }
+
+
+  try{
+
+    const extension =
+      (
+        file.name.split(".").pop() ||
+        "jpg"
+      ).toLowerCase();
+
+
+    const filename =
+      "site/"+
+      type+
+      "-"+
+      Date.now()+
+      "."+
+      extension;
+
+
+    const result =
+      await supabaseClient
+        .storage
+        .from("products")
+        .upload(
+          filename,
+          file,
+          {
+            cacheControl:
+              "3600",
+
+            upsert:true
+          }
+        );
+
+
+    if(result.error){
+
+      throw result.error;
+
+    }
+
+
+    const publicUrl =
+      supabaseClient
+        .storage
+        .from("products")
+        .getPublicUrl(
+          filename
+        );
+
+
+    const url =
+      publicUrl.data.publicUrl;
+
+
+    if(type === "logo"){
+
+      const logo =
+        document.querySelector(
+          ".logo img"
+        );
+
+      if(logo){
+
+        logo.src =
+          url;
+
+      }
+
+      localStorage.setItem(
+        "luxVaultLogo",
+        url
+      );
+
+    }
+
+
+    if(type === "hero"){
+
+      const hero =
+        document.querySelector(
+          ".hero"
+        );
+
+      if(hero){
+
+        hero.style.backgroundImage =
+          `url("${url}")`;
+
+      }
+
+      localStorage.setItem(
+        "luxVaultHero",
+        url
+      );
+
+    }
+
+
+    if(message){
+
+      message.textContent =
+        "Upload successful.";
+
+    }
+
+
+  }catch(error){
+
+    console.error(
+      "Site asset upload error:",
+      error
+    );
+
+
+    if(message){
+
+      message.textContent =
+        error.message ||
+        "Upload failed.";
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================
+   MANAGE PRODUCTS
+========================================================= */
+
+function openManageProducts(){
+
+  if(!isAdmin()){
+
+    alert(
+      "Admin access required."
+    );
+
+    return;
+
+  }
+
+
+  renderManageProducts();
+
+}
+
+
+function renderManageProducts(){
+
+  const productsToManage =
+    allProducts.length
+      ? allProducts
+      : products;
+
+
+  if(!productsToManage.length){
+
+    alert(
+      "No products available."
+    );
+
+    return;
+
+  }
+
+
+  const list =
+    productsToManage
+      .map(
+        function(product){
+
+          return (
+
+            "• "+
+            product.name+
+            " — ₹"+
+            product.price
+
+          );
+
+        }
+      )
+      .join("\n");
+
+
+  alert(
+    "Products:\n\n"+
+    list+
+    "\n\nProduct editing tools are available through the admin panel."
+  );
+
+}
+
+
+/* =========================================================
+   END OF PART 6
+========================================================= */
+  /* =========================================================
+   SITE SETTINGS / SAVED APPEARANCE
+========================================================= */
+
+function loadSavedAppearance(){
+
+  const savedLogo =
+    localStorage.getItem(
+      "luxVaultLogo"
+    );
+
+  const savedHero =
+    localStorage.getItem(
+      "luxVaultHero"
+    );
+
+
+  if(savedLogo){
+
+    const logo =
+      document.querySelector(
+        ".logo img"
+      );
+
+    if(logo){
+
+      logo.src =
+        savedLogo;
+
+    }
+
+  }
+
+
+  if(savedHero){
+
+    const hero =
+      document.querySelector(
+        ".hero"
+      );
+
+    if(hero){
+
+      hero.style.backgroundImage =
+        `url("${savedHero}")`;
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function searchProducts(){
+
+  const input =
+    document.getElementById(
+      "searchInput"
+    );
+
+  if(!input) return;
+
+  const search =
+    input.value
+      .trim()
+      .toLowerCase();
+
+
+  if(!search){
+
+    products =
+      allProducts.filter(
+        function(product){
+
+          return product.active;
+
+        }
+      );
+
+    renderProducts();
+
+    return;
+
+  }
+
+
+  products =
+    allProducts.filter(
+      function(product){
+
+        const text =
+          [
+            product.name,
+            product.category,
+            product.brand,
+            product.colour,
+            product.description
+          ]
+          .join(" ")
+          .toLowerCase();
+
+
+        return (
+          product.active &&
+          text.includes(search)
+        );
+
+      }
+    );
+
+
+  renderProducts();
+
+}
+
+
+/* =========================================================
+   CATEGORY FILTER
+========================================================= */
+
+function filterCategory(
+  category
+){
+
+  if(
+    !category ||
+    category === "all"
+  ){
+
+    products =
+      allProducts.filter(
+        function(product){
+
+          return product.active;
+
+        }
+      );
+
+  }else{
+
+    products =
+      allProducts.filter(
+        function(product){
+
+          return (
+            product.active &&
+            String(
+              product.category
+            ).toLowerCase() ===
+            String(
+              category
+            ).toLowerCase()
+          );
+
+        }
+      );
+
+  }
+
+
+  renderProducts();
+
+}
+
+
+/* =========================================================
+   SCROLL TO PRODUCTS
+========================================================= */
+
+function scrollToProducts(){
+
+  const section =
+    document.getElementById(
+      "products"
+    );
+
+  if(section){
+
+    section.scrollIntoView({
+
+      behavior:
+        "smooth",
+
+      block:
+        "start"
+
+    });
+
+  }
+
+}
+
+
+/* =========================================================
+   MODAL OUTSIDE CLICK
+========================================================= */
+
+window.addEventListener(
+  "click",
+  function(event){
+
+    const modalIds = [
+
+      "cart",
+
+      "accountModal",
+
+      "checkoutModal",
+
+      "paymentModal",
+
+      "productDetailsModal",
+
+      "adminLoginModal",
+
+      "adminModal",
+
+      "addProductModal"
+
+    ];
+
+
+    modalIds.forEach(
+      function(id){
+
+        const modal =
+          document.getElementById(
+            id
+          );
+
+
+        if(
+          modal &&
+          event.target === modal
+        ){
+
+          modal.style.display =
+            "none";
+
+        }
+
+      }
+    );
 
   }
 );
 
 
 /* =========================================================
-   INITIALIZE
+   KEYBOARD SHORTCUTS
 ========================================================= */
 
-updateCart();
+document.addEventListener(
+  "keydown",
+  function(event){
 
-loadProducts();
+    if(
+      event.key ===
+      "Escape"
+    ){
 
-initializeAuth();
+      closeCart();
+
+      closeAccount();
+
+      closeCheckout();
+
+      closePayment();
+
+      closeProductDetails();
+
+      closeAdminLogin();
+
+      closeAdmin();
+
+      closeAddProduct();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   SEARCH EVENT
+========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    const searchInput =
+      document.getElementById(
+        "searchInput"
+      );
+
+
+    if(searchInput){
+
+      searchInput.addEventListener(
+        "input",
+        searchProducts
+      );
+
+    }
+
+
+    const searchButton =
+      document.getElementById(
+        "searchButton"
+      );
+
+
+    if(searchButton){
+
+      searchButton.addEventListener(
+        "click",
+        searchProducts
+      );
+
+    }
+
+
+    const categorySelect =
+      document.getElementById(
+        "categoryFilter"
+      );
+
+
+    if(categorySelect){
+
+      categorySelect.addEventListener(
+        "change",
+        function(){
+
+          filterCategory(
+            this.value
+          );
+
+        }
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   SUPABASE AUTH LISTENER
+========================================================= */
+
+supabaseClient.auth.onAuthStateChange(
+  function(
+    event,
+    session
+  ){
+
+    currentUser =
+      session?.user ||
+      null;
+
+    updateAccountUI();
+
+  }
+);
+
+
+/* =========================================================
+   INITIAL APP LOAD
+========================================================= */
+
+async function initializeApp(){
+
+  console.log(
+    "Lux Vault initializing..."
+  );
+
+
+  loadSavedAppearance();
+
+
+  await refreshAuthState();
+
+
+  await loadProducts();
+
+
+  updateCartUI();
+
+
+  console.log(
+    "Lux Vault ready."
+  );
+
+}
+
+
+/* =========================================================
+   START APP
+========================================================= */
+
+if(
+  document.readyState ===
+  "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    initializeApp
+  );
+
+}else{
+
+  initializeApp();
+
+}
+
+
+/* =========================================================
+   FINAL SAFETY
+========================================================= */
+
+window.addToCart =
+  addToCart;
+
+window.buyNow =
+  buyNow;
+
+window.removeFromCart =
+  removeFromCart;
+
+window.changeQuantity =
+  changeQuantity;
+
+window.openCart =
+  openCart;
+
+window.closeCart =
+  closeCart;
+
+window.openAccount =
+  openAccount;
+
+window.closeAccount =
+  closeAccount;
+
+window.loginUser =
+  loginUser;
+
+window.signupUser =
+  signupUser;
+
+window.logoutUser =
+  logoutUser;
+
+window.startCheckout =
+  startCheckout;
+
+window.closeCheckout =
+  closeCheckout;
+
+window.continueToPayment =
+  continueToPayment;
+
+window.openPayment =
+  openPayment;
+
+window.closePayment =
+  closePayment;
+
+window.sendWhatsAppOrder =
+  sendWhatsAppOrder;
+
+window.finishOrder =
+  finishOrder;
+
+window.openAdmin =
+  openAdmin;
+
+window.closeAdminLogin =
+  closeAdminLogin;
+
+window.adminLogin =
+  adminLogin;
+
+window.openAdminDashboard =
+  openAdminDashboard;
+
+window.closeAdmin =
+  closeAdmin;
+
+window.openAddProduct =
+  openAddProduct;
+
+window.closeAddProduct =
+  closeAddProduct;
+
+window.saveNewProduct =
+  saveNewProduct;
+
+window.openProductDetails =
+  openProductDetails;
+
+window.closeProductDetails =
+  closeProductDetails;
+
+window.scrollToProducts =
+  scrollToProducts;
+
+window.searchProducts =
+  searchProducts;
+
+
+/* =========================================================
+   END OF PART 7
+========================================================= */
 
 </script>
 
 </body>
+
 </html>
