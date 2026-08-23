@@ -5860,25 +5860,39 @@ const siteAssetBucket = "product-images";
 
     if(type === "hero"){
 
-      const hero =
-        document.querySelector(
-          ".hero"
-        );
+  const hero =
+    document.getElementById(
+      "heroImage"
+    );
 
-      if(hero){
+  const fallback =
+    document.getElementById(
+      "heroFallbackArt"
+    );
 
-        hero.style.backgroundImage =
-          `url("${url}")`;
+  if(hero){
 
-      }
+    hero.src =
+      url;
 
-      localStorage.setItem(
-        "luxVaultHero",
-        url
-      );
+    hero.style.display =
+      "block";
+
+  }
+
+  if(fallback){
+
+    fallback.style.display =
+      "none";
+
+  }
+
+  localStorage.setItem(
+    "luxVaultHero",
+    url
+  );
 
     }
-
 
     if(message){
 
