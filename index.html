@@ -5822,6 +5822,20 @@ const siteAssetBucket = "product-images";
 
     if(type === "logo"){
 
+  localStorage.setItem(
+    "luxVaultLogo",
+    url
+  );
+
+  await supabaseClient
+    .from("store_settings")
+    .update({
+      logo_url: url
+    })
+    .eq("id", true);
+
+    }
+
   const logo =
     document.getElementById(
       "siteLogo"
