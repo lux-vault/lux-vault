@@ -5810,7 +5810,7 @@ async function uploadSiteAsset(
     const publicUrl =
       supabaseClient
         .storage
-        .from("products")
+        .from(siteAssetBucket)
         .getPublicUrl(
           filename
         );
