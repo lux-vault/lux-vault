@@ -5823,22 +5823,37 @@ const siteAssetBucket = "product-images";
 
     if(type === "logo"){
 
-      const logo =
-        document.querySelector(
-          ".logo img"
-        );
+  const logo =
+    document.getElementById(
+      "siteLogo"
+    );
 
-      if(logo){
+  const fallback =
+    document.getElementById(
+      "siteLogoFallback"
+    );
 
-        logo.src =
-          url;
+  if(logo){
 
-      }
+    logo.src =
+      url;
 
-      localStorage.setItem(
-        "luxVaultLogo",
-        url
-      );
+    logo.style.display =
+      "block";
+
+  }
+
+  if(fallback){
+
+    fallback.style.display =
+      "none";
+
+  }
+
+  localStorage.setItem(
+    "luxVaultLogo",
+    url
+  );
 
     }
 
