@@ -6880,23 +6880,18 @@ function escapeHtml(value){
    SITE SETTINGS / SAVED APPEARANCE
 ========================================================= */
 
-async function loadSavedAppearance(){
+function loadSavedAppearance(){
   
-  const { data: settings } =
-  await supabaseClient
-    .from("store_settings")
-    .select("logo_url, hero_url")
-    .eq("id", true)
-    .single();
-  const savedLogo =
-  settings?.logo_url || null;
+  
+const savedLogo =
+  localStorage.getItem(
+    "luxVaultLogo"
+  );
 
 const savedHero =
-  settings?.hero_url || null;
-if (!settings) {
-  console.log("Store settings not found");
-  return;
-}
+  localStorage.getItem(
+    "luxVaultHero"
+  );
 
   if(savedLogo){
 
