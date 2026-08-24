@@ -5923,12 +5923,22 @@ if(settingsResult.error){
     "luxVaultHero",
     url
   );
-await supabaseClient
-  .from("store_settings")
-  .update({
-    hero_url: url
-  })
-  .eq("id", true);
+const settingsResult =
+  await supabaseClient
+    .from("store_settings")
+    .update({
+      hero_url: url
+    })
+    .eq("id", true);
+
+if(settingsResult.error){
+  console.error(
+    "Hero settings update error:",
+    settingsResult.error
+  );
+
+  throw settingsResult.error;
+}
     }
 
     if(message){
