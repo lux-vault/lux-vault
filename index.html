@@ -6879,18 +6879,69 @@ function escapeHtml(value){
    SITE SETTINGS / SAVED APPEARANCE
 ========================================================= */
 
-function loadSavedAppearance(){
-  
-  
-const savedLogo =
-  localStorage.getItem(
-    "luxVaultLogo"
-  );
+async function loadSavedAppearance(){
 
-const savedHero =
-  localStorage.getItem(
-    "luxVaultHero"
-  );
+  let savedLogo =
+    localStorage.getItem(
+      "luxVaultLogo"
+    );
+
+  let savedHero =
+    localStorage.getItem(
+      "luxVaultHero"
+    );
+
+  try{
+
+    const result =
+      await supabaseClient
+        .from("store_settings")
+        .select(
+          "logo_url, hero_url"
+        )
+        .eq("id", true)
+        .maybeSingle();
+
+    if(
+      !result.error &&
+      result.data
+    ){
+
+      if(result.data.logo_url){
+
+        savedLogo =
+          result.data.logo_url;
+
+        localStorage.setItem(
+          "luxVaultLogo",
+          savedLogo
+        );
+
+      }
+
+      if(result.data.hero_url){
+
+        savedHero =
+          result.data.hero_url;
+
+        localStorage.setItem(
+          "luxVaultHero",
+          savedHero
+        );
+
+      }
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Appearance load error:",
+      error
+    );
+
+  }
+
 
   if(savedLogo){
 
