@@ -5873,12 +5873,22 @@ if(settingsResult.error){
     url
   );
     
-await supabaseClient
-  .from("store_settings")
-  .update({
-    logo_url: url
-  })
-  .eq("id", true);
+const settingsResult =
+  await supabaseClient
+    .from("store_settings")
+    .update({
+      logo_url: url
+    })
+    .eq("id", true);
+
+if(settingsResult.error){
+  console.error(
+    "Logo settings update error:",
+    settingsResult.error
+  );
+
+  throw settingsResult.error;
+}
 
     if(type === "hero"){
 
