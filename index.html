@@ -3829,26 +3829,23 @@ async function openPayment(){
 
     }
 
-  }catch(error){
-
-    console.error(
-      "Could not create order:",
-      error
-    );
-
-    currentOrderId =
-      generateOrderId();
-
-    if(paymentOrderId){
-
-      paymentOrderId.textContent =
-        "Order ID: "+
-        currentOrderId;
-
-    }
-
   }
+catch(error){
 
+  console.error(
+    "Could not create order:",
+    error
+  );
+
+  alert(
+    "Could not create the order. Please try again."
+  );
+
+  closePayment();
+
+  return;
+
+}
 }
 
 
