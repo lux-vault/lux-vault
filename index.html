@@ -6862,7 +6862,51 @@ async function updateProduct(){
 
 }
 
+async function deleteProduct(productId){
 
+  if(!isAdmin()){
+    alert("Admin access required.");
+    return;
+  }
+
+  const confirmed =
+    confirm("Delete this product permanently?");
+
+  if(!confirmed){
+    return;
+  }
+
+  try{
+
+    const result =
+      await supabaseClient
+        .from("products")
+        .delete()
+        .eq("id", productId);
+
+    if(result.error){
+      throw result.error;
+    }
+
+    await loadProducts();
+    renderManageProducts();
+
+  }catch(error){
+
+    console.error(
+      "Delete product error:",
+      error
+    );
+
+    alert(
+      error.message ||
+      "Could not delete product."
+    );
+
+  }
+
+}
+  
 function escapeHtml(value){
 
   return String(
