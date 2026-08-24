@@ -5827,12 +5827,17 @@ const siteAssetBucket = "product-images";
     url
   );
 
+  const settingsResult =
   await supabaseClient
     .from("store_settings")
     .update({
       logo_url: url
     })
     .eq("id", true);
+
+if(settingsResult.error){
+  throw settingsResult.error;
+}
 
     }
 
