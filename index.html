@@ -3913,14 +3913,6 @@ function generateOrderId(){
 
 async function createPendingOrder(){
 
-  if(!currentUser){
-
-    throw new Error(
-      "Please login before placing an order."
-    );
-
-  }
-
 
   const orderId =
     generateOrderId();
