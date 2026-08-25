@@ -3961,7 +3961,7 @@ async function createPendingOrder(){
 
     order_id:orderId,
 
-    user_id:currentUser.id,
+    user_id: currentUser ? currentUser.id : null,
 
     customer_name:
       customer.name,
