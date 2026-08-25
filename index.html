@@ -4746,7 +4746,7 @@ async function loadAdminOrders(){
 
         const orderStatus =
           String(
-            order.order_status ||
+            order.status ||
             "pending"
           ).toLowerCase();
 
