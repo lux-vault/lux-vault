@@ -3838,8 +3838,9 @@ catch(error){
   );
 
   alert(
-    "Could not create the order. Please try again."
-  );
+  "ORDER ERROR: " +
+  (error.message || error)
+);
 
   closePayment();
 
