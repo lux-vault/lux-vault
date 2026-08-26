@@ -2145,7 +2145,27 @@ async function loadProducts(){
 
 }
 
+function copyProductLink(productId){
+  if(!isAdmin()){
+    alert("Admin access required.");
+    return;
+  }
 
+  const url =
+    window.location.origin +
+    window.location.pathname +
+    "?product=" +
+    encodeURIComponent(productId);
+
+  navigator.clipboard.writeText(url)
+    .then(function(){
+      alert("Product link copied!");
+    })
+    .catch(function(){
+      prompt("Copy this product link:", url);
+    });
+}
+  
 function renderProducts(){
 
   const grid =
