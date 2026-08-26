@@ -2508,7 +2508,29 @@ function renderProducts(){
       info.appendChild(
         buyButton
       );
+      
+if(isAdmin()){
+  const shareButton =
+    document.createElement("button");
 
+  shareButton.className =
+    "details-btn";
+
+  shareButton.type =
+    "button";
+
+  shareButton.textContent =
+    "🔗 Copy Product Link";
+
+  shareButton.onclick =
+    function(){
+      copyProductLink(product.id);
+    };
+
+  info.appendChild(
+    shareButton
+  );
+}
       article.appendChild(
         image
       );
