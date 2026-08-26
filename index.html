@@ -2613,8 +2613,33 @@ function renderProducts(){
       description.className =
         "description";
 
-      description.textContent =
-        product.description;
+      const fullDescription =
+  product.description || "";
+
+const previewLength = 120;
+
+let preview =
+  fullDescription;
+
+if(fullDescription.length > previewLength){
+  preview =
+    fullDescription
+      .slice(0, previewLength)
+      .trim();
+
+  const lastSpace =
+    preview.lastIndexOf(" ");
+
+  if(lastSpace > 0){
+    preview =
+      preview.slice(0, lastSpace);
+  }
+
+  preview += "…";
+}
+
+description.textContent =
+  preview;
 
 
       const detailsButton =
