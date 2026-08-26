@@ -2996,20 +2996,17 @@ function getCartProductTotal(){
 
 
 function getShippingCost(){
-
   if(!cart.length){
-
     return 0;
-
   }
 
-  /*
-    Lux Vault default shipping charge.
-    Change this value later if required.
-  */
+  const productTotal = getCartProductTotal();
+
+  if(productTotal >= 499){
+    return 0;
+  }
 
   return 50;
-
 }
 
 
