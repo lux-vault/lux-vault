@@ -575,6 +575,213 @@ footer{
   .site-logo{max-width:120px;max-height:38px}
   .product-details-modal,.product-editor-modal{max-height:94vh}
 }
+  /* =========================================
+   LUX VAULT — LUXURY DESIGN UPGRADE
+   Visual only — functionality untouched
+   ========================================= */
+
+body{
+  font-family:
+    "Inter",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  background:#fff7fa;
+  color:#2b2227;
+}
+
+/* HEADER */
+header{
+  background:rgba(255,255,255,.96);
+  border-bottom:1px solid rgba(184,79,115,.14);
+  box-shadow:0 4px 24px rgba(55,30,40,.06);
+  backdrop-filter:blur(12px);
+}
+
+.header-btn{
+  border:1px solid rgba(184,79,115,.12);
+  box-shadow:0 4px 12px rgba(55,30,40,.06);
+  transition:all .2s ease;
+}
+
+.header-btn:hover{
+  transform:translateY(-1px);
+  box-shadow:0 7px 18px rgba(55,30,40,.10);
+}
+
+/* HERO — DO NOT CHANGE IMAGE / CONTENT */
+.hero{
+  background:#fff7fa;
+}
+
+.hero-image-wrap{
+  background:#fff7fa;
+}
+
+.hero-image{
+  background:#fff7fa;
+}
+
+/* IMPORTANT:
+   Empty areas created by contain will use
+   the same website background, not white.
+*/
+.hero-fallback-art{
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(255,255,255,.75),
+      transparent 55%
+    ),
+    #fff7fa;
+}
+
+/* SECTION HEADINGS */
+.section-title{
+  font-weight:900;
+  letter-spacing:-.4px;
+  color:#30262b;
+  position:relative;
+  padding-bottom:12px;
+}
+
+.section-title::after{
+  content:"";
+  display:block;
+  width:42px;
+  height:2px;
+  margin:10px auto 0;
+  background:#b84f73;
+  border-radius:2px;
+}
+
+/* PRODUCT GRID */
+.product-grid{
+  gap:20px;
+}
+
+/* PRODUCT CARDS */
+.product{
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(184,79,115,.12);
+  border-radius:18px;
+  box-shadow:
+    0 10px 30px rgba(55,30,40,.07),
+    0 2px 6px rgba(55,30,40,.04);
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    border-color .25s ease;
+}
+
+.product:hover{
+  transform:translateY(-4px);
+  border-color:rgba(184,79,115,.25);
+  box-shadow:
+    0 18px 42px rgba(55,30,40,.12),
+    0 4px 10px rgba(55,30,40,.05);
+}
+
+.product img{
+  background:#fff7fa;
+}
+
+.product-info{
+  padding:16px;
+}
+
+.product h3{
+  font-weight:800;
+  letter-spacing:-.2px;
+}
+
+/* PRICE */
+.price{
+  font-weight:900;
+  letter-spacing:.2px;
+}
+
+/* BUTTONS */
+.add-btn,
+.buy-btn,
+.shop-btn{
+  border-radius:12px;
+  font-weight:800;
+  letter-spacing:.3px;
+  box-shadow:0 8px 18px rgba(184,79,115,.16);
+  transition:all .2s ease;
+}
+
+.add-btn:hover,
+.buy-btn:hover,
+.shop-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 24px rgba(184,79,115,.22);
+}
+
+/* INPUTS */
+input,
+textarea,
+select{
+  border:1px solid #ead9e0 !important;
+  border-radius:11px !important;
+  background:#fffdfd !important;
+  transition:
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:#c77993 !important;
+  box-shadow:0 0 0 3px rgba(184,79,115,.10) !important;
+}
+
+/* MODALS */
+.modal-box{
+  border:1px solid rgba(184,79,115,.12);
+  box-shadow:
+    0 30px 80px rgba(45,25,35,.18);
+}
+
+/* ADMIN CARDS */
+.admin-stat,
+.manage-product{
+  border:1px solid rgba(184,79,115,.10);
+  box-shadow:0 7px 22px rgba(55,30,40,.05);
+}
+
+/* CART */
+.cart-item{
+  border-bottom:1px solid rgba(184,79,115,.10);
+}
+
+/* SMALL DETAILS */
+.status{
+  color:#766a70;
+}
+
+/* MOBILE */
+@media(max-width:699px){
+
+  .product-grid{
+    gap:14px;
+  }
+
+  .product{
+    border-radius:15px;
+  }
+
+  .section{
+    padding-top:38px;
+    padding-bottom:38px;
+  }
+
+  .section-title{
+    font-size:27px;
+  }
+}
 </style>
 </head>
 
