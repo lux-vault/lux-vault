@@ -5653,7 +5653,7 @@ async function uploadProductImage(
   const result =
     await supabaseClient
       .storage
-      .from("products")
+      .from("product-images")
       .upload(
         filename,
         file,
@@ -5676,8 +5676,8 @@ async function uploadProductImage(
   const publicUrl =
     supabaseClient
       .storage
-      .from("products")
-      .getPublicUrl(
+  .from("product-images")
+  .getPublicUrl(
         filename
       );
 
