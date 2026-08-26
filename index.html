@@ -7551,7 +7551,35 @@ window.searchProducts =
 ========================================================= */
 
 </script>
+<script>
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const productId = params.get("product");
 
+  if (!productId) return;
+
+  const checkProduct = setInterval(function(){
+    if (typeof products !== "undefined" &&
+        Array.isArray(products) &&
+        products.length > 0) {
+
+      const product = products.find(function(item){
+        return String(item.id) === String(productId);
+      });
+
+      clearInterval(checkProduct);
+
+      if (product && typeof openProductDetails === "function") {
+        openProductDetails(product.id);
+      }
+    }
+  }, 300);
+
+  setTimeout(function(){
+    clearInterval(checkProduct);
+  }, 10000);
+})();
+</script>
 </body>
 
 </html>
