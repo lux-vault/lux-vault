@@ -2577,19 +2577,29 @@ description.textContent =
         priceRow
       );
 
+     const actionRow =
+  document.createElement("div");
+
+actionRow.className =
+  "product-card-actions";
+
+actionRow.appendChild(
+  addButton
+);
+
+actionRow.appendChild(
+  detailsButton
+);
+
+info.appendChild(
+  actionRow
+);
+
+info.appendChild(
+  buyButton
+); 
+
       
-
-      info.appendChild(
-        detailsButton
-      );
-
-      info.appendChild(
-        addButton
-      );
-
-      info.appendChild(
-        buyButton
-      );
       
 if(isAdmin()){
   const shareButton =
