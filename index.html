@@ -5816,8 +5816,11 @@ async function uploadSiteAsset(
       "Uploading "+type+"...";
 
   }
-const defaultLogoImage = "";
-const siteAssetBucket = "product-images";
+
+
+  const siteAssetBucket =
+    "product-images";
+
 
   try{
 
@@ -5838,17 +5841,17 @@ const siteAssetBucket = "product-images";
 
 
     const result =
-  await supabaseClient
-    .storage
-    .from(siteAssetBucket)
-    .upload(
-      filename,
-      file,
-      {
-        cacheControl: "3600",
-        upsert: false
-      }
-    );
+      await supabaseClient
+        .storage
+        .from(siteAssetBucket)
+        .upload(
+          filename,
+          file,
+          {
+            cacheControl:"3600",
+            upsert:false
+          }
+        );
 
 
     if(result.error){
@@ -5871,131 +5874,176 @@ const siteAssetBucket = "product-images";
       publicUrl.data.publicUrl;
 
 
+    /* =========================
+       LOGO
+    ========================= */
+
     if(type === "logo"){
 
-  localStorage.setItem(
-    "luxVaultLogo",
-    url
-  );
+      const logo =
+        document.getElementById(
+          "siteLogo"
+        );
 
-  const settingsResult =
-  await supabaseClient
-    .from("store_settings")
-    .update({
-      logo_url: url
-    })
-    .eq("id", true);
+      const fallback =
+        document.getElementById(
+          "siteLogoFallback"
+        );
 
-if(settingsResult.error){
-  throw settingsResult.error;
-}
+
+      if(logo){
+
+        logo.src =
+          url;
+
+        logo.style.display =
+          "block";
+
+      }
+
+
+      if(fallback){
+
+        fallback.style.display =
+          "none";
+
+      }
+
+
+      localStorage.setItem(
+        "luxVaultLogo",
+        url
+      );
+
+
+      const settingsResult =
+        await supabaseClient
+          .from("store_settings")
+          .update({
+            logo_url:url
+          })
+          .eq("id",true);
+
+
+      if(settingsResult.error){
+
+        throw settingsResult.error;
+
+      }
 
     }
 
-  const logo =
-    document.getElementById(
-      "siteLogo"
-    );
 
-  const fallback =
-    document.getElementById(
-      "siteLogoFallback"
-    );
-
-  if(logo){
-
-    logo.src =
-      url;
-
-    logo.style.display =
-      "block";
-
-  }
-
-  if(fallback){
-
-    fallback.style.display =
-      "none";
-
-  }
-
-  localStorage.setItem(
-    "luxVaultLogo",
-    url
-  );
-    
-const settingsResult =
-  await supabaseClient
-    .from("store_settings")
-    .update({
-      logo_url: url
-    })
-    .eq("id", true);
-
-if(settingsResult.error){
-  console.error(
-    "Logo settings update error:",
-    settingsResult.error
-  );
-
-  throw settingsResult.error;
-}
+    /* =========================
+       HERO
+    ========================= */
 
     if(type === "hero"){
 
-  const hero =
-    document.getElementById(
-      "heroImage"
-    );
+      const hero =
+        document.getElementById(
+          "heroImage"
+        );
 
-  const fallback =
-    document.getElementById(
-      "heroFallbackArt"
-    );
+      const fallback =
+        document.getElementById(
+          "heroFallbackArt"
+        );
 
-  if(hero){
 
-    hero.src =
-      url;
+      if(hero){
 
-    hero.style.display =
-      "block";
+        hero.src =
+          url;
 
-  }
+        hero.style.display =
+          "block";
 
-  if(fallback){
+      }
 
-    fallback.style.display =
-      "none";
 
-  }
+      if(fallback){
 
-  localStorage.setItem(
-    "luxVaultHero",
-    url
-  );
-const settingsResult =
-  await supabaseClient
-    .from("store_settings")
-    .update({
-      hero_url: url
-    })
-    .eq("id", true);
+        fallback.style.display =
+          "none";
 
-if(settingsResult.error){
-  console.error(
-    "Hero settings update error:",
-    settingsResult.error
-  );
+      }
 
-  throw settingsResult.error;
-}
+
+      localStorage.setItem(
+        "luxVaultHero",
+        url
+      );
+
+
+      const settingsResult =
+        await supabaseClient
+          .from("store_settings")
+          .update({
+            hero_url:url
+          })
+          .eq("id",true);
+
+
+      if(settingsResult.error){
+
+        throw settingsResult.error;
+
+      }
+
     }
+
+
+    /* =========================
+       BACKGROUND
+    ========================= */
+
+    if(type === "background"){
+
+      document.body.style.backgroundImage =
+        'url("' + url + '")';
+
+      document.body.style.backgroundSize =
+        "cover";
+
+      document.body.style.backgroundPosition =
+        "center";
+
+      document.body.style.backgroundAttachment =
+        "fixed";
+
+      document.body.style.backgroundRepeat =
+        "no-repeat";
+
+
+      localStorage.setItem(
+        "luxVaultBackground",
+        url
+      );
+
+
+      const settingsResult =
+        await supabaseClient
+          .from("store_settings")
+          .update({
+            background_url:url
+          })
+          .eq("id",true);
+
+
+      if(settingsResult.error){
+
+        throw settingsResult.error;
+
+      }
+
+    }
+
 
     if(message){
 
       message.textContent =
-        "Upload successful.";
+        "Upload successful! 🎉";
 
     }
 
