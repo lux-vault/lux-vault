@@ -7069,8 +7069,8 @@ async function loadSavedAppearance(){
       await supabaseClient
         .from("store_settings")
         .select(
-          "logo_url, hero_url"
-        )
+  "logo_url, hero_url, background_url"
+)
         .eq("id", true)
         .maybeSingle();
 
