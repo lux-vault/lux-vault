@@ -130,7 +130,49 @@ header{
   display:block;
   background:#fff
 }
-.product-info{padding:13px}
+.product-info{
+  padding:10px;
+}
+
+.product h3{
+  font-size:14px;
+  line-height:1.25;
+  margin-bottom:6px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.product .price-row{
+  margin-bottom:8px;
+}
+
+.product img{
+  height:145px;
+  object-fit:cover;
+}
+
+.product-card-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6px;
+  margin-top:8px;
+}
+
+.product-card-actions button{
+  width:100%;
+  margin:0;
+  padding:9px 5px;
+  font-size:11px;
+}
+
+.product-buy-button,
+.product-copy-button{
+  width:100%;
+  margin-top:6px;
+  padding:9px 5px;
+  font-size:11px;
+}
 .product h3{
   font-size:16px;
   line-height:1.3;
