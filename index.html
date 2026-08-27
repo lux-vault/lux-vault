@@ -916,24 +916,36 @@ footer{
           Change the store logo and hero image.
         </p>
 
-        <div class="appearance-grid">
+<div class="appearance-grid">
 
-          <label class="upload-control">
-            Upload Logo
-            <input
-              type="file"
-              accept="image/*"
-              onchange="uploadSiteAsset('logo',this.files[0])"
-            >
-          </label>
+  <label class="upload-control">
+    Upload Logo
+    <input
+      type="file"
+      accept="image/*"
+      onchange="uploadSiteAsset('logo',this.files[0])"
+    >
+  </label>
 
-          <label class="upload-control">
-            Upload Hero Image
-            <input
-              type="file"
-              accept="image/*"
-              onchange="uploadSiteAsset('hero',this.files[0])"
-            >
+  <label class="upload-control">
+    Upload Hero Image
+    <input
+      type="file"
+      accept="image/*"
+      onchange="uploadSiteAsset('hero',this.files[0])"
+    >
+  </label>
+
+  <label class="upload-control">
+    🎨 Change Background
+    <input
+      type="file"
+      accept="image/*"
+      onchange="uploadSiteAsset('background',this.files[0])"
+    >
+  </label>
+
+</div>
           </label>
 
         </div>
