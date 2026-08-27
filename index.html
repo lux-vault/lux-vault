@@ -1657,13 +1657,13 @@ footer{
 
   <div class="help-query-wrap">
 
-    <button
-      class="help-query-btn"
-      onclick="toggleHelpQuery()"
-      type="button"
-    >
-      💬 Help & Query
-    </button>
+<button
+  class="help-query-btn"
+  type="button"
+  onclick="document.getElementById('helpQueryMenu').classList.toggle('show')"
+>
+  💬 Help & Query
+</button>
 
     <div class="help-query-menu" id="helpQueryMenu">
 
@@ -1695,10 +1695,7 @@ footer{
 
 <script>
   
-function toggleHelpQuery(){
-  const menu = document.getElementById("helpQueryMenu");
-  menu.classList.toggle("show");
-}
+
 /* =========================================================
    SUPABASE
 ========================================================= */
