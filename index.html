@@ -7102,7 +7102,19 @@ async function loadSavedAppearance(){
         );
 
       }
+      
+      if(result.data.background_url){
 
+        savedBackground =
+          result.data.background_url;
+
+        localStorage.setItem(
+          "luxVaultBackground",
+          savedBackground
+        );
+
+      }
+      
     }
 
   }catch(error){
