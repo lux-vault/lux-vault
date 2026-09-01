@@ -4288,43 +4288,43 @@ async function selectPaymentMethod(method){
 
   }
 
+  /* CREATE ORDER WITH SELECTED PAYMENT METHOD */
 
-  /* SAVE PAYMENT METHOD TO SUPABASE */
-
-  if(currentOrderId){
+  if(!currentOrderId){
 
     try{
 
-      const result =
-        await supabaseClient
-          .from("orders")
-          .update({
-            payment_method: method
-          })
-          .eq(
-            "order_id",
-            currentOrderId
-          );
+      currentOrderId =
+        await createPendingOrder();
 
-      if(result.error){
-        throw result.error;
+      const paymentOrderId =
+        document.getElementById(
+          "paymentOrderId"
+        );
+
+      if(paymentOrderId){
+
+        paymentOrderId.textContent =
+          "Order ID: " +
+          currentOrderId;
+
       }
-
-      console.log(
-        "Payment method saved:",
-        method
-      );
 
     }catch(error){
 
       console.error(
-        "Payment method update error:",
+        "Could not create order:",
         error
       );
 
       alert(
-        "Could not save the payment method. Please try again."
+        "ORDER ERROR: " +
+        (error.message || error)
       );
+
+      closePayment();
+
+      return;
 
     }
 
