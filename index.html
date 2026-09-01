@@ -4783,7 +4783,94 @@ async function finishOrder(){
   }
 
 }
+async function confirmCODOrder(){
 
+  if(orderSaved){
+    closePayment();
+    return;
+  }
+
+  const button =
+    document.getElementById("confirmCODButton");
+
+  if(button){
+    button.disabled = true;
+    button.textContent =
+      "Confirming COD Order...";
+  }
+
+  try{
+
+    if(currentOrderId){
+
+      const result =
+        await supabaseClient
+          .from("orders")
+          .update({
+
+            payment_method:
+              "COD",
+
+            payment_status:
+              "pending",
+
+            status:
+              "confirmed"
+
+          })
+          .eq(
+            "order_id",
+            currentOrderId
+          );
+
+      if(result.error){
+        throw result.error;
+      }
+
+    }
+
+    orderSaved = true;
+
+    alert(
+      "COD order placed successfully! 🎉"
+    );
+
+    closePayment();
+
+    cart = [];
+
+    saveCart();
+
+    updateCartUI();
+
+    if(button){
+      button.disabled = false;
+      button.textContent =
+        "💵 Confirm COD Order";
+    }
+
+    await loadProducts();
+
+  }catch(error){
+
+    console.error(
+      "COD order error:",
+      error
+    );
+
+    if(button){
+      button.disabled = false;
+      button.textContent =
+        "💵 Confirm COD Order";
+    }
+
+    alert(
+      "Could not confirm the COD order. Please try again."
+    );
+
+  }
+
+}
 
 /* =========================================================
    ADMIN LOGIN
