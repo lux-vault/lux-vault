@@ -4191,18 +4191,6 @@ async function openPayment(){
 
 
   orderSaved = false;
-paymentMethod = "UPI";
-
-const upiRadio =
-  document.querySelector(
-    'input[name="paymentMethod"][value="UPI"]'
-  );
-
-if(upiRadio){
-  upiRadio.checked = true;
-}
-
-selectPaymentMethod("UPI");
 
   const paymentTotal =
     document.getElementById(
