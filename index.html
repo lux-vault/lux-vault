@@ -4798,17 +4798,25 @@ async function finishOrder(){
 async function confirmCODOrder(){
 
   if(orderSaved){
+
     closePayment();
+
     return;
+
   }
 
   const button =
-    document.getElementById("confirmCODButton");
+    document.getElementById(
+      "confirmCODButton"
+    );
 
   if(button){
+
     button.disabled = true;
+
     button.textContent =
       "Confirming COD Order...";
+
   }
 
   try{
@@ -4836,41 +4844,10 @@ async function confirmCODOrder(){
           );
 
       if(result.error){
+
         throw result.error;
+
       }
-
-    }
-
-    orderSaved = true;
-
-    alert(
-      "COD order placed successfully! 🎉"
-    );
-
-    closePayment();
-
-    cart = [];
-
-    saveCart();
-
-    updateCartUI();
-
-    if(button){
-      button.disabled = false;
-      button.textContent =
-        "💵 Confirm COD Order";
-    }
-
-    try{
-
-  await loadProducts();
-
-}catch(error){
-
-  console.error(
-    "Post-COD product refresh error:",
-    error
-  );
 
     }
 
@@ -4882,19 +4859,65 @@ async function confirmCODOrder(){
     );
 
     if(button){
+
       button.disabled = false;
+
       button.textContent =
         "💵 Confirm COD Order";
+
     }
 
     alert(
       "Could not confirm the COD order. Please try again."
     );
 
+    return;
+
+  }
+
+
+  orderSaved = true;
+
+
+  if(button){
+
+    button.disabled = false;
+
+    button.textContent =
+      "💵 Confirm COD Order";
+
+  }
+
+
+  closePayment();
+
+
+  cart = [];
+
+  saveCart();
+
+  updateCartUI();
+
+
+  alert(
+    "COD order placed successfully! 🎉"
+  );
+
+
+  try{
+
+    await loadProducts();
+
+  }catch(error){
+
+    console.error(
+      "Post-COD product refresh error:",
+      error
+    );
+
   }
 
 }
-
 /* =========================================================
    ADMIN LOGIN
 ========================================================= */
