@@ -4603,8 +4603,13 @@ function buildWhatsAppMessage(){
   lines.push("");
 
   lines.push(
-    "Payment: UPI"
-  );
+  "Payment: "+
+  (
+    paymentMethod === "COD"
+      ? "Cash on Delivery"
+      : "UPI"
+  )
+);
 
 
   return lines.join(
