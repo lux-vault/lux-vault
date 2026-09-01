@@ -4181,7 +4181,6 @@ async function openPayment(){
 
   }
 
-
   const paymentModal =
     document.getElementById(
       "paymentModal"
@@ -4189,8 +4188,11 @@ async function openPayment(){
 
   if(!paymentModal) return;
 
-
   orderSaved = false;
+
+  currentOrderId = null;
+
+  paymentMethod = "UPI";
 
   const paymentTotal =
     document.getElementById(
@@ -4206,144 +4208,20 @@ async function openPayment(){
 
   }
 
-
   const paymentOrderId =
     document.getElementById(
       "paymentOrderId"
     );
 
-
   if(paymentOrderId){
 
     paymentOrderId.textContent =
-      "Preparing order...";
+      "Select payment method...";
 
   }
 
-    paymentModal.style.display =
+  paymentModal.style.display =
     "flex";
-}
-async function selectPaymentMethod(method){
-
-  paymentMethod = method;
-
-  const upiSection =
-    document.getElementById("upiPaymentSection");
-
-  const codSection =
-    document.getElementById("codPaymentSection");
-
-  const upiNote =
-    document.getElementById("upiPaymentNote");
-
-  const codNote =
-    document.getElementById("codPaymentNote");
-
-  const finishButton =
-    document.getElementById("finishPaymentButton");
-
-  const codButton =
-    document.getElementById("confirmCODButton");
-
-
-  if(method === "COD"){
-
-    if(upiSection)
-      upiSection.style.display = "none";
-
-    if(codSection)
-      codSection.style.display = "block";
-
-    if(upiNote)
-      upiNote.style.display = "none";
-
-    if(codNote)
-      codNote.style.display = "block";
-
-    if(finishButton)
-      finishButton.style.display = "none";
-
-    if(codButton)
-      codButton.style.display = "block";
-
-  }else{
-
-    if(upiSection)
-      upiSection.style.display = "block";
-
-    if(codSection)
-      codSection.style.display = "none";
-
-    if(upiNote)
-      upiNote.style.display = "block";
-
-    if(codNote)
-      codNote.style.display = "none";
-
-    if(finishButton)
-      finishButton.style.display = "block";
-
-    if(codButton)
-      codButton.style.display = "none";
-
-  }
-
-  /* CREATE ORDER WITH SELECTED PAYMENT METHOD */
-
-  if(!currentOrderId){
-
-    try{
-
-      currentOrderId =
-  await createPendingOrder(method);
-
-      const paymentOrderId =
-        document.getElementById(
-          "paymentOrderId"
-        );
-
-      if(paymentOrderId){
-
-        paymentOrderId.textContent =
-          "Order ID: " +
-          currentOrderId;
-
-      }
-
-    }catch(error){
-
-      console.error(
-        "Could not create order:",
-        error
-      );
-
-      alert(
-        "ORDER ERROR: " +
-        (error.message || error)
-      );
-
-      closePayment();
-
-      return;
-
-    }
-
-  }
-
-}
-function closePayment(){
-
-  const modal =
-    document.getElementById(
-      "paymentModal"
-    );
-
-  if(modal){
-
-    modal.style.display =
-      "none";
-
-  }
 
 }
 
