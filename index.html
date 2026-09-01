@@ -4795,6 +4795,16 @@ async function finishOrder(){
   }
 
 }
+  function closePayment(){
+
+  const paymentModal =
+    document.getElementById("paymentModal");
+
+  if(paymentModal){
+    paymentModal.style.display = "none";
+  }
+
+  }
   async function confirmCODOrder(){
 
   if(orderSaved){
