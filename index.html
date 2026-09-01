@@ -4673,7 +4673,21 @@ function sendWhatsAppOrder(){
 /* =========================================================
    FINISH ORDER
 ========================================================= */
+function closePayment(){
 
+  const modal =
+    document.getElementById(
+      "paymentModal"
+    );
+
+  if(modal){
+
+    modal.style.display =
+      "none";
+
+  }
+
+  }
 async function finishOrder(){
 
   if(orderSaved){
