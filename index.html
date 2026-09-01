@@ -1588,65 +1588,227 @@ footer{
 
     </div>
 
-    <div class="qr-wrap">
 
-      <p class="payment-note">
-        Scan the QR code using any supported UPI app and complete your payment.
-      </p>
+    <!-- PAYMENT METHOD -->
 
-      <img
-        src="https://raw.githubusercontent.com/lux-vault/lux-vault/main/IMG_20260820_010804.jpg"
-        alt="Lux Vault UPI Payment QR"
-        onerror="this.style.display='none';"
-      >
+    <div style="
+      margin:15px 0;
+      padding:16px;
+      border-radius:14px;
+      background:#fff4f7;
+      border:1px solid #f1cbd8;
+    ">
 
-      <div class="upi-id-box">
+      <h3 style="
+        margin:0 0 12px;
+        font-size:17px;
+      ">
+        Select Payment Method
+      </h3>
 
-        <span>UPI ID</span>
 
-        <strong>
-          9048305367@ptsbi
-        </strong>
+      <label style="
+        display:flex;
+        align-items:center;
+        gap:10px;
+        padding:12px;
+        margin-bottom:8px;
+        border:1px solid #ead0da;
+        border-radius:12px;
+        background:#fff;
+        cursor:pointer;
+      ">
 
-      </div>
-
-      <div
-        class="order-id"
-        id="paymentOrderId"
-      >
-        Order ready
-      </div>
-
-      <div class="cart-total">
-
-        <span>Total</span>
+        <input
+          type="radio"
+          name="paymentMethod"
+          value="UPI"
+          checked
+          onchange="selectPaymentMethod('UPI')"
+        >
 
         <span>
-          ₹<span id="paymentTotal">0</span>
+          💳 <strong>UPI Payment</strong>
         </span>
+
+      </label>
+
+
+      <label style="
+        display:flex;
+        align-items:center;
+        gap:10px;
+        padding:12px;
+        border:1px solid #ead0da;
+        border-radius:12px;
+        background:#fff;
+        cursor:pointer;
+      ">
+
+        <input
+          type="radio"
+          name="paymentMethod"
+          value="COD"
+          onchange="selectPaymentMethod('COD')"
+        >
+
+        <span>
+          💵 <strong>Cash on Delivery</strong>
+        </span>
+
+      </label>
+
+    </div>
+
+
+    <!-- UPI PAYMENT -->
+
+    <div id="upiPaymentSection">
+
+      <div class="qr-wrap">
+
+        <p class="payment-note">
+          Scan the QR code using any supported UPI app and complete your payment.
+        </p>
+
+        <img
+          src="https://raw.githubusercontent.com/lux-vault/lux-vault/main/IMG_20260820_010804.jpg"
+          alt="Lux Vault UPI Payment QR"
+          onerror="this.style.display='none';"
+        >
+
+        <div class="upi-id-box">
+
+          <span>UPI ID</span>
+
+          <strong>
+            9048305367@ptsbi
+          </strong>
+
+        </div>
 
       </div>
 
-      <p class="payment-note">
-        After payment, tap the WhatsApp button below to send your order details.
-      </p>
+    </div>
 
-      <button
-        class="main-btn green-btn"
-        onclick="sendWhatsAppOrder()"
-      >
-        📲 Send Order on WhatsApp
-      </button>
 
-      <button
-        class="main-btn"
-        id="finishPaymentButton"
-        onclick="finishOrder()"
-      >
-        ✅ I've Completed Payment
-      </button>
+    <!-- COD INFORMATION -->
+
+    <div
+      id="codPaymentSection"
+      style="display:none;"
+    >
+
+      <div style="
+        margin:15px 0;
+        padding:18px;
+        border-radius:14px;
+        background:#fff8ed;
+        border:1px solid #ead7b5;
+        text-align:center;
+      ">
+
+        <div style="
+          font-size:38px;
+          margin-bottom:8px;
+        ">
+          💵
+        </div>
+
+        <h3 style="
+          margin:0 0 8px;
+        ">
+          Cash on Delivery
+        </h3>
+
+        <p style="
+          margin:0;
+          line-height:1.5;
+          font-size:14px;
+        ">
+          Pay in cash when your order is delivered to you.
+        </p>
+
+      </div>
 
     </div>
+
+
+    <!-- ORDER ID -->
+
+    <div
+      class="order-id"
+      id="paymentOrderId"
+    >
+      Order ready
+    </div>
+
+
+    <!-- TOTAL -->
+
+    <div class="cart-total">
+
+      <span>Total</span>
+
+      <span>
+        ₹<span id="paymentTotal">0</span>
+      </span>
+
+    </div>
+
+
+    <!-- UPI NOTE -->
+
+    <p
+      class="payment-note"
+      id="upiPaymentNote"
+    >
+      After payment, tap the WhatsApp button below to send your order details.
+    </p>
+
+
+    <!-- COD NOTE -->
+
+    <p
+      class="payment-note"
+      id="codPaymentNote"
+      style="display:none;"
+    >
+      Confirm your COD order below. You will pay when the order is delivered.
+    </p>
+
+
+    <!-- WHATSAPP -->
+
+    <button
+      class="main-btn green-btn"
+      onclick="sendWhatsAppOrder()"
+    >
+      📲 Send Order on WhatsApp
+    </button>
+
+
+    <!-- UPI COMPLETE -->
+
+    <button
+      class="main-btn"
+      id="finishPaymentButton"
+      onclick="finishOrder()"
+    >
+      ✅ I've Completed Payment
+    </button>
+
+
+    <!-- COD CONFIRM -->
+
+    <button
+      class="main-btn"
+      id="confirmCODButton"
+      onclick="confirmCODOrder()"
+      style="display:none;"
+    >
+      💵 Confirm COD Order
+    </button>
 
   </div>
 
