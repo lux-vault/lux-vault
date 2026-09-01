@@ -4295,7 +4295,7 @@ async function selectPaymentMethod(method){
     try{
 
       currentOrderId =
-        await createPendingOrder();
+  await createPendingOrder(method);
 
       const paymentOrderId =
         document.getElementById(
