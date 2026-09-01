@@ -4392,7 +4392,7 @@ function generateOrderId(){
    CREATE ORDER
 ========================================================= */
 
-async function createPendingOrder(){
+async function createPendingOrder(method){
 
 
   const orderId =
@@ -4471,7 +4471,7 @@ async function createPendingOrder(){
   "pending",
 
 payment_method:
-  paymentMethod,
+  method,
 
 status:
   "pending",
