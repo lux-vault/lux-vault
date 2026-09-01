@@ -4861,7 +4861,18 @@ async function confirmCODOrder(){
         "💵 Confirm COD Order";
     }
 
-    await loadProducts();
+    try{
+
+  await loadProducts();
+
+}catch(error){
+
+  console.error(
+    "Post-COD product refresh error:",
+    error
+  );
+
+    }
 
   }catch(error){
 
