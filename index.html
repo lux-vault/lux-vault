@@ -3414,13 +3414,19 @@ function getCartProductTotal(){
 
 
 function getShippingCost(){
+
   if(!cart.length){
     return 0;
   }
 
-  const productTotal = getCartProductTotal();
+  const productTotal =
+    getCartProductTotal();
 
-  if(productTotal >= 499){
+  if(paymentMethod === "COD"){
+    return 50;
+  }
+
+  if(productTotal > 499){
     return 0;
   }
 
