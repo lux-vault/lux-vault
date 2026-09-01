@@ -4220,41 +4220,8 @@ async function openPayment(){
 
   }
 
-
-  
-
-  try{
-
-    currentOrderId =
-      await createPendingOrder();
-paymentModal.style.display =
+    paymentModal.style.display =
     "flex";
-    if(paymentOrderId){
-
-      paymentOrderId.textContent =
-        "Order ID: "+
-        currentOrderId;
-
-    }
-
-  }
-catch(error){
-
-  console.error(
-    "Could not create order:",
-    error
-  );
-
-  alert(
-  "ORDER ERROR: " +
-  (error.message || error)
-);
-
-  closePayment();
-
-  return;
-
-}
 }
 async function selectPaymentMethod(method){
 
