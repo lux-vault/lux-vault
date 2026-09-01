@@ -4256,7 +4256,7 @@ catch(error){
 
 }
 }
-function selectPaymentMethod(method){
+async function selectPaymentMethod(method){
 
   paymentMethod = method;
 
@@ -4321,8 +4321,49 @@ function selectPaymentMethod(method){
 
   }
 
-}
 
+  /* SAVE PAYMENT METHOD TO SUPABASE */
+
+  if(currentOrderId){
+
+    try{
+
+      const result =
+        await supabaseClient
+          .from("orders")
+          .update({
+            payment_method: method
+          })
+          .eq(
+            "order_id",
+            currentOrderId
+          );
+
+      if(result.error){
+        throw result.error;
+      }
+
+      console.log(
+        "Payment method saved:",
+        method
+      );
+
+    }catch(error){
+
+      console.error(
+        "Payment method update error:",
+        error
+      );
+
+      alert(
+        "Could not save the payment method. Please try again."
+      );
+
+    }
+
+  }
+
+}
 function closePayment(){
 
   const modal =
