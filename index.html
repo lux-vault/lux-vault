@@ -4241,7 +4241,17 @@ async function openPayment(){
 async function selectPaymentMethod(method){
 
   paymentMethod = method;
+  const paymentTotal =
+    document.getElementById(
+      "paymentTotal"
+    );
 
+  if(paymentTotal){
+    paymentTotal.textContent =
+      getCartGrandTotal().toLocaleString(
+        "en-IN"
+      );
+  }
   const upiSection =
     document.getElementById(
       "upiPaymentSection"
