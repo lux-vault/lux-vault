@@ -4220,15 +4220,15 @@ async function openPayment(){
   }
 
 
-  paymentModal.style.display =
-    "flex";
+  
 
 
   try{
 
     currentOrderId =
       await createPendingOrder();
-
+paymentModal.style.display =
+  "flex";
     if(paymentOrderId){
 
       paymentOrderId.textContent =
