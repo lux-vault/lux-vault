@@ -1967,7 +1967,208 @@ const supabaseClient =
     SUPABASE_URL,
     SUPABASE_PUBLISHABLE_KEY
   );
+/* =========================================================
+   COD CONTROL
+========================================================= */
 
+let codEnabled = true;
+
+
+async function loadCODControl(){
+
+  try{
+
+    const result =
+      await supabaseClient
+        .from("store_settings")
+        .select("cod_enabled")
+        .eq("id", true)
+        .maybeSingle();
+
+    if(
+      !result.error &&
+      result.data &&
+      typeof result.data.cod_enabled === "boolean"
+    ){
+      codEnabled =
+        result.data.cod_enabled;
+    }
+
+  }catch(error){
+
+    console.error(
+      "COD control load error:",
+      error
+    );
+
+  }
+
+  applyCODVisibility();
+
+  if(isAdmin()){
+    updateCODControlUI();
+  }
+}
+
+
+function applyCODVisibility(){
+
+  const codOption =
+    document.getElementById(
+      "codPaymentOption"
+    );
+
+  if(codOption){
+    codOption.style.display =
+      codEnabled
+        ? "flex"
+        : "none";
+  }
+
+  if(!codEnabled){
+
+    const codRadio =
+      document.querySelector(
+        'input[name="paymentMethod"][value="COD"]'
+      );
+
+    if(codRadio){
+      codRadio.checked = false;
+    }
+
+    paymentMethod = "UPI";
+
+    const upiRadio =
+      document.querySelector(
+        'input[name="paymentMethod"][value="UPI"]'
+      );
+
+    if(upiRadio){
+      upiRadio.checked = true;
+    }
+
+  }
+}
+
+
+function updateCODControlUI(){
+
+  const toggle =
+    document.getElementById(
+      "codControlToggle"
+    );
+
+  const status =
+    document.getElementById(
+      "codControlStatus"
+    );
+
+  const slider =
+    document.getElementById(
+      "codControlSlider"
+    );
+
+  if(toggle){
+    toggle.checked =
+      codEnabled;
+  }
+
+  if(status){
+    status.textContent =
+      codEnabled
+        ? "COD is ON — customers can choose COD."
+        : "COD is OFF — customers cannot choose COD.";
+  }
+
+  if(slider){
+    slider.style.background =
+      codEnabled
+        ? "#b84f73"
+        : "#ccc";
+  }
+}
+
+
+async function toggleCODControl(enabled){
+
+  if(!isAdmin()){
+
+    alert(
+      "Admin access required."
+    );
+
+    return;
+
+  }
+
+  const previousState =
+    codEnabled;
+
+  codEnabled =
+    !!enabled;
+
+  const status =
+    document.getElementById(
+      "codControlStatus"
+    );
+
+  if(status){
+
+    status.textContent =
+      codEnabled
+        ? "Saving COD ON..."
+        : "Saving COD OFF...";
+
+  }
+
+  try{
+
+    const result =
+      await supabaseClient
+        .from("store_settings")
+        .update({
+          cod_enabled:
+            codEnabled
+        })
+        .eq("id", true);
+
+    if(result.error){
+      throw result.error;
+    }
+
+    applyCODVisibility();
+    updateCODControlUI();
+
+  }catch(error){
+
+    console.error(
+      "COD control save error:",
+      error
+    );
+
+    codEnabled =
+      previousState;
+
+    const toggle =
+      document.getElementById(
+        "codControlToggle"
+      );
+
+    if(toggle){
+      toggle.checked =
+        codEnabled;
+    }
+
+    applyCODVisibility();
+    updateCODControlUI();
+
+    alert(
+      "Could not update COD setting: " +
+      (error.message || error)
+    );
+
+  }
+}
 
 /* =========================================================
    ADMIN CONFIG
