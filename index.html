@@ -1046,7 +1046,68 @@ footer{
       onchange="uploadSiteAsset('background',this.files[0])"
     >
   </label>
+<div style="
+  margin-top:14px;
+  padding:14px;
+  border:1px solid #ead0da;
+  border-radius:12px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+">
 
+  <div>
+    <strong style="color:#a64a68;">
+      💵 Cash on Delivery
+    </strong>
+
+    <div
+      id="codControlStatus"
+      style="
+        font-size:12px;
+        color:#66585e;
+        margin-top:4px;
+      "
+    >
+      COD is ON
+    </div>
+  </div>
+
+  <label style="
+    position:relative;
+    display:inline-block;
+    width:52px;
+    height:28px;
+    flex-shrink:0;
+  ">
+
+    <input
+      id="codControlToggle"
+      type="checkbox"
+      checked
+      style="
+        opacity:0;
+        width:0;
+        height:0;
+      "
+    >
+
+    <span
+      id="codControlSlider"
+      style="
+        position:absolute;
+        cursor:pointer;
+        inset:0;
+        background:#b84f73;
+        border-radius:28px;
+      "
+    ></span>
+
+  </label>
+
+</div>
 </div>
           </label>
 
