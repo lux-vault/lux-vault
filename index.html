@@ -4931,7 +4931,71 @@ async function handlePaymentScreenshot(input){
     );
   }
 }
+async function shareOrderAndPayment(screenshot){
 
+  if(!screenshot){
+    throw new Error("Payment screenshot is missing.");
+  }
+
+  if(!currentOrderId){
+    throw new Error("Order ID is missing.");
+  }
+
+  const message =
+    buildWhatsAppMessage() +
+    "\n\n" +
+    "💳 PAYMENT DETAILS\n" +
+    "━━━━━━━━━━━━━━━━━━\n\n" +
+    "Method: UPI\n" +
+    "Amount: ₹" + getCartGrandTotal().toFixed(2) + "\n" +
+    "UPI ID: 9048305367@ptsbi\n\n" +
+    "📸 Payment screenshot attached.\n" +
+    "Please verify the payment before processing the order.";
+
+  const file =
+    new File(
+      [await screenshot.arrayBuffer()],
+      screenshot.name || "payment-screenshot.jpg",
+      {
+        type: screenshot.type || "image/jpeg"
+      }
+    );
+
+  if(
+    navigator.share &&
+    navigator.canShare &&
+    navigator.canShare({
+      files: [file]
+    })
+  ){
+
+    await navigator.share({
+      title: "Lux Vault Order",
+      text: message,
+      files: [file]
+    });
+
+    return;
+  }
+
+  if(navigator.share){
+
+    await navigator.share({
+      title: "Lux Vault Order",
+      text: message
+    });
+
+    alert(
+      "Your device could not attach the screenshot automatically. Please attach it in WhatsApp."
+    );
+
+    return;
+  }
+
+  alert(
+    "Your device does not support direct sharing. Please attach the screenshot manually in WhatsApp."
+  );
+  }
 
 /* =========================================================
    WHATSAPP ORDER
