@@ -4467,6 +4467,33 @@ function continueToPayment(){
    PAYMENT
 ========================================================= */
 
+  function startUPIPayment(){
+
+  if(!cart.length){
+    alert("Your cart is empty.");
+    return;
+  }
+
+  const amount = getCartGrandTotal();
+
+  if(!amount || amount <= 0){
+    alert("Invalid payment amount.");
+    return;
+  }
+
+  const upiId = "9048305367@ptsbi";
+
+  const upiUrl =
+    "upi://pay" +
+    "?pa=" + encodeURIComponent(upiId) +
+    "&pn=" + encodeURIComponent("Lux Vault") +
+    "&am=" + encodeURIComponent(amount.toFixed(2)) +
+    "&cu=INR" +
+    "&tn=" + encodeURIComponent("Lux Vault Order");
+
+  window.location.href = upiUrl;
+}
+  
 async function openPayment(){
 
   if(!cart.length){
