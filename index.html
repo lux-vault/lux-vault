@@ -4842,6 +4842,95 @@ status:
   return orderId;
 
 }
+  /* =========================================================
+   PAYMENT SCREENSHOT
+========================================================= */
+
+function choosePaymentScreenshot(){
+
+  if(!cart.length){
+    alert("Your cart is empty.");
+    return;
+  }
+
+  const input =
+    document.getElementById(
+      "paymentScreenshotInput"
+    );
+
+  if(input){
+    input.value = "";
+    input.click();
+  }
+}
+
+
+async function handlePaymentScreenshot(input){
+
+  if(
+    !input ||
+    !input.files ||
+    !input.files.length
+  ){
+    return;
+  }
+
+  const screenshot =
+    input.files[0];
+
+  if(!screenshot.type.startsWith("image/")){
+    alert("Please select a payment screenshot image.");
+    return;
+  }
+
+  if(!currentOrderId){
+    alert(
+      "Your order is not ready yet. Please try again."
+    );
+    return;
+  }
+
+  const button =
+    document.getElementById(
+      "sendOrderPaymentButton"
+    );
+
+  if(button){
+    button.disabled = true;
+    button.textContent =
+      "Preparing Order...";
+  }
+
+  try{
+
+    /*
+      The order was already created as PENDING
+      when the customer selected UPI.
+      We do NOT mark it as paid here.
+    */
+
+    await shareOrderAndPayment(
+      screenshot
+    );
+
+  }catch(error){
+
+    console.error(
+      "Payment screenshot error:",
+      error
+    );
+
+    if(button){
+      button.disabled = false;
+      button.textContent =
+        "📲 Send Order & Payment Details";
+    }
+
+    alert(
+      "Could not prepare the order details. Please try again."
+    );
+  }
+}
 
 
 /* =========================================================
