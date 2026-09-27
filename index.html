@@ -4922,8 +4922,8 @@ async function handlePaymentScreenshot(input){
     }
 
     alert(
-      "Could not prepare the order details. Please try again."
-    );
+  "Error: " + (error && error.message ? error.message : error)
+);
   }
 }
 async function shareOrderAndPayment(screenshot){
