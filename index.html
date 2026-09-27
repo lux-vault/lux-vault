@@ -4945,14 +4945,7 @@ async function shareOrderAndPayment(screenshot){
     "📸 Payment screenshot attached.\n" +
     "Please verify the payment before processing the order.";
 
-  const file =
-    new File(
-      [await screenshot.arrayBuffer()],
-      screenshot.name || "payment-screenshot.jpg",
-      {
-        type: screenshot.type || "image/jpeg"
-      }
-    );
+  const file = screenshot;
 
   if(
     navigator.share &&
