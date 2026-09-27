@@ -5622,11 +5622,13 @@ async function updateAdminStats(){
 
   }
   
-async function loadAdminOrders(){
+async function loadAdminOrders(
+  containerId = "adminOrdersList"
+){
 
   const container =
     document.getElementById(
-      "adminOrdersList"
+      containerId
     );
 
   if(!container) return;
