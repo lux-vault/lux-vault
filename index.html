@@ -4569,17 +4569,21 @@ async function openPayment(){
 async function selectPaymentMethod(method){
 
   paymentMethod = method;
+
   const paymentTotal =
     document.getElementById(
       "paymentTotal"
     );
 
   if(paymentTotal){
+
     paymentTotal.textContent =
       getCartGrandTotal().toLocaleString(
         "en-IN"
       );
+
   }
+
   const upiSection =
     document.getElementById(
       "upiPaymentSection"
@@ -4600,10 +4604,15 @@ async function selectPaymentMethod(method){
       "codPaymentNote"
     );
 
-  const finishButton =
-  document.getElementById(
-    "sendOrderPaymentButton"
-  );
+  const screenshotButton =
+    document.getElementById(
+      "choosePaymentScreenshotButton"
+    );
+
+  const sendButton =
+    document.getElementById(
+      "sendOrderPaymentButton"
+    );
 
   const codButton =
     document.getElementById(
@@ -4624,8 +4633,11 @@ async function selectPaymentMethod(method){
     if(codNote)
       codNote.style.display = "block";
 
-    if(finishButton)
-      finishButton.style.display = "none";
+    if(screenshotButton)
+      screenshotButton.style.display = "none";
+
+    if(sendButton)
+      sendButton.style.display = "none";
 
     if(codButton)
       codButton.style.display = "block";
@@ -4644,15 +4656,16 @@ async function selectPaymentMethod(method){
     if(codNote)
       codNote.style.display = "none";
 
-    if(finishButton)
-      finishButton.style.display = "block";
+    if(screenshotButton)
+      screenshotButton.style.display = "block";
+
+    if(sendButton)
+      sendButton.style.display = "block";
 
     if(codButton)
       codButton.style.display = "none";
 
   }
-
-  /* CREATE ORDER WITH SELECTED PAYMENT METHOD */
 
   if(!currentOrderId){
 
@@ -4694,7 +4707,10 @@ async function selectPaymentMethod(method){
 
   }
 
-}
+    }
+
+
+
 
 /* =========================================================
    ORDER ID
