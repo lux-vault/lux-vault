@@ -4918,50 +4918,30 @@ async function handlePaymentScreenshot(input){
 
 async function shareOrderAndPayment(){
 
-  const screenshot = selectedPaymentScreenshot;
+  const screenshot =
+    selectedPaymentScreenshot;
 
   if(!screenshot){
-    alert("Please select your payment screenshot first.");
+    alert(
+      "Please select your payment screenshot first."
+    );
     return;
   }
 
-  const button =
-    document.getElementById("sendOrderPaymentButton");
-
-  if(button){
-    button.disabled = true;
-    button.textContent = "Sharing...";
-  }
+  const message =
+    buildWhatsAppMessage() +
+    "\n\n" +
+    "💳 PAYMENT DETAILS\n" +
+    "━━━━━━━━━━━━━━━━━━\n\n" +
+    "Method: UPI\n" +
+    "Amount: ₹" +
+    getCartGrandTotal().toFixed(2) +
+    "\n" +
+    "UPI ID: 9048305367@ptsbi\n\n" +
+    "📸 Payment screenshot attached.\n" +
+    "Please verify the payment before processing the order.";
 
   try{
-
-    const message =
-      buildWhatsAppMessage() +
-      "\n\n" +
-      "💳 PAYMENT DETAILS\n" +
-      "━━━━━━━━━━━━━━━━━━\n\n" +
-      "Method: " +
-      (paymentMethod === "COD"
-        ? "Cash on Delivery"
-        : "UPI") +
-      "\n" +
-      "Amount: ₹" +
-      getCartGrandTotal().toFixed(2) +
-      "\n" +
-      (
-        paymentMethod === "COD"
-          ? ""
-          : "UPI ID: 9048305367@ptsbi\n"
-      ) +
-      "\n📸 Payment screenshot attached.\n" +
-      "Please verify the payment before processing the order.";
-
-    /*
-     * IMPORTANT:
-     * Do NOT use await before navigator.share().
-     * The selected screenshot is already a File object.
-     * This keeps the Android user-gesture active.
-     */
 
     if(
       navigator.share &&
@@ -4977,11 +4957,6 @@ async function shareOrderAndPayment(){
         files:[screenshot]
       });
 
-      if(button){
-        button.disabled = false;
-        button.textContent = "➤ Share Order & Payment";
-      }
-
       return;
     }
 
@@ -4996,22 +4971,12 @@ async function shareOrderAndPayment(){
         "Please attach the selected payment screenshot in WhatsApp."
       );
 
-      if(button){
-        button.disabled = false;
-        button.textContent = "➤ Share Order & Payment";
-      }
-
       return;
     }
 
     alert(
       "Your device does not support direct sharing. Please send the screenshot manually in WhatsApp."
     );
-
-    if(button){
-      button.disabled = false;
-      button.textContent = "➤ Share Order & Payment";
-    }
 
   }catch(error){
 
@@ -5020,18 +4985,18 @@ async function shareOrderAndPayment(){
       error
     );
 
-    if(button){
-      button.disabled = false;
-      button.textContent = "➤ Share Order & Payment";
-    }
-
     if(error.name !== "AbortError"){
+
       alert(
         "Could not open WhatsApp sharing. Please try again."
       );
+
     }
+
   }
+
 }
+
 
   
 
