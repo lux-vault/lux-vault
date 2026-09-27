@@ -4865,6 +4865,9 @@ function choosePaymentScreenshot(){
 }
 
 
+<script>
+let selectedPaymentScreenshot = null;
+
 async function handlePaymentScreenshot(input){
 
   if(
@@ -4875,113 +4878,143 @@ async function handlePaymentScreenshot(input){
     return;
   }
 
-  const screenshot =
-    input.files[0];
+  const screenshot = input.files[0];
 
   if(!screenshot.type.startsWith("image/")){
     alert("Please select a payment screenshot image.");
     return;
   }
 
-  
+  selectedPaymentScreenshot = screenshot;
 
   const button =
-    document.getElementById(
-      "sendOrderPaymentButton"
-    );
+    document.getElementById("sendOrderPaymentButton");
+
+  if(button){
+    button.disabled = false;
+    button.textContent =
+      "📲 Send Screenshot to WhatsApp";
+  }
+}
+
+
+async function shareOrderAndPayment(){
+
+  const screenshot = selectedPaymentScreenshot;
+
+  if(!screenshot){
+    alert("Please select your payment screenshot first.");
+    return;
+  }
+
+  const button =
+    document.getElementById("sendOrderPaymentButton");
 
   if(button){
     button.disabled = true;
-    button.textContent =
-      "Preparing Order...";
+    button.textContent = "Opening WhatsApp...";
   }
 
   try{
 
-    /*
-      The order was already created as PENDING
-      when the customer selected UPI.
-      We do NOT mark it as paid here.
-    */
+    const message =
+      buildWhatsAppMessage() +
+      "\n\n" +
+      "💳 PAYMENT DETAILS\n" +
+      "━━━━━━━━━━━━━━━━━━\n\n" +
+      "Method: UPI\n" +
+      "Amount: ₹" + getCartGrandTotal().toFixed(2) + "\n" +
+      "UPI ID: 9048305367@ptsbi\n\n" +
+      "📸 Payment screenshot attached.\n" +
+      "Please verify the payment before processing the order.";
 
-    await shareOrderAndPayment(
-      screenshot
+    const file =
+      new File(
+        [await screenshot.arrayBuffer()],
+        screenshot.name || "payment-screenshot.jpg",
+        {
+          type: screenshot.type || "image/jpeg"
+        }
+      );
+
+    if(
+      navigator.share &&
+      navigator.canShare &&
+      navigator.canShare({
+        files: [file]
+      })
+    ){
+
+      await navigator.share({
+        title: "Lux Vault Order",
+        text: message,
+        files: [file]
+      });
+
+      if(button){
+        button.disabled = false;
+        button.textContent =
+          "📲 Send Screenshot to WhatsApp";
+      }
+
+      return;
+    }
+
+    if(navigator.share){
+
+      await navigator.share({
+        title: "Lux Vault Order",
+        text: message
+      });
+
+      alert(
+        "Please attach the selected payment screenshot in WhatsApp."
+      );
+
+      if(button){
+        button.disabled = false;
+        button.textContent =
+          "📲 Send Screenshot to WhatsApp";
+      }
+
+      return;
+    }
+
+    alert(
+      "Your device does not support direct sharing. Please send the screenshot manually in WhatsApp."
     );
+
+    if(button){
+      button.disabled = false;
+      button.textContent =
+        "📲 Send Screenshot to WhatsApp";
+    }
 
   }catch(error){
 
     console.error(
-      "Payment screenshot error:",
+      "WhatsApp sharing error:",
       error
     );
 
     if(button){
       button.disabled = false;
       button.textContent =
-        "📲 Send Order & Payment Details";
+        "📲 Send Screenshot to WhatsApp";
     }
 
-    alert(
-  "Error: " + (error && error.message ? error.message : error)
-);
+    if(error.name !== "AbortError"){
+      alert(
+        "Could not open WhatsApp sharing. Please try again."
+      );
+    }
   }
 }
-async function shareOrderAndPayment(screenshot){
-
-  if(!screenshot){
-    throw new Error("Payment screenshot is missing.");
-  }
+</script>
 
   
 
-  const message =
-    buildWhatsAppMessage() +
-    "\n\n" +
-    "💳 PAYMENT DETAILS\n" +
-    "━━━━━━━━━━━━━━━━━━\n\n" +
-    "Method: UPI\n" +
-    "Amount: ₹" + getCartGrandTotal().toFixed(2) + "\n" +
-    "UPI ID: 9048305367@ptsbi\n\n" +
-    "📸 Payment screenshot attached.\n" +
-    "Please verify the payment before processing the order.";
 
-  const file = screenshot;
-
-  if(
-    navigator.share &&
-    navigator.canShare &&
-    navigator.canShare({
-      files: [file]
-    })
-  ){
-
-    await navigator.share({
-      title: "Lux Vault Order",
-      text: message,
-      files: [file]
-    });
-
-    return;
-  }
-
-  if(navigator.share){
-
-    await navigator.share({
-      title: "Lux Vault Order",
-      text: message
-    });
-
-    alert(
-      "Your device could not attach the screenshot automatically. Please attach it in WhatsApp."
-    );
-
-    return;
-  }
-
-  alert(
-    "Your device does not support direct sharing. Please attach the screenshot manually in WhatsApp."
-  );
-  }
 
 /* =========================================================
    WHATSAPP ORDER
