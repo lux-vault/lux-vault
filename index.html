@@ -4936,20 +4936,31 @@ async function handlePaymentScreenshot(input){
   const screenshot = input.files[0];
 
   if(!screenshot.type.startsWith("image/")){
-    alert("Please select a payment screenshot image.");
+
+    alert(
+      "Please select a payment screenshot image."
+    );
+
     return;
+
   }
 
   selectedPaymentScreenshot = screenshot;
 
   const button =
-    document.getElementById("sendOrderPaymentButton");
+    document.getElementById(
+      "sendOrderPaymentButton"
+    );
 
   if(button){
+
     button.disabled = false;
+
     button.textContent =
-      "📲 Send Screenshot to WhatsApp";
+      "📎 Screenshot Selected";
+
   }
+
 }
 
 async function shareOrderAndPayment(){
