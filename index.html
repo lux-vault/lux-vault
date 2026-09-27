@@ -1870,7 +1870,6 @@ footer{
 
 
 <!-- UPI ORDER + PAYMENT DETAILS -->
-
 <input
   type="file"
   id="paymentScreenshotInput"
@@ -1882,20 +1881,24 @@ footer{
 <button
   class="main-btn green-btn"
   type="button"
-  id="sendOrderPaymentButton"
+  id="choosePaymentScreenshotButton"
   onclick="choosePaymentScreenshot()"
 >
-  📲 Send Order & Payment Details
+  📎 Select Payment Screenshot
 </button>
 
-<p
-  style="
-    margin:10px 0 0;
-    text-align:center;
-    font-size:13px;
-    color:#777;
-  "
+<button
+  class="main-btn green-btn"
+  type="button"
+  id="sendOrderPaymentButton"
+  onclick="shareOrderAndPayment()"
+  disabled
+  style="margin-top:10px;"
 >
+  ➤ Share Order & Payment
+</button>
+
+<p style="...">
   📸 Payment screenshot required
 </p>
 
