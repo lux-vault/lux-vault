@@ -4932,9 +4932,7 @@ async function shareOrderAndPayment(screenshot){
     throw new Error("Payment screenshot is missing.");
   }
 
-  if(!currentOrderId){
-    throw new Error("Order ID is missing.");
-  }
+  
 
   const message =
     buildWhatsAppMessage() +
