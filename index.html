@@ -5198,13 +5198,7 @@ function closePayment(){
 
   try{
 
-    if(!currentOrderId){
-
-      throw new Error(
-        "Order ID is missing."
-      );
-
-    }
+    
 
     const result =
       await supabaseClient
