@@ -5582,6 +5582,16 @@ async function updateAdminStats(){
    ADMIN ORDERS
 ========================================================= */
 
+  function openOrdersSection(){
+
+  if(!isAdmin()){
+    return;
+  }
+
+  loadAdminOrders();
+
+  }
+  
 async function loadAdminOrders(){
 
   const container =
