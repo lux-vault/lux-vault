@@ -4900,7 +4900,6 @@ async function handlePaymentScreenshot(input){
   }
 }
 
-
 async function shareOrderAndPayment(){
 
   const screenshot = selectedPaymentScreenshot;
@@ -4915,7 +4914,7 @@ async function shareOrderAndPayment(){
 
   if(button){
     button.disabled = true;
-    button.textContent = "Opening WhatsApp...";
+    button.textContent = "Sharing...";
   }
 
   try{
@@ -4925,39 +4924,46 @@ async function shareOrderAndPayment(){
       "\n\n" +
       "💳 PAYMENT DETAILS\n" +
       "━━━━━━━━━━━━━━━━━━\n\n" +
-      "Method: UPI\n" +
-      "Amount: ₹" + getCartGrandTotal().toFixed(2) + "\n" +
-      "UPI ID: 9048305367@ptsbi\n\n" +
-      "📸 Payment screenshot attached.\n" +
+      "Method: " +
+      (paymentMethod === "COD"
+        ? "Cash on Delivery"
+        : "UPI") +
+      "\n" +
+      "Amount: ₹" +
+      getCartGrandTotal().toFixed(2) +
+      "\n" +
+      (
+        paymentMethod === "COD"
+          ? ""
+          : "UPI ID: 9048305367@ptsbi\n"
+      ) +
+      "\n📸 Payment screenshot attached.\n" +
       "Please verify the payment before processing the order.";
 
-    const file =
-      new File(
-        [await screenshot.arrayBuffer()],
-        screenshot.name || "payment-screenshot.jpg",
-        {
-          type: screenshot.type || "image/jpeg"
-        }
-      );
+    /*
+     * IMPORTANT:
+     * Do NOT use await before navigator.share().
+     * The selected screenshot is already a File object.
+     * This keeps the Android user-gesture active.
+     */
 
     if(
       navigator.share &&
       navigator.canShare &&
       navigator.canShare({
-        files: [file]
+        files:[screenshot]
       })
     ){
 
       await navigator.share({
-        title: "Lux Vault Order",
-        text: message,
-        files: [file]
+        title:"Lux Vault Order",
+        text:message,
+        files:[screenshot]
       });
 
       if(button){
         button.disabled = false;
-        button.textContent =
-          "📲 Send Screenshot to WhatsApp";
+        button.textContent = "➤ Share Order & Payment";
       }
 
       return;
@@ -4966,8 +4972,8 @@ async function shareOrderAndPayment(){
     if(navigator.share){
 
       await navigator.share({
-        title: "Lux Vault Order",
-        text: message
+        title:"Lux Vault Order",
+        text:message
       });
 
       alert(
@@ -4976,8 +4982,7 @@ async function shareOrderAndPayment(){
 
       if(button){
         button.disabled = false;
-        button.textContent =
-          "📲 Send Screenshot to WhatsApp";
+        button.textContent = "➤ Share Order & Payment";
       }
 
       return;
@@ -4989,8 +4994,7 @@ async function shareOrderAndPayment(){
 
     if(button){
       button.disabled = false;
-      button.textContent =
-        "📲 Send Screenshot to WhatsApp";
+      button.textContent = "➤ Share Order & Payment";
     }
 
   }catch(error){
@@ -5002,8 +5006,7 @@ async function shareOrderAndPayment(){
 
     if(button){
       button.disabled = false;
-      button.textContent =
-        "📲 Send Screenshot to WhatsApp";
+      button.textContent = "➤ Share Order & Payment";
     }
 
     if(error.name !== "AbortError"){
