@@ -5618,9 +5618,31 @@ async function updateAdminStats(){
     return;
   }
 
-  loadAdminOrders();
+  const modal =
+    document.getElementById(
+      "ordersModal"
+    );
 
+  if(modal){
+    modal.style.display = "flex";
   }
+
+  loadAdminOrders("ordersList");
+
+}
+
+function closeOrdersSection(){
+
+  const modal =
+    document.getElementById(
+      "ordersModal"
+    );
+
+  if(modal){
+    modal.style.display = "none";
+  }
+
+}
   
 async function loadAdminOrders(
   containerId = "adminOrdersList"
