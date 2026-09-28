@@ -5733,7 +5733,12 @@ async function loadAdminOrders(
             order.status ||
             "pending"
           ).toLowerCase();
-
+        
+const paymentMethod =
+  String(
+    order.payment_method ||
+    "Unknown"
+  ).toUpperCase();
 
         card.innerHTML = `
 
@@ -5776,7 +5781,18 @@ async function loadAdminOrders(
             </span>
 
           </div>
-
+          
+<div
+  style="
+    margin-top:8px;
+    font-size:14px;
+    font-weight:700;
+    color:#a64a68;
+  "
+>
+  💳 Payment:
+  ${escapeHtml(paymentMethod)}
+</div>
 
           <div class="admin-customer">
 
