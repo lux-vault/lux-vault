@@ -6118,7 +6118,6 @@ const paymentMethod =
 
         `;
 
-
 if(order.payment_screenshot_url){
 
   supabaseClient
@@ -6136,37 +6135,35 @@ if(order.payment_screenshot_url){
           !result.data ||
           !result.data.signedUrl
         ){
+
           return;
+
         }
 
         const screenshotBox =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
 
         screenshotBox.style.margin =
-          "10px 0";
+          "15px 0";
 
         screenshotBox.innerHTML = `
-          <div style="
-            font-size:11px;
-            font-weight:700;
-            color:#a64a68;
-            margin-bottom:6px;
-          ">
+          <strong>
             Payment Screenshot
-          </div>
+          </strong>
+
+          <br><br>
 
           <img
             src="${result.data.signedUrl}"
             alt="Payment Screenshot"
-            onclick="openImageFullscreen(this.src)"
             style="
-              width:90px;
-              height:70px;
-              object-fit:cover;
-              border-radius:9px;
-              border:1px solid #ead6df;
+              width:100%;
+              max-width:320px;
+              border-radius:12px;
+              border:1px solid #ddd;
               display:block;
-              cursor:pointer;
             "
           >
         `;
@@ -6179,7 +6176,6 @@ if(order.payment_screenshot_url){
     );
 
 }
-
 container.appendChild(
   card
 );
@@ -8810,77 +8806,7 @@ window.searchProducts =
   }, 10000);
 })();
 </script>
-  <script>
 
-function openImageFullscreen(imageUrl){
-
-  const overlay =
-    document.createElement("div");
-
-  overlay.id =
-    "paymentScreenshotFullscreen";
-
-  overlay.style.cssText = `
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.92);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:99999;
-    padding:20px;
-  `;
-
-  overlay.innerHTML = `
-    <button
-      onclick="closeImageFullscreen()"
-      style="
-        position:absolute;
-        top:15px;
-        right:15px;
-        width:40px;
-        height:40px;
-        border:none;
-        border-radius:50%;
-        background:#fff;
-        color:#222;
-        font-size:24px;
-        font-weight:bold;
-        cursor:pointer;
-      "
-    >
-      ×
-    </button>
-
-    <img
-      src="${imageUrl}"
-      style="
-        max-width:100%;
-        max-height:90vh;
-        object-fit:contain;
-        border-radius:10px;
-      "
-    >
-  `;
-
-  document.body.appendChild(overlay);
-
-}
-
-function closeImageFullscreen(){
-
-  const overlay =
-    document.getElementById(
-      "paymentScreenshotFullscreen"
-    );
-
-  if(overlay){
-    overlay.remove();
-  }
-
-}
-
-  </script>
 </body>
 
 </html>
