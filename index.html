@@ -5943,26 +5943,26 @@ async function loadAdminOrders(
             </span>
 
             <span>
-              ${escapeHtml(
-                order.customer_phone ||
-                ""
-              )}
-            </span>
+  ${escapeHtml(
+    order.phone ||
+    ""
+  )}
+</span>
 
-            <span>
-              ${escapeHtml(
-                order.customer_address ||
-                ""
-              )}
-            </span>
+<span>
+  ${escapeHtml(
+    order.address ||
+    ""
+  )}
+</span>
 
-            <span>
-              PIN:
-              ${escapeHtml(
-                order.customer_pin ||
-                ""
-              )}
-            </span>
+<span>
+  PIN:
+  ${escapeHtml(
+    order.pin_code ||
+    ""
+  )}
+</span>
 
           </div>
 
