@@ -5334,7 +5334,9 @@ function closePayment(){
   }
 
   const button =
-    document.getElementById("confirmCODButton");
+    document.getElementById(
+      "confirmCODButton"
+    );
 
   if(button){
     button.disabled = true;
@@ -5344,15 +5346,20 @@ function closePayment(){
 
   try{
 
-    
+    if(!currentOrderId){
+
+      currentOrderId =
+        await createPendingOrder("COD");
+
+    }
 
     const result =
       await supabaseClient
         .from("orders")
         .update({
-          payment_method: "COD",
-          payment_status: "pending",
-          status: "confirmed"
+          payment_method:"COD",
+          payment_status:"pending",
+          status:"confirmed"
         })
         .eq(
           "order_id",
@@ -5365,16 +5372,14 @@ function closePayment(){
 
     orderSaved = true;
 
-    // Clear cart
     cart = [];
 
     saveCart();
+
     updateCartUI();
 
-    // Close payment modal
     closePayment();
 
-    // Success message
     alert(
       "Order confirmed successfully! 🎉"
     );
