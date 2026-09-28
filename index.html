@@ -4887,9 +4887,12 @@ async function handlePaymentScreenshot(input){
     return;
   }
 
-  const screenshot = input.files[0];
+  const screenshot =
+    input.files[0];
 
-  if(!screenshot.type.startsWith("image/")){
+  if(
+    !screenshot.type.startsWith("image/")
+  ){
 
     alert(
       "Please select a payment screenshot image."
@@ -4899,7 +4902,8 @@ async function handlePaymentScreenshot(input){
 
   }
 
-  selectedPaymentScreenshot = screenshot;
+  selectedPaymentScreenshot =
+    screenshot;
 
   const button =
     document.getElementById(
