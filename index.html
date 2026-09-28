@@ -4749,13 +4749,10 @@ function generateOrderId(){
 /* =========================================================
    CREATE ORDER
 ========================================================= */
-
 async function createPendingOrder(method){
-
 
   const orderId =
     generateOrderId();
-
 
   const items =
     cart.map(
@@ -4784,7 +4781,6 @@ async function createPendingOrder(method){
       }
     );
 
-
   const productTotal =
     getCartProductTotal();
 
@@ -4795,26 +4791,29 @@ async function createPendingOrder(method){
     productTotal +
     shipping;
 
-
   const orderPayload = {
 
     order_id:orderId,
 
-    user_id: currentUser ? currentUser.id : null,
+    user_id:
+      currentUser
+        ? currentUser.id
+        : null,
 
     customer_name:
       customer.name,
 
     phone:
-  customer.phone,
+      customer.phone,
 
     address:
-  customer.address,
+      customer.address,
 
     pin_code:
-  customer.pin,
+      customer.pin,
 
-    items:items,
+    items:
+      items,
 
     product_total:
       productTotal,
@@ -4826,16 +4825,15 @@ async function createPendingOrder(method){
       total,
 
     payment_status:
-  "pending",
+      "pending",
 
-payment_method:
-  method,
+    payment_method:
+      method,
 
-status:
-  "pending",
+    status:
+      "pending"
 
   };
-
 
   const result =
     await supabaseClient
@@ -4844,13 +4842,11 @@ status:
         orderPayload
       );
 
-
   if(result.error){
 
     throw result.error;
 
   }
-
 
   return orderId;
 
