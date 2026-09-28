@@ -6124,9 +6124,68 @@ async function loadAdminOrders(
         `;
 
 
-        container.appendChild(
-          card
+        if(order.payment_screenshot_url){
+
+  supabaseClient
+    .storage
+    .from("payment-screenshots")
+    .createSignedUrl(
+      order.payment_screenshot_url,
+      3600
+    )
+    .then(
+      function(result){
+
+        if(
+          result.error ||
+          !result.data ||
+          !result.data.signedUrl
+        ){
+
+          return;
+
+        }
+
+        const screenshotBox =
+          document.createElement(
+            "div"
+          );
+
+        screenshotBox.style.margin =
+          "15px 0";
+
+        screenshotBox.innerHTML = `
+          <strong>
+            Payment Screenshot
+          </strong>
+
+          <br><br>
+
+          <img
+            src="${result.data.signedUrl}"
+            alt="Payment Screenshot"
+            style="
+              width:100%;
+              max-width:320px;
+              border-radius:12px;
+              border:1px solid #ddd;
+              display:block;
+            "
+          >
+        `;
+
+        card.appendChild(
+          screenshotBox
         );
+
+      }
+    );
+
+}
+
+container.appendChild(
+  card
+);
 
       }
     );
