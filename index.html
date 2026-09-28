@@ -8804,6 +8804,77 @@ window.searchProducts =
   }, 10000);
 })();
 </script>
+  <script>
+
+function openImageFullscreen(imageUrl){
+
+  const overlay =
+    document.createElement("div");
+
+  overlay.id =
+    "paymentScreenshotFullscreen";
+
+  overlay.style.cssText = `
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.92);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:99999;
+    padding:20px;
+  `;
+
+  overlay.innerHTML = `
+    <button
+      onclick="closeImageFullscreen()"
+      style="
+        position:absolute;
+        top:15px;
+        right:15px;
+        width:40px;
+        height:40px;
+        border:none;
+        border-radius:50%;
+        background:#fff;
+        color:#222;
+        font-size:24px;
+        font-weight:bold;
+        cursor:pointer;
+      "
+    >
+      ×
+    </button>
+
+    <img
+      src="${imageUrl}"
+      style="
+        max-width:100%;
+        max-height:90vh;
+        object-fit:contain;
+        border-radius:10px;
+      "
+    >
+  `;
+
+  document.body.appendChild(overlay);
+
+}
+
+function closeImageFullscreen(){
+
+  const overlay =
+    document.getElementById(
+      "paymentScreenshotFullscreen"
+    );
+
+  if(overlay){
+    overlay.remove();
+  }
+
+}
+
+  </script>
 </body>
 
 </html>
