@@ -4601,7 +4601,6 @@ async function openPayment(){
 /* =========================================================
    SELECT PAYMENT METHOD
 ========================================================= */
-
 async function selectPaymentMethod(method){
 
   paymentMethod = method;
@@ -4703,48 +4702,7 @@ async function selectPaymentMethod(method){
 
   }
 
-  if(!currentOrderId){
-
-    try{
-
-      currentOrderId =
-        await createPendingOrder(method);
-
-      const paymentOrderId =
-        document.getElementById(
-          "paymentOrderId"
-        );
-
-      if(paymentOrderId){
-
-        paymentOrderId.textContent =
-          "Order ID: " +
-          currentOrderId;
-
-      }
-
-    }catch(error){
-
-      console.error(
-        "Could not create order:",
-        error
-      );
-
-      alert(
-        "ORDER ERROR: " +
-        (error.message || error)
-      );
-
-      closePayment();
-
-      return;
-
-    }
-
-  }
-
-    }
-
+}
 
 
 
