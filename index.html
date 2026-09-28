@@ -4651,6 +4651,11 @@ async function selectPaymentMethod(method){
     document.getElementById(
       "confirmCODButton"
     );
+  
+  const screenshotRequiredText =
+  document.getElementById(
+    "paymentScreenshotRequiredText"
+  );
 
   if(method === "COD"){
 
@@ -4668,6 +4673,9 @@ async function selectPaymentMethod(method){
 
     if(screenshotButton)
       screenshotButton.style.display = "none";
+
+    if(screenshotRequiredText)
+  screenshotRequiredText.style.display = "none";
 
     if(sendButton)
       sendButton.style.display = "none";
@@ -4691,6 +4699,9 @@ async function selectPaymentMethod(method){
 
     if(screenshotButton)
       screenshotButton.style.display = "block";
+
+    if(screenshotRequiredText)
+  screenshotRequiredText.style.display = "block";
 
     if(sendButton)
       sendButton.style.display = "block";
