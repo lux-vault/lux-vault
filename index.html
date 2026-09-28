@@ -6113,7 +6113,7 @@ const paymentMethod =
         `;
 
 
-        if(order.payment_screenshot_url){
+if(order.payment_screenshot_url){
 
   supabaseClient
     .storage
@@ -6130,35 +6130,37 @@ const paymentMethod =
           !result.data ||
           !result.data.signedUrl
         ){
-
           return;
-
         }
 
         const screenshotBox =
-          document.createElement(
-            "div"
-          );
+          document.createElement("div");
 
         screenshotBox.style.margin =
-          "15px 0";
+          "10px 0";
 
         screenshotBox.innerHTML = `
-          <strong>
+          <div style="
+            font-size:11px;
+            font-weight:700;
+            color:#a64a68;
+            margin-bottom:6px;
+          ">
             Payment Screenshot
-          </strong>
-
-          <br><br>
+          </div>
 
           <img
             src="${result.data.signedUrl}"
             alt="Payment Screenshot"
+            onclick="openImageFullscreen(this.src)"
             style="
-              width:100%;
-              max-width:320px;
-              border-radius:12px;
-              border:1px solid #ddd;
+              width:90px;
+              height:70px;
+              object-fit:cover;
+              border-radius:9px;
+              border:1px solid #ead6df;
               display:block;
+              cursor:pointer;
             "
           >
         `;
