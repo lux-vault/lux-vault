@@ -4905,15 +4905,27 @@ async function handlePaymentScreenshot(input){
   selectedPaymentScreenshot =
     screenshot;
 
-  const button =
+  const screenshotButton =
     document.getElementById(
       "choosePaymentScreenshotButton"
     );
 
-  if(button){
+  if(screenshotButton){
 
-    button.textContent =
+    screenshotButton.textContent =
       "📎 Screenshot Selected";
+
+  }
+
+  const placeButton =
+    document.getElementById(
+      "sendOrderPaymentButton"
+    );
+
+  if(placeButton){
+
+    placeButton.disabled =
+      false;
 
   }
 
